@@ -1,0 +1,49 @@
+/* Container for the form to center it on the page */
+.title {
+  text-align: center;
+  width: 100%; /* Ensure the title stretches across the full width */
+  margin-top: 20px; /* Adjust top margin as needed */
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  /*align-items: center;*/
+  min-height: 100vh; /* This will take up the full viewport height */
+}
+
+/* Styles for the form itself */
+.fuel-quote-form {
+  /* Align the form contents to the left */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Add some padding around the form if needed */
+  padding: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px; /* adjust as needed for spacing */
+}
+
+.form-group label {
+  width: 200px; /* adjust as needed */
+  margin-right: 10px; /* adjust as needed for spacing */
+  text-align: left;
+}
+
+.form-group input {
+  flex: 1; /* ensures input fields take up the remaining space */
+  width: 100%; /* This will make the input take the full width of its container */
+  /*max-width: 300px; /* This sets a maximum width; adjust as needed */
+  margin-right: 10px; /* Space after the input, adjust as needed */
+}
+
+.retrieve-address {
+  width: 100%; /* You can also set a fixed pixel width here if you prefer */
+  min-width: 250px; /* Example fixed width, adjust as needed */
+}
