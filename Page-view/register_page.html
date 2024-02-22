@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Register Page</title>
+    <style>
+      .register-input{
+        font-family: Arial;
+        font-size: 15px;
+      }
+      p{
+        font-size: 25px;
+        font-weight: bold;
+        background-color: lightblue;
+      }
+      .register-button{
+        width: 100px;
+        height: 25px;
+        background-color: rgb(82, 12, 122);
+        color: white;
+        margin-top: 10px;
+        border-radius: 50px;
+        cursor: pointer;
+      }
+      .register-button:hover{
+        opacity:0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <p> Please create your username and password</p>
+    <div class="register-input">
+      <div>
+        <input style="margin-bottom: 15px;" type="text" placeholder="username">
+      </div>
+      <div>
+        <input style="margin-bottom: 15px;" type="text" placeholder="password">
+      </div>
+      <div>
+        <input style="margin-bottom: 15px;" type="text" placeholder="re-enter password">
+      </div>
+
+    </div>
+    <div>
+      <button class="register-button">Register</button>
+      <button class="register-button" onClick="redirectToPage();"
+      >Back to login</button>
+    </div>
+
+    <script>
+      function redirectToPage() {
+        // Redirect to Register Page
+        window.location.href = "login.html";
+      }
+    </script>
+
+  </body>
+</html>
