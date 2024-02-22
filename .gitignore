@@ -1,0 +1,5 @@
+.github/workflows/firebase-hosting-merge.yml
+.github/workflows/firebase-hosting-pull-request.yml
+fuel_rate_calc/.firebaserc
+fuel_rate_calc/firebase.json
+fuel_rate_calc/.firebase/hosting.YnVpbGQ.cache

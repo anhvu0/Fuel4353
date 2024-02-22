@@ -65,8 +65,3 @@ button:hover {
   width: 100%; /* Ensure it takes full width to work with justify-content */
   gap: 10px; /* Adjust the gap between buttons */
 }
-
-.button-login, .button-register {
-  padding: 10px 20px; /* Example padding, adjust as needed */
-  cursor: pointer;
-}
