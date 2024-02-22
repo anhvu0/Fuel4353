@@ -2,23 +2,20 @@
 .title {
   text-align: center;
   width: 100%; /* Ensure the title stretches across the full width */
-  margin-top: 20px; /* Adjust top margin as needed */
+  margin-top: 20px; 
 }
 
 .form-container {
   display: flex;
   justify-content: center;
-  /*align-items: center;*/
   min-height: 100vh; /* This will take up the full viewport height */
 }
 
-/* Styles for the form itself */
 .fuel-quote-form {
   /* Align the form contents to the left */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* Add some padding around the form if needed */
   padding: 20px;
 }
 
@@ -38,12 +35,38 @@
 
 .form-group input {
   flex: 1; /* ensures input fields take up the remaining space */
-  width: 100%; /* This will make the input take the full width of its container */
-  /*max-width: 300px; /* This sets a maximum width; adjust as needed */
+  width: 100%; 
   margin-right: 10px; /* Space after the input, adjust as needed */
 }
 
 .retrieve-address {
-  width: 100%; /* You can also set a fixed pixel width here if you prefer */
+  width: 100%; 
   min-width: 250px; /* Example fixed width, adjust as needed */
+}
+
+button {
+  display: block; /* This will treat the button as a block element */
+  margin: 20px auto; /* This applies margin to the top and bottom, and auto margin to left and right */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Ensure it takes full width to work with justify-content */
+  gap: 10px; /* Adjust the gap between buttons */
+}
+
+.button-login, .button-register {
+  padding: 10px 20px; /* Example padding, adjust as needed */
+  cursor: pointer;
 }
