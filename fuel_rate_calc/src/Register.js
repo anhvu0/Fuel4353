@@ -27,7 +27,7 @@ const Register = () => {
     <div>
       <div className="title">
         <h2>Register</h2>
-        <p>Let's us help you!</p>
+        <p>Let us help you!</p>
       </div>
       <div className="form-container">
         <form className="fuel-quote-form" onSubmit={handleSubmit}>

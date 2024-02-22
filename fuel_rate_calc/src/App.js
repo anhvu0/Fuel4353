@@ -1,13 +1,15 @@
 import './App.css';
+import HomePage from './HomePage';
 import Login from './Login';
 import Register from './Register';
 import FuelQuoteForm from './FuelQuoteForm';
+import FuelQuoteHistory from './FuelQuoteHistory';
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import CustomerProfile from './customer_profile';
 function App() {
   return (
     <div className="App">
-      <h1>Fuel Rate Web App</h1>
+      <h1>Smart Fuel Rates</h1>
 
       <Router>
         <nav>
@@ -18,11 +20,19 @@ function App() {
               </NavLink>
             </li>
             <li>
-              <a href="/login">Login/Register</a>
+              {/*<a href="/login">Login/Register</a>*/}
+              <NavLink to="/login"  className={({ isActive }) => isActive ? 'active' : undefined}>
+              Login/Register
+              </NavLink>
             </li>
             <li>
             <NavLink to="/fuel-quote-form" className={({ isActive }) => isActive ? 'active' : undefined}>
               Fuel Quote Form
+            </NavLink>
+            </li>
+            <li>
+            <NavLink to="/fuel-quote-history" className={({ isActive }) => isActive ? 'active' : undefined}>
+              Quote History
             </NavLink>
             </li>
           </ul>
@@ -30,11 +40,12 @@ function App() {
 
         {/* Routes */}
         <Routes>
-          <Route exact path="/" element={<h2>This is the main page</h2>} />
+          <Route exact path="/" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/fuel-quote-form" element={<FuelQuoteForm />} />
           <Route exact path="/customer-profile" element={<CustomerProfile />} />
+          <Route path="/fuel-quote-history" element={<FuelQuoteHistory />} />
         </Routes>
       </Router>
     </div>

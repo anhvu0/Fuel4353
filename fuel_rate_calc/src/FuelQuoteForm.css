@@ -12,7 +12,6 @@
 }
 
 .fuel-quote-form {
-  /* Align the form contents to the left */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -45,10 +44,10 @@
 }
 
 button {
-  display: block; /* This will treat the button as a block element */
-  margin: 20px auto; /* This applies margin to the top and bottom, and auto margin to left and right */
+  display: block;
+  margin: 20px auto; 
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #4abf51;
   color: #fff;
   font-size:12px;
   font-weight:bold;
@@ -58,7 +57,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #61c267;
 }
 
 .button-container {
@@ -71,4 +70,49 @@ button:hover {
 p{
   color:blue;
   font-family: Arial;
+}
+
+.responsive-image {
+  width: 100%; /* Make the image take up the full container width */
+  height: auto; /* Maintain the aspect ratio of the image */
+  margin: 0 auto;
+  display: block; /* Remove any extra space below the image */
+}
+
+/* limit the size of the image */
+@media (min-width: 768px) {
+  .responsive-image {
+    max-height: 700px; /* Adjust as necessary */
+  }
+}
+
+.fuel-quote-history-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*min-height: 100vh;*/
+}
+
+.fuel-quote-history-table {
+  width: 70%;
+  border-collapse: collapse;
+}
+
+.fuel-quote-history-table th,
+.fuel-quote-history-table td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.fuel-quote-history-table th {
+  background-color: #f2f2f2;
+}
+
+.fuel-quote-history-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.fuel-quote-history-table tr:hover {
+  background-color: #ddd;
 }
