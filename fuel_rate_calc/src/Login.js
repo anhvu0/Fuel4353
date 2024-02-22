@@ -24,7 +24,7 @@ const Login = () => {
                 
             </div>
             <div className="button-container">
-                <Link to="/register">
+                <Link to="/register" style={{ textDecoration: 'none' }}>
                         <button type="button" className="button-register">Register</button>
                     </Link>
             </div>
