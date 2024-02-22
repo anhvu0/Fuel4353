@@ -43,6 +43,11 @@ const Register = () => {
             <input type="password" id="confirmPassword" className="retrieve-address" value={confirmPassword} onChange={handleConfirmPasswordChange} />
           </div>
           <button type="submit">Register</button>
+          <div className="button-container">
+                <Link to="/login" style={{ textDecoration: 'none' }}>
+                        <button type="button" className="button-back_to_login">Back to Login</button>
+                    </Link>
+          </div>
         </form>
       </div>
     </div>
