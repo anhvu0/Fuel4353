@@ -54,7 +54,7 @@ const Register = () => {
               className="retrieve-address"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
-              placeholder="*************"
+              placeholder="************"
             />
           </div>
           <button type="submit">Register</button>
