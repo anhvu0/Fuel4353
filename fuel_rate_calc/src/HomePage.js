@@ -7,13 +7,8 @@ const HomePage = () => {
   return (
     <div>
       <header>
-        <h2>Welcome to Our Service</h2>
-      </header>
-      <main>
-        <img src={mainPageImage} alt="Gas Station at Night" className="responsive-image" />
-      </main>
-      <h1>Smart Fuel Rates</h1>
-  <nav>
+        <h1>Smart Fuel Rates</h1>
+        <nav>
     <ul>
       <li>
         <NavLink to="/"  className={({ isActive }) => isActive ? 'active' : undefined}>
@@ -43,6 +38,11 @@ const HomePage = () => {
       </li>
     </ul>
   </nav>
+        <h2>Welcome to Our Service</h2>
+      </header>
+      <main>
+        <img src={mainPageImage} alt="Gas Station at Night" className="responsive-image" />
+      </main>
     </div>
   );
 };
