@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: blue;
 }
 
 .App-link {
@@ -35,4 +35,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+/* Navigation bar styling */
+nav ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Align items horizontally */
+  justify-content: center; /* Center the navigation items */
+}
+
+nav ul li {
+  margin: 0 10px; /* Add some space between the navigation items */
+}
+
+nav ul li a {
+  text-decoration: none; /* Remove underline from links */
+  color: blue; /* Set a default color for the links */
+}
+
+nav ul li a:hover {
+  color: green; /* Color when hovering over the link */
+}
+
+nav ul li a.active {
+  color: red; /* Active link color */
 }

@@ -1,0 +1,74 @@
+/* Container for the form to center it on the page */
+.title {
+  text-align: center;
+  width: 100%; /* Ensure the title stretches across the full width */
+  margin-top: 20px; 
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh; /* This will take up the full viewport height */
+}
+
+.fuel-quote-form {
+  /* Align the form contents to the left */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px; /* adjust as needed for spacing */
+}
+
+.form-group label {
+  width: 200px; /* adjust as needed */
+  margin-right: 10px; /* adjust as needed for spacing */
+  text-align: left;
+}
+
+.form-group input {
+  flex: 1; /* ensures input fields take up the remaining space */
+  width: 100%; 
+  margin-right: 10px; /* Space after the input, adjust as needed */
+}
+
+.retrieve-address {
+  width: 100%; 
+  min-width: 250px; /* Example fixed width, adjust as needed */
+}
+
+button {
+  display: block; /* This will treat the button as a block element */
+  margin: 20px auto; /* This applies margin to the top and bottom, and auto margin to left and right */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  font-size:12px;
+  font-weight:bold;
+  border-color:black;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Ensure it takes full width to work with justify-content */
+  gap: 10px; /* Adjust the gap between buttons */
+
+}
+p{
+  color:blue;
+  font-family: Arial;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Login Page</title>
+    <link rel="stylesheet" href="style/login_page.css">
+  </head>
+  <body>
+    <p class="loginTitle">Member Login</p>
+    <div class="loginInput">
+        <input type =" text" placeholder="username" class="userName-input">
+
+        <input type="text" placeholder="password"  class="passwordInput">
+    </div>
+
+    <div class="login_button">
+        <button class="loginButton">Login</button>
+        <button class="registerButton" onclick="
+        redirectToPage();
+        
+        
+        
+        ">Register</button>
+    </div>
+    <script>
+      function redirectToPage() {
+        // Redirect to Register Page
+        window.location.href = "register_page.html";
+      }
+    </script>
+  </body>
+</html>
