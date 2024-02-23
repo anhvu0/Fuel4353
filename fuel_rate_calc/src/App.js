@@ -43,7 +43,6 @@ function App() {
             </li>
           </ul>
         </nav>
-        <h2>Welcome to Our Service</h2>
       </header>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
