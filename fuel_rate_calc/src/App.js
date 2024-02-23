@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 function App() {
   return (
     <div className="App">
-      <h1>CS4353 Web App</h1>
+      <h1>Fuel Rate Web App</h1>
 
       <Router>
         <nav>

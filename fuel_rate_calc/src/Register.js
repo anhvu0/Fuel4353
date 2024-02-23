@@ -27,12 +27,13 @@ const Register = () => {
     <div>
       <div className="title">
         <h2>Register</h2>
+        <p>Let's us help you!</p>
       </div>
       <div className="form-container">
         <form className="fuel-quote-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username:</label>
-            <input type="text" id="username" className="retrieve-address" />
+            <input type="text" id="username" className="retrieve-address" placeholder="enter username" />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password:</label>
@@ -42,6 +43,7 @@ const Register = () => {
               className="retrieve-address"
               value={password}
               onChange={handlePasswordChange}
+              placeholder="*************"
             />
           </div>
           <div className="form-group">
@@ -52,6 +54,7 @@ const Register = () => {
               className="retrieve-address"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
+              placeholder="************"
             />
           </div>
           <button type="submit">Register</button>

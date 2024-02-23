@@ -6,17 +6,18 @@ const Login = () => {
   return (
     <div>
       <div className="title">
-        <h2>Login</h2>
+        <h2>Welcome Back!</h2>
+        <p>Hello again!Please enter your details</p>
       </div>
       <div className="form-container">
         <form className="fuel-quote-form">
           <div className="form-group">
             <label htmlFor="username">Username:</label>
-            <input type="text" id="username" className="form-control" />
+            <input type="text" id="username" className="form-control" placeholder="enter username" />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" className="form-control" />
+            <input type="password" id="password" className="form-control" placeholder="**********"/>
           </div>
 
           <div className="button-container">
