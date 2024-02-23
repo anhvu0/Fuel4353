@@ -6,6 +6,7 @@ const FuelQuoteHistory = () => {
   const quotes = [
     { id: 1, gallonsRequested: 100, deliveryDate: '2022-01-01', suggestedPrice: 2.5, totalAmountDue: 250, deliveryAddress: '4302 University Drive, Houston, TX 77204' },
     { id: 2, gallonsRequested: 150, deliveryDate: '2022-01-15', suggestedPrice: 2.6, totalAmountDue: 390, deliveryAddress: '2700 Bay Area Blvd, Houston, TX 77058' },
+    { id: 3, gallonsRequested: 200, deliveryDate: '2023-01-25', suggestedPrice: 3.0, totalAmountDue: 600, deliveryAddress: '4302 University Drive, Houston, TX 77204'}
     // Add more quote data as needed
   ];
 
