@@ -24,12 +24,11 @@ const Register = () => {
   };
 
   return (
-    <div>
+      <div className="form-container">
       <div className="title">
         <h2>Register</h2>
         <p>Let us help you!</p>
       </div>
-      <div className="form-container">
         <form className="fuel-quote-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username:</label>
@@ -67,7 +66,6 @@ const Register = () => {
           </div>
         </form>
       </div>
-    </div>
   );
 };
 

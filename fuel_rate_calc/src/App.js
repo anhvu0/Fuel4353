@@ -1,5 +1,7 @@
 import './App.css';
 import Navbar from './Navbar';
+import Header from './Header';
+import Footer from './Footer';
 import HomePage from './HomePage';
 import Login from './Login';
 import Register from './Register';
@@ -12,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+      <Header />
         <Navbar />
         <Routes>
           <Route exact path="/" element={<HomePage />} />
@@ -21,6 +24,7 @@ function App() {
           <Route exact path="/customer-profile" element={<CustomerProfile />} />
           <Route path="/fuel-quote-history" element={<FuelQuoteHistory />} />
         </Routes>
+        <Footer />
       </Router>
     </div>
   );

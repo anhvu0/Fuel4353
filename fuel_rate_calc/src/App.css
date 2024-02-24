@@ -59,17 +59,14 @@ nav ul li a:hover {
 }
 
 h1 {
-  margin-top: 0;
-  background-color: #f8f9fa;
-  color: black;
   margin: 0;
-  padding: 10px; /* Optional: Adds some spacing around the text */
+  padding: 5px; /* Optional: Adds some spacing around the text */
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #f8f9fa;
+  background-color: #eaf1f7;
 }
 
 nav {

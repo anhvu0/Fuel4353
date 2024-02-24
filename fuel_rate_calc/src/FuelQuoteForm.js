@@ -18,10 +18,11 @@ const FuelQuoteForm = () => {
 
   return (
     <div>
-    <div className="title">
+    
+  <div className="form-container">
+  <div className="title">
         <h2>Fuel Quote Form</h2>
       </div>
-  <div className="form-container">
     <div className="fuel-quote-form">
       <form onSubmit={handleSubmit}>
         <div className="form-group">

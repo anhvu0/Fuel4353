@@ -50,11 +50,10 @@ function CustomerProfile(){
 
 
     return (
-        <div>
-             <div className="title">
+            <div className="form-container">
+            <div className="title">
                 <h2>Customer Information</h2>
             </div>
-            <div className="form-container">
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="firstName">First Name:</label>
@@ -102,7 +101,6 @@ function CustomerProfile(){
               </form>
      
             </div>
-        </div>
     )
 }
 

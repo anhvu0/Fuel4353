@@ -11,7 +11,7 @@ const FuelQuoteHistory = () => {
   ];
 
   return (
-    <div>
+    <div className="form-container">
         <h2>Fuel Quote History</h2>
         <div className="fuel-quote-history-container">
         <table className="fuel-quote-history-table">

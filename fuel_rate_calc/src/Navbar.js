@@ -1,14 +1,11 @@
 // Navbar.js
+import "./FuelQuoteForm.css";
 import React from 'react';
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    
     <nav>
-        <header>
-          <h1>Smart Fuel Rates</h1>
-        </header>
       <ul>
         <li>
           <NavLink to="/"  className={({ isActive }) => isActive ? 'active' : undefined}>

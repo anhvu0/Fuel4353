@@ -4,12 +4,11 @@ import "./FuelQuoteForm.css";
 
 const Login = () => {
   return (
-    <div>
+      <div className="form-container">
       <div className="title">
         <h2>Welcome Back!</h2>
         <p>Hello again! Please enter your details</p>
       </div>
-      <div className="form-container">
         <form className="fuel-quote-form">
           <div className="form-group">
             <label htmlFor="username">Username:</label>
@@ -34,7 +33,6 @@ const Login = () => {
           </div>
         </form>
       </div>
-    </div>
   );
 };
 

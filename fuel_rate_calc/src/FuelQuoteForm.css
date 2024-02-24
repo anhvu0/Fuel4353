@@ -2,20 +2,23 @@
 .title {
   text-align: center;
   width: 100%; /* Ensure the title stretches across the full width */
-  margin-top: 20px; 
 }
 
 .form-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  min-height: 100vh; /* This will take up the full viewport height */
+  align-items: center;
+  /*min-height: 100vh; /* This will take up the full viewport height */
+ 
+  border: 2px solid #000000; /* Adjust the color (black in this example), style, and width as needed */
+  margin: 10px;
 }
 
 .fuel-quote-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
 }
 
 .form-group {
@@ -39,6 +42,7 @@
   padding: 10px; /* Adds some space inside the input box */
   border-radius: 5px; /* Rounds the corners of the input box */
   border: 1px solid #ccc; /* Adds a light grey border */
+  background-color: white;
 }
 
 .retrieve-address {
@@ -99,13 +103,14 @@ p {
 .fuel-quote-history-table {
   width: 70%;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 .fuel-quote-history-table th,
 .fuel-quote-history-table td {
   border: 1px solid #000000;
   text-align: left;
-  padding: 8px;
+  padding: 5px;
 }
 
 .fuel-quote-history-table th {
@@ -118,4 +123,25 @@ p {
 
 .fuel-quote-history-table tr:hover {
   background-color: #ddd;
+}
+
+/* Footer.css */
+.footer {
+  background-color: #141239; /* Light grey background */
+  color: #cfcfcf; /* Dark grey text */
+  text-align: center;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Header.css */
+header {
+  background-color: #e4f2fe;
 }
