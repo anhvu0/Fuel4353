@@ -27,15 +27,18 @@
 }
 
 .form-group label {
-  width: 200px; /* adjust as needed */
+  width: 180px; /* adjust as needed */
   margin-right: 10px; /* adjust as needed for spacing */
   text-align: left;
 }
 
 .form-group input {
   flex: 1; /* ensures input fields take up the remaining space */
-  width: 100%; 
+  width: 250px; 
   margin-right: 10px; /* Space after the input, adjust as needed */
+  padding: 10px; /* Adds some space inside the input box */
+  border-radius: 5px; /* Rounds the corners of the input box */
+  border: 1px solid #ccc; /* Adds a light grey border */
 }
 
 .retrieve-address {
@@ -67,7 +70,7 @@ button:hover {
   gap: 10px; /* Adjust the gap between buttons */
 
 }
-p{
+p {
   color:blue;
   font-family: Arial;
 }

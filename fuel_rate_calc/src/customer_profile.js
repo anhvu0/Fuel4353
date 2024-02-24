@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './FuelQuoteForm.css';
 import { useNavigate } from 'react-router-dom';
 
 function CustomerProfile(){
@@ -56,28 +57,28 @@ function CustomerProfile(){
             <div className="form-container">
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <input type="text" className="form-control" id="firstName" placeholder="First Name" value={firstName} onChange={(e) => setfirstName(e.target.value)} required />
+                  <label htmlFor="firstName">First Name:</label>
+                  <input type="text" id="firstName" placeholder="First Name" value={firstName} onChange={(e) => setfirstName(e.target.value)} required />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <input type="text" className="form-control" id="lastName" placeholder="Last Name" value={lastName} onChange={(e) => setlastName(e.target.value)} required />
+                  <label htmlFor="lastName">Last Name:</label>
+                  <input type="text" id="lastName" placeholder="Last Name" value={lastName} onChange={(e) => setlastName(e.target.value)} required />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="addressOne">Address 1</label>
-                  <input type="text" className="form-control" id="addressOne" placeholder="Address 1" value={addressOne} onChange={(e) => setaddressOne(e.target.value)} required />
+                  <label htmlFor="addressOne">Address 1:</label>
+                  <input type="text" id="addressOne" placeholder="Address 1" value={addressOne} onChange={(e) => setaddressOne(e.target.value)} required />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="addressTwo">Address 2</label>
-                  <input type="text" className="form-control" id="addressTwo" placeholder="Address 2" value={addressTwo} onChange={(e) => setaddressTwo(e.target.value)} />
+                  <label htmlFor="addressTwo">Address 2:</label>
+                  <input type="text" id="addressTwo" placeholder="Address 2" value={addressTwo} onChange={(e) => setaddressTwo(e.target.value)} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="city">City</label>
-                  <input type="text" className="form-control" id="city" placeholder="City" value={city} onChange={(e) => setcity(e.target.value)} required />
+                  <label htmlFor="city">City:</label>
+                  <input type="text" id="city" placeholder="City" value={city} onChange={(e) => setcity(e.target.value)} required />
                 </div>
                 <div className="form-group">
-                <label htmlFor="state">State</label>
-                    <select className="form-control" id="state" value={state} onChange={(e) => setstate(e.target.value)} required>
+                <label htmlFor="state">State:</label>
+                    <select id="state" value={state} onChange={(e) => setstate(e.target.value)} required>
                         <option value="" disabled>Select state</option>
                         {states.map((state) => (
                             <option key={state.code} value={state.code}>{state.name}</option>
@@ -85,10 +86,9 @@ function CustomerProfile(){
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="zipCode">Zip code</label>
+                    <label htmlFor="zipCode">Zip code:</label>
                     <input
                         type="text"
-                        className="form-control"
                         id="zipCode"
                         placeholder="Zip code"
                         value={zipCode}
@@ -98,8 +98,9 @@ function CustomerProfile(){
                         required
                     />
                 </div>
-                <input type="submit" className="btn btn-primary btn-block" value="Update" />
+                <button type="submit">Update</button>
               </form>
+     
             </div>
         </div>
     )
