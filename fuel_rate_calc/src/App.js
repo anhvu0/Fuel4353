@@ -1,10 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-//import Navbar from './Navbar';
-
 import { AuthProvider } from './context/AuthContext'
 import Header from './components/Header';
-//import Footer from './Footer';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import Login from './pages/LoginPage';
 import Register from './pages/Register';
@@ -16,11 +15,13 @@ function App() {
       <Router>
       <AuthProvider>
       <Header />
+      <Navbar />
         <Routes>
           <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />
           <Route exact path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
+      <Footer />
       </AuthProvider>
       </Router>
     </div>

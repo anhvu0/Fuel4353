@@ -1,9 +1,11 @@
 // Navbar.js
-import "./FuelQuoteForm.css";
-import React from 'react';
+import React, { useContext } from 'react'
+import AuthContext from '../context/AuthContext'
+import '../FuelQuoteForm.css'; 
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
+  let { user, logoutUser } = useContext(AuthContext)
   return (
     <nav>
       <ul>
@@ -13,11 +15,14 @@ function Navbar() {
           </NavLink>
         </li>
         <li>
+        {user ? (
+             <NavLink onClick={logoutUser}>Logout</NavLink>
+          ) : (
           <NavLink to="/login"  className={({ isActive }) => isActive ? 'active' : undefined}>
-            Login/Register
-          </NavLink>
+            Login
+          </NavLink>)}
         </li>
-        <li>
+        {/*<li>
           <NavLink to="/fuel-quote-form" className={({ isActive }) => isActive ? 'active' : undefined}>
             Fuel Quote Form
           </NavLink>
@@ -31,7 +36,7 @@ function Navbar() {
           <NavLink to="/customer-profile"  className={({ isActive }) => isActive ? 'active' : undefined}>
             Profile (after login)
           </NavLink>
-        </li>
+        </li>*/}
       </ul>
     </nav>
   );

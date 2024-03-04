@@ -1,6 +1,6 @@
 // Footer.js
 import React from 'react';
-import './FuelQuoteForm.css';
+import '../FuelQuoteForm.css';
 
 function Footer() {
   return (

@@ -4,6 +4,7 @@ import '../FuelQuoteForm.css';
 import mainPageImage from '../img/mainpage.jpg';
 
 const HomePage = () => {
+    let { user } = useContext(AuthContext)
   const { authTokens, logoutUser } = useContext(AuthContext);
   let [profile, setProfile] = useState([])
 
@@ -30,6 +31,7 @@ const HomePage = () => {
   return (
   
       <div>
+        { <p>Hello {user.username}!</p>}
           <p>Name: {profile.first_name} {profile.last_name}</p>
             <p>Email: {profile.email}</p>
           <img src={mainPageImage} alt="Gas Station at Night" className="responsive-image" />

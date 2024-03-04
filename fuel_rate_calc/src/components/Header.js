@@ -1,5 +1,17 @@
 // Header.js
-import React, { useContext } from 'react'
+import React from 'react';
+import '../FuelQuoteForm.css'; 
+
+function Header() {
+  return (
+    <header>
+      <h1>Smart Fuel Rates</h1>
+      </header>
+  );
+}
+
+export default Header;
+{/*import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import '../FuelQuoteForm.css'; 
@@ -21,4 +33,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header*/}
