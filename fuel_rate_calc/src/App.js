@@ -1,30 +1,27 @@
 import './App.css';
-import Navbar from './Navbar';
-import Header from './Header';
-import Footer from './Footer';
-import HomePage from './HomePage';
-import Login from './Login';
-import Register from './Register';
-import FuelQuoteForm from './FuelQuoteForm';
-import FuelQuoteHistory from './FuelQuoteHistory';
-import CustomerProfile from './customer_profile';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+//import Navbar from './Navbar';
+
+import { AuthProvider } from './context/AuthContext'
+import Header from './components/Header';
+//import Footer from './Footer';
+import HomePage from './pages/HomePage';
+import Login from './pages/LoginPage';
+import Register from './pages/Register';
+import PrivateRoute from './utils/PrivateRoute'
 
 function App() {
   return (
     <div className="App">
       <Router>
+      <AuthProvider>
       <Header />
-        <Navbar />
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
+          <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/fuel-quote-form" element={<FuelQuoteForm />} />
-          <Route exact path="/customer-profile" element={<CustomerProfile />} />
-          <Route path="/fuel-quote-history" element={<FuelQuoteHistory />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
-        <Footer />
+      </AuthProvider>
       </Router>
     </div>
   );

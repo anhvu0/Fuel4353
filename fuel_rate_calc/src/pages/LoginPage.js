@@ -1,22 +1,24 @@
-import React from "react";
+import React, {useContext} from 'react'
+import AuthContext from '../context/AuthContext'
 import { Link } from "react-router-dom";
-import "./FuelQuoteForm.css";
+import "../FuelQuoteForm.css";
 
-const Login = () => {
+const LoginPage = () => {
+
+  let {loginUser} = useContext(AuthContext)
   return (
       <div className="form-container">
       <div className="title">
-        <h2>Welcome Back!</h2>
-        <p>Hello again! Please enter your details</p>
+        <h2>Log in</h2>
       </div>
-        <form className="fuel-quote-form">
+        <form className="fuel-quote-form" onSubmit={loginUser}>
           <div className="form-group">
             <label htmlFor="username">Username:</label>
-            <input type="text" id="username" className="form-control" placeholder="enter username" />
+            <input type="text" name="username" placeholder="Enter username" />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" className="form-control" placeholder="**********"/>
+            <input type="password" name="password" placeholder="Enter password"/>
           </div>
 
           <div className="button-container">
@@ -36,4 +38,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
