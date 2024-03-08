@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from 'react'
 import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'
-
+import { toast } from 'react-toastify';
 const AuthContext = createContext()
 
 export default AuthContext;
@@ -13,30 +13,6 @@ export const AuthProvider = ({children}) => {
     let [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
-
-   /* let registerUser = async (e) => {
-        e.preventDefault()
-        const response = await fetch('http://127.0.0.1:8000/api/register/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: e.target.username.value,
-                password: e.target.password.value,
-            })
-        });
-    
-        let data = await response.json();
-    
-        if(response.status === 201){
-            alert('User registered successfully!');
-            navigate('/login'); // Redirect to login after successful registration
-        } else {
-            alert('Something went wrong during registration!');
-        }
-    }*/
-    
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -50,22 +26,26 @@ export const AuthProvider = ({children}) => {
 
         let data = await response.json();
 
-        if(data){
+        if(response.ok){
             localStorage.setItem('authTokens', JSON.stringify(data));
-            setAuthTokens(data)
-            setUser(jwtDecode(data.access))
-            navigate('/')
+            setAuthTokens(data);
+            setUser(jwtDecode(data.access));
+            setTimeout(() => navigate('/'), 1600);
+            toast.success("Logged in successfully"); // Display success message
         } else {
-            alert('Something went wrong while logging in the user!')
+            // Display an error message. Adjust the message based on your API response structure.
+            const errorMessage = data.detail || "Something went wrong while logging in the user!";
+            toast.error(errorMessage); // Display error message
         }
-    }
+    };
 
     let logoutUser = (e) => {
         //e.preventDefault()
         localStorage.removeItem('authTokens')
         setAuthTokens(null)
         setUser(null)
-        navigate('/login')
+        setTimeout(() => navigate('/login'), 1600);
+        toast.success("Logged out successfully"); // Display success message
     }
 
     const updateToken = async () => {

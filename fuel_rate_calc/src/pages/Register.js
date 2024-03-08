@@ -43,32 +43,35 @@ const Register = () => {
         }),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
+        toast.success("Registration successful!");
+        setTimeout(() => navigate('/login'), 2000); // Redirect after showing success message
+      } else {
         const errorData = await response.json();
-        const errorMessage = errorData.message || "An error occurred during registration";
-        throw new Error(errorMessage);
+        // Handle errors from backend
+        if (errorData.errors) {
+          Object.keys(errorData.errors).forEach((key) => {
+            const message = errorData.errors[key].join(' '); // Join messages if array
+            toast.error(`${message}`); //`${key}: ${message}`
+          });
+        } else {
+          // Fallback error message
+          toast.error("An error occurred during registration. Please try again.");
+        }
       }
-
-      const data = await response.json();
-      console.log(data); // Handle success
-      toast.success("Registration successful!");
-      setTimeout(() => {
-        navigate('/login'); // Redirect to login page using useNavigate
-      }, 2000);
     } catch (error) {
       console.error('Error during registration:', error);
-      // Handle errors (e.g., display error messages)
-      toast.error(error.toString());
+      toast.error("An error occurred during registration. Please try again.");
     }
   };
 
 
   return (
       <div className="form-container">
-        <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        {/*<ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />*/}
+        <ToastContainer />      
       <div className="title">
         <h2>Register</h2>
-        <p>Let us help you!</p>
       </div>
         <form className="fuel-quote-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -76,7 +79,7 @@ const Register = () => {
             <input type="text" 
             name="username" 
             className="retrieve-address" 
-            placeholder="enter username" 
+            placeholder="Enter username" 
             value={formData.username}
             onChange={handleChange}
             required />
@@ -87,7 +90,7 @@ const Register = () => {
               type="password"
               name="password"
               className="retrieve-address"
-              placeholder="*************"
+              placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
               required
@@ -98,6 +101,8 @@ const Register = () => {
         <input
           type="password"
           name="password2"
+          className="retrieve-address"
+          placeholder="Confirm password"
           value={formData.password2}
           onChange={handleChange}
           required
