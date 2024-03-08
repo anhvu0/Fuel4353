@@ -14,7 +14,7 @@ export const AuthProvider = ({children}) => {
 
     const navigate = useNavigate()
 
-    let registerUser = async (e) => {
+   /* let registerUser = async (e) => {
         e.preventDefault()
         const response = await fetch('http://127.0.0.1:8000/api/register/', {
             method: 'POST',
@@ -35,7 +35,7 @@ export const AuthProvider = ({children}) => {
         } else {
             alert('Something went wrong during registration!');
         }
-    }
+    }*/
     
 
     let loginUser = async (e) => {
@@ -96,7 +96,7 @@ export const AuthProvider = ({children}) => {
         authTokens:authTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,
-        registerUser: registerUser,
+        //registerUser: registerUser,
     }
 
     useEffect(()=>{
