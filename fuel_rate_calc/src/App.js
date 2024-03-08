@@ -8,20 +8,22 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import Login from './pages/LoginPage';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
 import PrivateRoute from './utils/PrivateRoute'
 import { ToastContainer } from 'react-toastify';
 function App() {
   return (
     <div className="App">
       <Router>
-      <AuthProvider>
       <ToastContainer />
+      <AuthProvider>
       <Header />
       <Navbar />
         <Routes>
           <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />
           <Route exact path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </AuthProvider>
       </Router>

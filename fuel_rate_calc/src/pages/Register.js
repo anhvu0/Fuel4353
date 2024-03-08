@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import AuthContext from '../context/AuthContext';
+//import AuthContext from '../context/AuthContext';
 import { useNavigate, Link } from "react-router-dom";
 import "../FuelQuoteForm.css";
 import { toast, ToastContainer } from 'react-toastify';
-
+import mainImage from '../img/mainpage.jpg';
 const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -65,11 +65,12 @@ const Register = () => {
     }
   };
 
-
   return (
       <div className="form-container">
-        {/*<ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />*/}
-        <ToastContainer />      
+        <ToastContainer /> 
+        <div className="two-column-layout">
+        <div className="form-column"> 
+        
       <div className="title">
         <h2>Register</h2>
       </div>
@@ -77,12 +78,12 @@ const Register = () => {
           <div className="form-group">
             <label htmlFor="username">Username:</label>
             <input type="text" 
-            name="username" 
-            className="retrieve-address" 
-            placeholder="Enter username" 
-            value={formData.username}
-            onChange={handleChange}
-            required />
+              name="username" 
+              className="retrieve-address" 
+              placeholder="Enter username" 
+              value={formData.username}
+              onChange={handleChange}
+              required />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password:</label>
@@ -97,27 +98,34 @@ const Register = () => {
             />
           </div>
           <div className="form-group">
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          name="password2"
-          className="retrieve-address"
-          placeholder="Confirm password"
-          value={formData.password2}
-          onChange={handleChange}
-          required
-        />
-        {errors.password2 && <p style={{ color: 'red' }}>{errors.password2}</p>}
-      </div>
-          <button type="submit">Register</button>
+            <label>Confirm Password:</label>
+            <input
+              type="password"
+              name="password2"
+              className="retrieve-address"
+              placeholder="Confirm password"
+              value={formData.password2}
+              onChange={handleChange}
+              required
+            />
+            {errors.password2 && <p style={{ color: 'red' }}>{errors.password2}</p>}
+          </div>
+          
           <div className="button-container">
-            <Link to="/login" style={{ textDecoration: "none" }}>
-              <button type="button" className="button-back_to_login">
-                Back to Login
+          <Link to="/login" style={{ textDecoration: "none" }}>
+              <button type="button" className="button-cancel">
+                Back to Log in
               </button>
             </Link>
+          <button type="submit" className="button-login">Submit</button>
+            
           </div>
         </form>
+        </div>  
+        <div className="image-column">
+          <img src={mainImage} alt="Image" />
+        </div>
+        </div>
       </div>
   );
 };

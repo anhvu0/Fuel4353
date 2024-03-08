@@ -2,6 +2,7 @@
 .title {
   text-align: center;
   width: 100%; /* Ensure the title stretches across the full width */
+  margin-bottom: 20px;
 }
 
 .form-container {
@@ -50,30 +51,6 @@
   min-width: 250px; /* Example fixed width, adjust as needed */
 }
 
-button {
-  display: block;
-  margin: 20px auto; 
-  padding: 10px 20px;
-  background-color: #4abf51;
-  color: #fff;
-  font-size:12px;
-  font-weight:bold;
-  border-color:black;
-  border-radius: 18px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #61c267;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  width: 100%; /* Ensure it takes full width to work with justify-content */
-  gap: 10px; /* Adjust the gap between buttons */
-
-}
 p {
   color:blue;
   font-family: Arial;
@@ -91,38 +68,6 @@ p {
   .responsive-image {
     max-height: 700px; /* Adjust as necessary */
   }
-}
-
-.fuel-quote-history-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /*min-height: 100vh;*/
-}
-
-.fuel-quote-history-table {
-  width: 70%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.fuel-quote-history-table th,
-.fuel-quote-history-table td {
-  border: 1px solid #000000;
-  text-align: left;
-  padding: 5px;
-}
-
-.fuel-quote-history-table th {
-  background-color: #f2f2f2;
-}
-
-.fuel-quote-history-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.fuel-quote-history-table tr:hover {
-  background-color: #ddd;
 }
 
 /* Footer.css */
@@ -144,4 +89,119 @@ p {
 /* Header.css */
 header {
   background-color: #e4f2fe;
+}
+
+.profile-table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*height: 100vh; /* Adjust height as needed */
+  margin-bottom: 20px;
+}
+
+.profile-table {
+  width: 100%; /* Adjust table width as needed */
+  /*border-collapse: separate; /* Collapse borders */
+  margin: auto; /* Center table on the page */
+  text-align: left; /* Align text to the left */
+}
+
+/* Table header styling, if applicable */
+.profile-table th {
+  background-color: #f2f2f2; /* Light grey background for headers */
+  padding: 8px; /* Padding inside header cells */
+}
+
+/* Table row styling */
+.profile-table tr {
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Alternating row background colors */
+.profile-table tr:nth-child(odd) {
+  background-color: hsla(0, 0%, 94%, 0.796); /* Light color for odd rows */
+}
+
+.profile-table tr:nth-child(even) {
+  background-color: #ffffff; /* White or different color for even rows */
+}
+
+/* Hover effect */
+.profile-table tr:hover {
+  background-color: #d9e6e7; /* Change color on hover */
+}
+
+/* Table cell styling */
+.profile-table td {
+  padding: 12px; /* Padding inside cells */
+}
+
+/* Make text in the first column bold */
+.profile-table td:first-child {
+  font-weight: bold; /* Bold text for the first column */
+}
+
+.two-column-layout {
+  display: flex;
+}
+
+.image-column {
+  flex: 2;
+  padding: 20px;
+
+}
+
+.form-column {
+  flex: 1;
+  padding: 20px;
+}
+
+
+img {
+  width: 100%; /* Make the image occupy the full container width */
+  height: 100%; /* Make the image occupy the full container height */
+  object-fit: fill; /* Stretch the image to fill the container */
+}
+
+
+.button-login {
+  flex: 1; /* Make login button take half of the space */
+}
+
+.button-register {
+  flex: 1; /* Make register button take half of the space */
+  margin-left: 10px; /* Add some space between buttons */
+}
+
+.button-cancel {
+  background-color: #141239; 
+}
+.button-cancel:hover {
+  background-color: #231f66; 
+}
+
+button {
+  display: block;
+  margin: 20px auto; 
+  padding: 10px 20px;
+  background-color: #4abf51;
+  color: #fff;
+  font-size:12px;
+  font-weight:bold;
+  border-color:black;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #61c267;
+}
+
+.button-container {
+  display: flex; /* Display buttons in a row */
+  justify-content: space-between; /* Add space between buttons */
+  margin-top: 15px;
+  text-align: center;
+  width: 100%; /* Ensure it takes full width to work with justify-content */
+  gap: 10px; 
 }

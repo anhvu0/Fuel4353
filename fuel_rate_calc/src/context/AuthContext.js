@@ -44,8 +44,8 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem('authTokens')
         setAuthTokens(null)
         setUser(null)
-        setTimeout(() => navigate('/login'), 1600);
-        toast.success("Logged out successfully"); // Display success message
+        setTimeout(() => navigate('/login'), 600);
+        toast.dismiss();
     }
 
     const updateToken = async () => {
@@ -76,7 +76,6 @@ export const AuthProvider = ({children}) => {
         authTokens:authTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,
-        //registerUser: registerUser,
     }
 
     useEffect(()=>{

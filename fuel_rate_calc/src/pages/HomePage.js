@@ -36,26 +36,44 @@ const HomePage = () => {
     };
 
     return (
-        <div>
-            <p>Hello {user.username}!</p>
+        <div className="form-container">
+            <p>{user.username}'s Profile:</p>
             {profileLoaded ? (
                 profile ? (
-                    <>
-                        <p>Name: {profile.first_name} {profile.last_name}</p>
-                        <p>Email: {profile.email}</p>
-                        <p>Address: {profile.address}</p>
-                        <p>City: {profile.city}</p>
-                        <p>State: {profile.state}</p>
-                        <p>Zip: {profile.zip_code}</p>
-                    </>
+                    <div className="profile-table-container">
+                        <table className="profile-table">
+                            <tbody>
+                            <tr>
+                                <td>Name:</td>
+                                <td>{profile.first_name} {profile.last_name}</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td>{profile.address}</td>
+                            </tr>
+                            <tr>
+                                <td>City:</td>
+                                <td>{profile.city}</td>
+                            </tr>
+                            <tr>
+                                <td>State:</td>
+                                <td>{profile.state}</td>
+                            </tr>
+                            <tr>
+                                <td>Zip:</td>
+                                <td>{profile.zip_code}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 ) : (
                     <p>Please go to your profile settings to update your profile information.</p>
                 )
             ) : (
                 <p>Loading profile...</p> // This can now safely be omitted if not needed
             )}
-            <img src={mainPageImage} alt="Gas Station at Night" className="responsive-image" />
-        </div>
+            {/*<img src={mainPageImage} alt="Gas Station at Night" className="responsive-image" />
+        */}</div>
     );
 };
 
