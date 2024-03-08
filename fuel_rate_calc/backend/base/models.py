@@ -6,6 +6,9 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-
+    address = models.CharField(max_length=100, default='address')
+    city = models.CharField(max_length=50, default='city')
+    state = models.CharField(max_length=50, default='state')
+    zip_code = models.CharField(max_length=10, default='zip_code')
     def __str__(self):
         return self.user.username

@@ -34,6 +34,10 @@ const HomePage = () => {
         { <p>Hello {user.username}!</p>}
           <p>Name: {profile.first_name} {profile.last_name}</p>
             <p>Email: {profile.email}</p>
+            <p>Address: {profile.address}</p>
+            <p>City: {profile.city}</p>
+            <p>State: {profile.state}</p> 
+            <p>Zip: {profile.zip_code}</p>
           <img src={mainPageImage} alt="Gas Station at Night" className="responsive-image" />
       </div>
 
