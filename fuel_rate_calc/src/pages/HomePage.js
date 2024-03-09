@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import '../FuelQuoteForm.css';
-import mainPageImage from '../img/mainpage.jpg';
 
 const HomePage = () => {
     const { user, authTokens, logoutUser } = useContext(AuthContext);

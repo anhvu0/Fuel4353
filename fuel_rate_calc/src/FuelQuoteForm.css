@@ -205,3 +205,136 @@ button:hover {
   width: 100%; /* Ensure it takes full width to work with justify-content */
   gap: 10px; 
 }
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  align-items: stretch; /* Ensure the children fill the height */
+}
+
+.login-image-section {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  background-color: #20d489; /* Background color */
+  color: white; /* Text color */
+}
+
+.image-text-content h2 {
+  font-size: 3rem; /* Large text for the title */
+  margin-top: 15px;
+  color: #181c32;
+  font-family: "Lexend", sans-serif;
+  font-weight: bold;
+}
+
+.image-text-content p {
+  font-size: 1.4rem; /* Smaller text for the subtitle */
+  color:white;
+  font-weight: bold;
+  font-family: "Lexend", sans-serif;
+}
+
+.login-image {
+  max-width: 85%; /* Adjust the image size */
+  height: auto; /* Adjust height automatically */
+  margin-top: 0.5rem; /* Space between the text and the image */
+}
+
+.login-form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: white;
+  align-items: center;
+}
+
+.login-form-content {
+  max-width: 400px; /* Maximum width of the form */
+  width: 100%; /* Make the form full width within its container */
+  text-align: left;
+  font-family: "Lexend", sans-serif;
+}
+
+/* Additional styles remain the same */
+
+
+.login-form-content h1 {
+  margin-bottom: 1em;
+  color: #181c32;
+}
+
+.login-form-content p {
+  margin-bottom: 3em;
+  color:#ababab;
+  font-family: "Lexend", sans-serif;
+}
+
+.login-form-group {
+  margin-bottom: 1em;
+}
+
+.login-form-group input {
+  border: 0px solid #ccc; /* Light grey border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 15px; /* Top/bottom and left/right padding */
+  margin-bottom: 20px; /* Space between each input field */
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Include padding and border in the element's width */
+  font-size: 12px; /* Adequate font size */
+  background-color: #eef3f7;
+  font-family: "Lexend", sans-serif;
+}
+
+.login-form-group input::placeholder {
+  color: #aaa;
+}
+.login-form-group input:focus {
+  border-color: #9fa7a8; /* Different border color when focused */
+  outline: none; /* Remove default focus outline */
+  box-shadow: none;
+  /*border: 1px solid #4CAF50;*/
+}
+.login-form-group a {
+  display: block; /* Or inline-block based on design */
+}
+
+.login-form-group label {
+  /*width: 180px; /* adjust as needed */
+  /*margin-right: 10px; /* adjust as needed for spacing */
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* Adjust link styles */
+a {
+  color: #20d489; /* Adjust the color as needed */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+.login-form-content button{
+  width:100%;
+  font-family: "Lexend", sans-serif;
+  font-size:14px;
+}
+button {
+  /*width: 100%;*/
+  padding: 10px;
+  margin-bottom: 1em; /* Space between buttons */
+  background-color: #20d489; /* Adjust background color as needed */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3bc98e; /* Adjust hover color as needed */
+}
+
+/* Additional styles for the form and other elements can be added here */
+

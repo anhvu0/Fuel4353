@@ -62,15 +62,17 @@ h1 {
   margin: 0;
   padding: 5px; /* Optional: Adds some spacing around the text */
 }
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@600&display=swap');
 
 body {
   margin: 0;
   padding: 0;
   background-color: #eaf1f7;
+  /*font-family: "Lexend", sans-serif;*/
 }
 
 nav {
-  background-color: #141239;
+  background-color: #141239; /*141239-6322ee*/
   margin: 0;
   padding: 0;
 }
@@ -97,5 +99,5 @@ nav ul li a {
 
 /* Change color for active NavLink */
 .active {
-  background-color: #4abf51; /*#007bff*/
+  background-color: #20d489; /*#007bff*/
 }

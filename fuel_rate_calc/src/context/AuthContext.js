@@ -44,7 +44,7 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem('authTokens')
         setAuthTokens(null)
         setUser(null)
-        setTimeout(() => navigate('/login'), 600);
+        setTimeout(() => navigate('/login'), 450);
         toast.dismiss();
     }
 

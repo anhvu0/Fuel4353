@@ -6,24 +6,35 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 //import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-import Login from './pages/LoginPage';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import PrivateRoute from './utils/PrivateRoute'
 import { ToastContainer } from 'react-toastify';
+import LoginPage from './pages/LoginPage';
+import { Outlet } from 'react-router';
+
 function App() {
   return (
     <div className="App">
       <Router>
       <ToastContainer />
       <AuthProvider>
-      <Header />
-      <Navbar />
+      {/*<Header />*/}
         <Routes>
-          <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />
-          <Route exact path="/login" element={<Login />} />
+        <Route exact path="/login" element={<LoginPage />} />
+        <Route
+          element={
+            <>
+              <Header />
+              <Navbar />
+              <Outlet />
+            </>
+          }
+        >
+          <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />        
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          </Route>
         </Routes>
       </AuthProvider>
       </Router>
