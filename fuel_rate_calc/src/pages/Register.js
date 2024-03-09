@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-//import AuthContext from '../context/AuthContext';
 import { useNavigate, Link } from "react-router-dom";
 import "../FuelQuoteForm.css";
-import { toast, ToastContainer } from 'react-toastify';
-import mainImage from '../img/mainpage.jpg';
+import { toast} from 'react-toastify';
+import winnerImg from '../img/winner.png';
+
 const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -24,7 +24,6 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.password2) {
-      //setErrors({ ...errors, password2: "Passwords do not match." });
       toast.error("Passwords do not match.");
       return;
     }
@@ -44,7 +43,7 @@ const Register = () => {
       });
 
       if (response.ok) {
-        toast.success("Registration successful!");
+        toast.success("Registration successful! Please log in.");
         setTimeout(() => navigate('/login'), 2000); // Redirect after showing success message
       } else {
         const errorData = await response.json();
@@ -66,7 +65,65 @@ const Register = () => {
   };
 
   return (
-      <div className="form-container">
+    <div className="login-container">
+    <div className="login-image-section">
+      <div className="image-text-content">
+        <h2>Smart+</h2>
+        <p>Discover Fuel Rates <br/>with great quote tools</p>
+      </div>
+      <img className="login-image" src={winnerImg} alt="Start" />
+    </div>
+    <div className="login-form-section">
+      <div className="login-form-content">
+        <h1>Register with Smart+</h1>
+        <p>Already have an account? <Link to="/login">Sign in</Link></p>
+
+        <form onSubmit={handleSubmit}>
+          <div className="login-form-group">
+            <label htmlFor="username">Username:</label>
+            <input type="text" 
+              name="username" 
+              className="retrieve-address" 
+              placeholder="Enter username" 
+              value={formData.username}
+              onChange={handleChange}
+              required />
+          </div>
+          <div className="login-form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              className="retrieve-address"
+              placeholder="Enter password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="login-form-group">
+            <label>Confirm Password:</label>
+            <input
+              type="password"
+              name="password2"
+              className="retrieve-address"
+              placeholder="Confirm password"
+              value={formData.password2}
+              onChange={handleChange}
+              required
+            />
+            {errors.password2 && <p style={{ color: 'red' }}>{errors.password2}</p>}
+          </div>
+
+          <button type="submit" className="button-login">Create account</button>
+            
+          
+        </form>
+</div>
+      </div>
+    </div>
+
+      /*<div className="form-container">
         <div className="two-column-layout">
         <div className="form-column"> 
         
@@ -125,7 +182,7 @@ const Register = () => {
           <img src={mainImage} alt="Image" />
         </div>
         </div>
-      </div>
+      </div>*/
   );
 };
 

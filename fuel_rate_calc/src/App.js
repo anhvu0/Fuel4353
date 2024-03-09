@@ -22,6 +22,7 @@ function App() {
       {/*<Header />*/}
         <Routes>
         <Route exact path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
         <Route
           element={
             <>
@@ -32,7 +33,6 @@ function App() {
           }
         >
           <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />        
-          <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
