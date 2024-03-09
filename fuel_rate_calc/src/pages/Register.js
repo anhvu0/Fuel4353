@@ -67,7 +67,6 @@ const Register = () => {
 
   return (
       <div className="form-container">
-        <ToastContainer /> 
         <div className="two-column-layout">
         <div className="form-column"> 
         
