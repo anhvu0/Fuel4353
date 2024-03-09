@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import "../FuelQuoteForm.css";
 import { toast} from 'react-toastify';
-import winnerImg from '../img/winner.png';
+import winnerImg from '../img/yes.png';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -76,7 +76,7 @@ const Register = () => {
     <div className="login-form-section">
       <div className="login-form-content">
         <h1>Register with Smart+</h1>
-        <p>Already have an account? <Link to="/login">Sign in</Link></p>
+        <p>Already have an account? <Link to="/login" class="text-success">Sign in</Link></p>
 
         <form onSubmit={handleSubmit}>
           <div className="login-form-group">
@@ -119,70 +119,9 @@ const Register = () => {
             
           
         </form>
-</div>
+      </div>
       </div>
     </div>
-
-      /*<div className="form-container">
-        <div className="two-column-layout">
-        <div className="form-column"> 
-        
-      <div className="title">
-        <h2>Register</h2>
-      </div>
-        <form className="fuel-quote-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username:</label>
-            <input type="text" 
-              name="username" 
-              className="retrieve-address" 
-              placeholder="Enter username" 
-              value={formData.username}
-              onChange={handleChange}
-              required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              className="retrieve-address"
-              placeholder="Enter password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Confirm Password:</label>
-            <input
-              type="password"
-              name="password2"
-              className="retrieve-address"
-              placeholder="Confirm password"
-              value={formData.password2}
-              onChange={handleChange}
-              required
-            />
-            {errors.password2 && <p style={{ color: 'red' }}>{errors.password2}</p>}
-          </div>
-          
-          <div className="button-container">
-          <Link to="/login" style={{ textDecoration: "none" }}>
-              <button type="button" className="button-cancel">
-                Back to Log in
-              </button>
-            </Link>
-          <button type="submit" className="button-login">Submit</button>
-            
-          </div>
-        </form>
-        </div>  
-        <div className="image-column">
-          <img src={mainImage} alt="Image" />
-        </div>
-        </div>
-      </div>*/
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import '../FuelQuoteForm.css';
 
-const HomePage = () => {
+const oldHomePage = () => {
     const { user, authTokens, logoutUser } = useContext(AuthContext);
     let [profile, setProfile] = useState(null);
     let [profileLoaded, setProfileLoaded] = useState(false);
@@ -76,4 +76,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default oldHomePage;

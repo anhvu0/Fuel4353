@@ -1,15 +1,15 @@
-// Footer.js
 import React from 'react';
-import '../FuelQuoteForm.css';
+import { MDBFooter } from 'mdb-react-ui-kit';
 
-function Footer() {
+export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="container">
-        <span>© {new Date().getFullYear()} CS4353 - Group 52. All rights reserved.</span>
+    <MDBFooter bgColor='light' className='text-center text-lg-left fixed-bottom'>
+      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
+        &copy; {new Date().getFullYear()} Copyright:{' '}
+        <a className='text-dark' href='#'>
+          CS4353 Group xx
+        </a>
       </div>
-    </footer>
+    </MDBFooter>
   );
 }
-
-export default Footer;

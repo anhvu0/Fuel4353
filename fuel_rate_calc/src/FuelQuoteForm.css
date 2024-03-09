@@ -51,7 +51,7 @@
   min-width: 250px; /* Example fixed width, adjust as needed */
 }
 
-p {
+ap {
   color:blue;
   font-family: Arial;
 }
@@ -197,6 +197,10 @@ button:hover {
   background-color: #61c267;
 }
 
+.extrabutton{
+  background-color: red;
+}
+
 .button-container {
   display: flex; /* Display buttons in a row */
   justify-content: space-between; /* Add space between buttons */
@@ -270,6 +274,7 @@ button:hover {
   margin-bottom: 3em;
   color:#ababab;
   font-family: "Lexend", sans-serif;
+  font-weight: bold;
 }
 
 .login-form-group {
@@ -335,6 +340,3 @@ button {
 button:hover {
   background-color: #3bc98e; /* Adjust hover color as needed */
 }
-
-/* Additional styles for the form and other elements can be added here */
-

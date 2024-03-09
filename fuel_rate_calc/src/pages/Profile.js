@@ -3,7 +3,16 @@ import '../FuelQuoteForm.css';
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import {
+    MDBCol,
+    MDBContainer,
+    MDBRow,
+    MDBCard,
+    MDBCardText,
+    MDBCardBody,
+    MDBBtn
+  } from 'mdb-react-ui-kit';
+  
 function Profile(){
     const {authTokens } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -113,53 +122,91 @@ function Profile(){
 
 
     return (
-      <div className="form-container">
+    <section style={{ backgroundColor: '#eee' }}>
+    <MDBContainer className="py-5 fluid">
+    <MDBRow>    
+          <MDBCol lg="9">
+    <MDBCard >
+      {/*<div className="form-container">*/}
+    <MDBCardBody>
       <div className="title">
-          <h2>Customer Information</h2>
-      </div>
+          <h3>Customer Information</h3>
+      </div><hr/>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="firstName">First Name:</label>
-            <input type="text" id="firstName" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="address">Address 1:</label>
-            <input type="text" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="city">City:</label>
-            <input type="text" id="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required />
-          </div>
-          <div className="form-group">
-          <label htmlFor="state">State:</label>
-              <select id="state" value={state} onChange={(e) => setState(e.target.value)} required>
+        <MDBRow>
+            <MDBCol sm="3">
+            <MDBCardText className='text-start fw-bold'>First Name</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="5">
+            <input type="text" class="form-control" id="firstName" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+            </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+            <MDBCol sm="3">
+            <MDBCardText className='text-start fw-bold'>Last Name</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="5">
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+            </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+            <MDBCol sm="3">
+            <MDBCardText className='text-start fw-bold'>Address 1</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="5">
+            <input type="text" class="form-control" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
+            </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+            <MDBCol sm="3">
+            <MDBCardText className='text-start fw-bold'>City</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="5">
+            <input type="text" class="form-control" id="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required />
+            </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+            <MDBCol sm="3">
+            <MDBCardText className='text-start fw-bold'>State</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="5">
+            <select class="form-control" id="state" value={state} onChange={(e) => setState(e.target.value)} required>
                   <option value="" disabled>Select state</option>
                   {states.map((state) => (
                       <option key={state.code} value={state.code}>{state.name}</option>
                   ))}
               </select>
-          </div>
-          <div className="form-group">
-              <label htmlFor="zipCode">Zip code:</label>
-              <input
-                  type="text"
-                  id="zipCode"
+            </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+            <MDBCol sm="3">
+            <MDBCardText className='text-start fw-bold'>Zip Code</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="5">
+            <input type="text" class="form-control" id="zipCode"
                   placeholder="Zip code"
                   value={zipCode}
                   onChange={(e) => setZipCode(e.target.value)}
                   maxLength="9"
                   minLength="5"
-                  required
-              />
-          </div>
-          <button type="submit">Update</button>
+                  required />
+            </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init>Update</MDBBtn>
         </form>
-
-      </div>
+    </MDBCardBody>
+      {/*</div>*/}
+    </MDBCard>
+    </MDBCol>
+    </MDBRow>
+    </MDBContainer>
+    </section>
     )
 }
 

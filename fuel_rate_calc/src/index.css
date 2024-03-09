@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
-:root {
-  font-family: "Lexend", sans-serif !important;
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+
+body {
+  font-family: Lexend, Roboto, Helvetica, Arial, sans-serif;
 }
