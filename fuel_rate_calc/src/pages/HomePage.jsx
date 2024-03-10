@@ -48,8 +48,9 @@ export default function HomePage() {
     {profileLoaded ? (
         profile ? (
       <MDBContainer className="py-5 fluid">
-        <MDBRow>    
-          <MDBCol lg="7">
+        <MDBRow>     
+          <MDBCol lg="3"></MDBCol>
+          <MDBCol lg="6">
             <MDBCard className="mb-4">
               <MDBCardBody>
               <div className="title">

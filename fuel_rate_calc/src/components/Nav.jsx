@@ -14,27 +14,29 @@ import {
 
 export default function Navx() {
   let { user, logoutUser } = useContext(AuthContext);
-  const [openNav, setOpenNav] = useState(false);
+  const [openNavCentred, setOpenNavCentred] = useState(false);
   const handleLogout = (e) => {
     e.preventDefault(); // Prevent default link behavior
     logoutUser(); // Call the logout function
   };
 
   return (
-    <MDBNavbar expand='lg' light bgColor='light'>
-      <MDBContainer fluid>
-        <MDBNavbarBrand href='/'>SMART+</MDBNavbarBrand>
+    <MDBNavbar expand='lg' className='shadow-3 text-dark'>
+      <MDBContainer fluid >
+       <MDBNavbarBrand href='/'>SMART+</MDBNavbarBrand>
         <MDBNavbarToggler
           type='button'
+          data-target='#navbarCenteredExample'
+          aria-controls='navbarCenteredExample'
           aria-expanded='false'
           aria-label='Toggle navigation'
-          onClick={() => setOpenNav(!openNav)}
+          onClick={() => setOpenNavCentred(!openNavCentred)}
         >
           <MDBIcon icon='bars' fas />
         </MDBNavbarToggler>
-        <MDBCollapse navbar open={openNav}>
-          <MDBNavbarNav>
-            <MDBNavbarItem>
+        <MDBCollapse navbar open={openNavCentred} center id='navbarCenteredExample'>
+          <MDBNavbarNav fullWidth={false} className='mb-2 mb-lg-0'>
+            <MDBNavbarItem >
               <MDBNavbarLink aria-current='page' href='/'>
                 Home
               </MDBNavbarLink>
@@ -50,11 +52,6 @@ export default function Navx() {
               Log in
             </MDBNavbarLink>
               )}
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              {/*<MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
-                Disabled
-              </MDBNavbarLink>*/}
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>
