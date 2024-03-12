@@ -18,12 +18,18 @@ function Profile(){
     const navigate = useNavigate();
     const [profileExists, setProfileExists] = useState(false);
     
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [address, setAddress] = useState(''); // Single address field
+    const [fullName, setFullName] = useState('');
+    const [addressOne, setAddressOne] = useState(''); // Single address field
+    const [addressTwo, setAddressTwo] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
+
+    const handleChange = (e) => {
+        const value = e.target.value.replace(/\D/g, "");
+        setZipCode(value);
+      };
+      
 
     const states = [
         { code: "AL", name: "Alabama" }, { code: "AK", name: "Alaska" },
@@ -85,9 +91,9 @@ function Profile(){
 
       // Prepare your profile data object according to your backend expectations
       const profileData = {
-          first_name: firstName,
-          last_name: lastName,
-          address: address,
+          full_name: fullName,
+          addressOne: addressOne,
+          addressTwo: addressTwo,
           city: city,
           state: state,
           zip_code: zipCode,
@@ -108,7 +114,7 @@ function Profile(){
               if (response.ok) {
                 toast.success('Profile updated successfully.');
                 setProfileExists(true); // Ensure future submissions use PATCH
-                setTimeout(() => navigate('/'), 1600);
+                setTimeout(() => navigate('/'), 900);
             } else {
                 throw new Error('Failed to update profile.');
             }
@@ -130,24 +136,15 @@ function Profile(){
     <MDBCard >
     <MDBCardBody>
       <div className="title">
-          <h3>Customer Information</h3>
+          <h3>Your Profile</h3>
       </div><hr/>
         <form onSubmit={handleSubmit}>
         <MDBRow>
             <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>First Name</MDBCardText>
+            <MDBCardText className='text-start fw-bold'>Full Name</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <input type="text" class="form-control" id="firstName" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
-            </MDBCol>
-        </MDBRow>
-        <hr />
-        <MDBRow>
-            <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>Last Name</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="6">
-            <input type="text" class="form-control" id="lastName" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+            <input type="text" class="form-control" id="fullName" placeholder="Full Name" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
             </MDBCol>
         </MDBRow>
         <hr />
@@ -156,7 +153,16 @@ function Profile(){
             <MDBCardText className='text-start fw-bold'>Address 1</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <input type="text" class="form-control" id="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
+            <input type="text" class="form-control" id="addressOne" placeholder="Address 1" value={addressOne} onChange={(e) => setAddressOne(e.target.value)} required />
+            </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+            <MDBCol sm="3">
+            <MDBCardText className='text-start fw-bold'>Address 2</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="6">
+            <input type="text" class="form-control" id="addressTwo" placeholder="Address 2" value={addressTwo} onChange={(e) => setAddressTwo(e.target.value)} />
             </MDBCol>
         </MDBRow>
         <hr />
@@ -191,7 +197,7 @@ function Profile(){
             <input type="text" class="form-control" id="zipCode"
                   placeholder="Zip code"
                   value={zipCode}
-                  onChange={(e) => setZipCode(e.target.value)}
+                  onChange={handleChange}
                   maxLength="9"
                   minLength="5"
                   required />

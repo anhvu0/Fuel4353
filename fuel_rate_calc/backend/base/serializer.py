@@ -11,7 +11,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False, read_only=True)
     class Meta:
         model = Profile
-        fields = ('user', 'first_name', 'last_name', 'email', 'address', 'city', 'state', 'zip_code')
+        fields = ('user', 'full_name', 'addressOne', 'addressTwo', 'city', 'state', 'zip_code')
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])

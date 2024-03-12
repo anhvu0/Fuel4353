@@ -30,7 +30,7 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authTokens', JSON.stringify(data));
             setAuthTokens(data);
             setUser(jwtDecode(data.access));
-            setTimeout(() => navigate('/'), 1600);
+            setTimeout(() => navigate('/'), 900);
             toast.success("Logged in successfully"); // Display success message
         } else {
             // Display an error message. Adjust the message based on your API response structure.

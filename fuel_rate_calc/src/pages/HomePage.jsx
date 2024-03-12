@@ -62,16 +62,7 @@ export default function HomePage() {
                     <MDBCardText className='text-start fw-bold'>Full Name</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className='text-start'>{profile.first_name} {profile.last_name}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="4">
-                    <MDBCardText className='text-start fw-bold'>Email</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="8">
-                    <MDBCardText className='text-start'>{profile.email}</MDBCardText>
+                    <MDBCardText className='text-start'>{profile.full_name} {profile.last_name}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -80,7 +71,16 @@ export default function HomePage() {
                     <MDBCardText className='text-start fw-bold'>Address 1</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className='text-start'>{profile.address}</MDBCardText>
+                    <MDBCardText className='text-start'>{profile.addressOne}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="4">
+                    <MDBCardText className='text-start fw-bold'>Address 2</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="8">
+                    <MDBCardText className='text-start'>{profile.addressTwo}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -104,7 +104,7 @@ export default function HomePage() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="4">
-                    <MDBCardText className='text-start fw-bold'>Zip</MDBCardText>
+                    <MDBCardText className='text-start fw-bold'>Zip Code</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
                     <MDBCardText className='text-start'>{profile.zip_code}</MDBCardText>
@@ -121,7 +121,7 @@ export default function HomePage() {
         <MDBCardText>
         Please update your profile information.
         </MDBCardText>
-        <MDBBtn href='/profile' type="button" class="btn btn-secondary" data-mdb-ripple-init>Edit Profile</MDBBtn>
+        <MDBBtn href='/profile' type="button" class="btn btn-success" data-mdb-ripple-init>Edit Profile</MDBBtn>
       </MDBCardBody>
       
     </MDBCard>
