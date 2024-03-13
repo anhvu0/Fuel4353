@@ -26,7 +26,7 @@ function Profile(){
     const [zipCode, setZipCode] = useState('');
 
     const handleChange = (e) => {
-        const value = e.target.value.replace(/\D/g, "");
+        const value = e.target.value.replace(/\D/g, "").slice(0, 9);
         setZipCode(value);
       };
       
@@ -198,9 +198,11 @@ function Profile(){
                   placeholder="Zip code"
                   value={zipCode}
                   onChange={handleChange}
+                  pattern="\d{5}(\d{4})?"
+                  title="Zip code must be either 5 or 9 digits."
                   maxLength="9"
                   minLength="5"
-                  required />
+                required />
             </MDBCol>
         </MDBRow>
         <hr />
