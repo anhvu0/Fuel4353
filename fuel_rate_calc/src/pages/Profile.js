@@ -64,8 +64,14 @@ function Profile(){
 
     useEffect(() => {
         // Once the profile data is loaded, check if the profile exists
-        if (profileLoaded) {
-            setProfileExists(!!profile);
+        if (profileLoaded && profile) {
+            setFullName(profile.full_name || '');
+            setAddressOne(profile.addressOne || '');
+            setAddressTwo(profile.addressTwo || '');
+            setCity(profile.city || '');
+            setState(profile.state || '');
+            setZipCode(profile.zip_code || '');
+            setProfileExists(true);
         }
     }, [profile, profileLoaded]);
 
@@ -120,7 +126,7 @@ function Profile(){
     <MDBCard >
     <MDBCardBody>
       <div className="title">
-          <h3>Your Profile</h3>
+          <h3>Edit Your Profile</h3>
       </div><hr/>
         <form onSubmit={handleSubmit}>
         <MDBRow>

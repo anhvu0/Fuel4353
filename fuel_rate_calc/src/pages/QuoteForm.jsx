@@ -129,6 +129,7 @@ const QuoteForm = () => {
             <MDBCol sm="4">
             <input
             type="number"
+            min="0"
             id="gallonsRequested"
             class="form-control"
             value={gallonsRequested}

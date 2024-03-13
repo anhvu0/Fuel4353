@@ -24,7 +24,7 @@ export default function HomePage() {
             <MDBCard className="mb-4">
               <MDBCardBody>
               <div className="title">
-                <h3>Profile</h3>
+                <h3>Your Profile</h3>
               </div>
                 <hr />
                 <MDBRow>
