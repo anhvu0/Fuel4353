@@ -9,10 +9,10 @@ import {
   MDBCardBody,
   MDBBtn
 } from 'mdb-react-ui-kit';
+import LoadingSpinner from "../components/Loading";
 
 export default function HomePage() {
     const { profile, profileLoaded } = ProfileHook();
-
   return (
     <section style={{ backgroundColor: '#eee' }}>
     {profileLoaded ? (
@@ -93,12 +93,12 @@ export default function HomePage() {
         </MDBCardText>
         <MDBBtn href='/profile' type="button" class="btn btn-success" data-mdb-ripple-init>Edit Profile</MDBBtn>
       </MDBCardBody>
-      
     </MDBCard>
-    
     )
 ) : (
-    <p>Loading profile...</p>
+  <>
+  <LoadingSpinner />
+  </>
 )}
     </section>
   );

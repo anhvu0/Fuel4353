@@ -13,6 +13,7 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit';
 import { toast } from 'react-toastify';
+import LoadingSpinner from "../components/Loading";
 
 const QuoteForm = () => {
   const { profile, profileLoaded } = ProfileHook();
@@ -86,6 +87,7 @@ const QuoteForm = () => {
 
   return (
     <section style={{ backgroundColor: '#eee' }}>
+    {profileLoaded ? (
     <MDBContainer className="py-5 fluid">
     <MDBRow>     
       <MDBCol lg="2"></MDBCol>
@@ -177,6 +179,11 @@ const QuoteForm = () => {
         </MDBCol>  
         </MDBRow>
         </MDBContainer>
+        ) : (
+          <>
+          <LoadingSpinner />
+          </>
+      )}
         </section>
   );
 };

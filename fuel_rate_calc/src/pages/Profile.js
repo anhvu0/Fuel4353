@@ -13,7 +13,8 @@ import {
     MDBCardBody,
     MDBBtn
   } from 'mdb-react-ui-kit';
-  
+import LoadingSpinner from "../components/Loading";
+
 function Profile(){
     const { profile, profileLoaded } = ProfileHook();
     const { authTokens } = useContext(AuthContext);
@@ -119,6 +120,7 @@ function Profile(){
 
     return (
     <section style={{ backgroundColor: '#eee' }}>
+    {profileLoaded ? (
     <MDBContainer className="py-5 fluid">
     <MDBRow>    
     <MDBCol lg="2"></MDBCol>
@@ -203,6 +205,11 @@ function Profile(){
     </MDBCol>
     </MDBRow>
     </MDBContainer>
+    ) : (
+        <>
+        <LoadingSpinner />
+        </>
+    )}
     </section>
     )
 }
