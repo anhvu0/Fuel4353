@@ -45,6 +45,9 @@ export default function Navx() {
               <MDBNavbarLink href='/profile'>Profile</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
+              <MDBNavbarLink href='/quoteform'>Get a Quote</MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
             {user ? (
             <MDBNavbarLink href="/login" onClick={handleLogout}>Log out</MDBNavbarLink>
             ) : (

@@ -1,4 +1,5 @@
-import ProfileHook from "../context/ProfileHook";
+import React, { useState, useEffect, useContext } from 'react';
+import AuthContext from '../context/AuthContext';
 import "../FuelQuoteForm.css";
 import {
   MDBCol,
@@ -11,8 +12,37 @@ import {
 } from 'mdb-react-ui-kit';
 
 export default function HomePage() {
-    const { profile, profileLoaded } = ProfileHook();
 
+    const { user, authTokens, logoutUser } = useContext(AuthContext);
+    let [profile, setProfile] = useState(null);
+    let [profileLoaded, setProfileLoaded] = useState(false);
+
+    useEffect(() => {
+        getProfile();
+    }, []);
+
+    const getProfile = async () => {
+        try {
+            let response = await fetch('http://127.0.0.1:8000/api/profile', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + String(authTokens.access),
+                },
+            });
+
+            if (response.status === 200) {
+                let data = await response.json();
+                setProfile(data);
+            } else if (response.status === 401) {
+                logoutUser();
+            }
+            setProfileLoaded(true); // Indicates the profile fetch attempt was made
+        } catch (error) {
+            console.error("An error occurred while fetching the profile:", error);
+            setProfileLoaded(true);
+        }
+    };
   return (
     <section style={{ backgroundColor: '#eee' }}>
     {profileLoaded ? (
