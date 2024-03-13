@@ -1,30 +1,44 @@
 import './App.css';
-import Navbar from './Navbar';
-import Header from './Header';
-import Footer from './Footer';
-import HomePage from './HomePage';
-import Login from './Login';
-import Register from './Register';
-import FuelQuoteForm from './FuelQuoteForm';
-import FuelQuoteHistory from './FuelQuoteHistory';
-import CustomerProfile from './customer_profile';
+import './FuelQuoteForm.css'
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { AuthProvider } from './context/AuthContext'
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+import PrivateRoute from './utils/PrivateRoute'
+import { ToastContainer } from 'react-toastify';
+import LoginPage from './pages/LoginPage';
+import { Outlet } from 'react-router';
+import Navx from './components/Nav'
+import QuoteForm from './pages/QuoteForm';
+import QuoteHistory from './pages/QuoteHistory';
 
 function App() {
   return (
     <div className="App">
       <Router>
-      <Header />
-        <Navbar />
+      <ToastContainer />
+      <AuthProvider>
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/fuel-quote-form" element={<FuelQuoteForm />} />
-          <Route exact path="/customer-profile" element={<CustomerProfile />} />
-          <Route path="/fuel-quote-history" element={<FuelQuoteHistory />} />
+        <Route exact path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          element={
+            <>
+              <Navx />
+              <Outlet />
+              <Footer />
+            </>
+          }
+        >
+          <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />        
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/quoteform" element={<QuoteForm />} />
+          <Route path="/quotehistory" element={<QuoteHistory />} />
+          </Route>
         </Routes>
-        <Footer />
+      </AuthProvider>
       </Router>
     </div>
   );
