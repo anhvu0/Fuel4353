@@ -12,6 +12,7 @@ import LoginPage from './pages/LoginPage';
 import { Outlet } from 'react-router';
 import Navx from './components/Nav'
 import QuoteForm from './pages/QuoteForm';
+import QuoteHistory from './pages/QuoteHistory';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />        
           <Route path="/profile" element={<Profile />} />
           <Route path="/quoteform" element={<QuoteForm />} />
+          <Route path="/quotehistory" element={<QuoteHistory />} />
           </Route>
         </Routes>
       </AuthProvider>

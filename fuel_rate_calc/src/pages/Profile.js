@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import '../FuelQuoteForm.css';
 import AuthContext from '../context/AuthContext';
+import ProfileHook from "../context/ProfileHook";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -14,7 +15,8 @@ import {
   } from 'mdb-react-ui-kit';
   
 function Profile(){
-    const {authTokens } = useContext(AuthContext);
+    const { profile, profileLoaded } = ProfileHook();
+    const { authTokens } = useContext(AuthContext);
     const navigate = useNavigate();
     const [profileExists, setProfileExists] = useState(false);
     
@@ -61,28 +63,11 @@ function Profile(){
     ];
 
     useEffect(() => {
-      const fetchProfile = async () => {
-          if (authTokens) {
-              const response = await fetch('http://127.0.0.1:8000/api/profile/', {
-                  method: 'GET',
-                  headers: {
-                      'Authorization': `Bearer ${authTokens.access}`,
-                  },
-              });
-
-              if (response.ok) {
-                  setProfileExists(true);
-                  // Optionally, populate form fields with existing profile data
-              } else if (response.status === 404) {
-                  setProfileExists(false);
-              } else {
-                  // Handle other potential errors or statuses
-              }
-          }
-      };
-
-      fetchProfile();
-  }, [authTokens]);
+        // Once the profile data is loaded, check if the profile exists
+        if (profileLoaded) {
+            setProfileExists(!!profile);
+        }
+    }, [profile, profileLoaded]);
 
     const handleSubmit = async (e) => {
       e.preventDefault();

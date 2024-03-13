@@ -7,6 +7,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from base.serializer import UserRegistrationSerializer
 from base.serializer import ProfileSerializer
 from base.models import Profile
+from base.models import QuoteForm
+from base.serializer import QuoteSerializer
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -71,3 +73,20 @@ def user_registration(request):
             error_messages = {'errors': errors}
             return Response(error_messages, status=status.HTTP_400_BAD_REQUEST)
         
+@api_view(['POST'])
+def submit_quote(request):
+    if request.method == 'POST':
+        serializer = QuoteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)  # Automatically associate the quote with the logged-in user
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def quote_history(request):
+    quotes = QuoteForm.objects.filter(user=request.user).order_by('-delivery_date')  # Assuming you have a 'user' field in your Quote model
+    serializer = QuoteSerializer(quotes, many=True)
+    return Response(serializer.data)

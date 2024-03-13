@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ProfileHook from '../context/ProfileHook';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 import "../FuelQuoteForm.css";
 import {
   MDBCol,
@@ -15,6 +16,7 @@ import { toast } from 'react-toastify';
 
 const QuoteForm = () => {
   const { profile, profileLoaded } = ProfileHook();
+  const { authTokens } = useContext(AuthContext);
   const navigate = useNavigate();
   const [gallonsRequested, setGallonsRequested] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
@@ -50,13 +52,36 @@ const QuoteForm = () => {
 
     const quoteData = {
       user: profile.user, // Assuming you have user ID in profile
-      gallonsRequested,
-      deliveryAddress,
-      deliveryDate,
-      pricePerGallon,
-      totalAmountDue,
+      gallons_requested: gallonsRequested,
+      delivery_address: deliveryAddress,
+      delivery_date: deliveryDate,
+      price_per_gallon: pricePerGallon,
+      total_amount_due: totalAmountDue,
     };
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/quotes/', {
+          method: 'POST', // Use POST for creating new data
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${authTokens.access}`, // Use the access token
+          },
+          body: JSON.stringify(quoteData),
+      });
 
+      if (response.ok) {
+        // Assuming the backend responds with the created quote data
+        const data = await response.json();
+        toast.success('Quote submitted successfully.');
+        // Optionally, navigate to a confirmation page or display the quote details
+        navigate('/quotehistory'); // Adjust the route as necessary
+      } else {
+        // If the server responded with a client error (e.g., 400) or server error (e.g., 500)
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit quote.');
+      }
+  } catch (error) {
+      toast.error(error.message || 'An error occurred while submitting the quote.');
+  }
     // Submit the quoteData to the backend API
     console.log('Submitting quote:', quoteData);
     // After submission logic goes here...
@@ -80,7 +105,7 @@ const QuoteForm = () => {
             <MDBCardText className='text-start fw-bold'>Delivery Address</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <MDBCardText>
+            <MDBCardText className='text-start'>
            {/*<input
             type="text"
             id="deliveryAddress"

@@ -33,3 +33,9 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+
+class QuoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuoteForm
+        fields = '__all__'
+        read_only_fields = ('user',)  # Assuming 'user' should not be directly set via API
