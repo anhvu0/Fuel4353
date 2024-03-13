@@ -51,7 +51,7 @@ const QuoteForm = () => {
     }
 
     const quoteData = {
-      user: profile.user, // Assuming you have user ID in profile
+      user: profile.user,
       gallons_requested: gallonsRequested,
       delivery_address: deliveryAddress,
       delivery_date: deliveryDate,
@@ -60,20 +60,18 @@ const QuoteForm = () => {
     };
     try {
       const response = await fetch('http://127.0.0.1:8000/api/quotes/', {
-          method: 'POST', // Use POST for creating new data
+          method: 'POST', 
           headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${authTokens.access}`, // Use the access token
+              'Authorization': `Bearer ${authTokens.access}`, 
           },
           body: JSON.stringify(quoteData),
       });
 
       if (response.ok) {
-        // Assuming the backend responds with the created quote data
         const data = await response.json();
         toast.success('Quote submitted successfully.');
-        // Optionally, navigate to a confirmation page or display the quote details
-        navigate('/quotehistory'); // Adjust the route as necessary
+        setTimeout(() => navigate('/quotehistory'), 600);
       } else {
         // If the server responded with a client error (e.g., 400) or server error (e.g., 500)
         const errorData = await response.json();
@@ -84,7 +82,6 @@ const QuoteForm = () => {
   }
     // Submit the quoteData to the backend API
     console.log('Submitting quote:', quoteData);
-    // After submission logic goes here...
   };
 
   return (
@@ -105,16 +102,7 @@ const QuoteForm = () => {
             <MDBCardText className='text-start fw-bold'>Delivery Address</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <MDBCardText className='text-start'>
-           {/*<input
-            type="text"
-            id="deliveryAddress"
-            class="form-control"
-            value={deliveryAddress}
-            disabled={true} // This field is not editable
-            />*/} 
-            {deliveryAddress}
-            </MDBCardText>
+            <MDBCardText className='text-start'>{deliveryAddress}</MDBCardText>
             </MDBCol>
         </MDBRow>
         <hr />

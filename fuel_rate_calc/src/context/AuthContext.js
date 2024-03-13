@@ -33,7 +33,6 @@ export const AuthProvider = ({children}) => {
             setTimeout(() => navigate('/'), 900);
             toast.success("Logged in successfully"); // Display success message
         } else {
-            // Display an error message. Adjust the message based on your API response structure.
             const errorMessage = data.detail || "Something went wrong while logging in the user!";
             toast.error(errorMessage); // Display error message
         }

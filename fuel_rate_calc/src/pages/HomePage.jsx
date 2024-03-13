@@ -98,7 +98,7 @@ export default function HomePage() {
     
     )
 ) : (
-    <p>Loading profile...</p> // This can now safely be omitted if not needed
+    <p>Loading profile...</p>
 )}
     </section>
   );

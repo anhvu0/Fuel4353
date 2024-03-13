@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import AuthContext from '../context/AuthContext'; // Make sure the path is correct
+import AuthContext from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import {
     MDBTable,
@@ -29,7 +29,7 @@ const QuoteHistory = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setQuotes(data); // Assuming the data is an array of quotes
+          setQuotes(data); 
         } else {
           // Handle errors, e.g., unauthorized access, no quotes found, etc.
           toast.error('Failed to fetch quotes.');

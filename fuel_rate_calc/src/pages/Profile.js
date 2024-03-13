@@ -21,7 +21,7 @@ function Profile(){
     const [profileExists, setProfileExists] = useState(false);
     
     const [fullName, setFullName] = useState('');
-    const [addressOne, setAddressOne] = useState(''); // Single address field
+    const [addressOne, setAddressOne] = useState('');
     const [addressTwo, setAddressTwo] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -74,7 +74,6 @@ function Profile(){
 
       const method = profileExists ? 'PATCH' : 'POST';
 
-      // Prepare your profile data object according to your backend expectations
       const profileData = {
           full_name: fullName,
           addressOne: addressOne,
@@ -91,7 +90,7 @@ function Profile(){
                   method: method,
                   headers: {
                       'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${authTokens.access}`, // Use the access token
+                      'Authorization': `Bearer ${authTokens.access}`, 
                   },
                   body: JSON.stringify(profileData),
               });

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import "../FuelQuoteForm.css";
 import { toast} from 'react-toastify';
@@ -29,7 +29,6 @@ const Register = () => {
     }
 
     try {
-      // Replace URL with your actual registration endpoint
       const response = await fetch('http://localhost:8000/api/register/', {
         method: 'POST',
         headers: {

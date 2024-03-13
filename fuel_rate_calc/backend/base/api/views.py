@@ -6,9 +6,9 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from base.serializer import UserRegistrationSerializer
 from base.serializer import ProfileSerializer
+from base.serializer import QuoteSerializer
 from base.models import Profile
 from base.models import QuoteForm
-from base.serializer import QuoteSerializer
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -36,8 +36,6 @@ def profile_view(request):
             return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'POST':
-        # Assuming the Profile model has a OneToOneField to User and
-        # you want to avoid creating multiple profiles for the same user.
         if Profile.objects.filter(user=user).exists():
             return Response({'error': 'Profile already exists'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = ProfileSerializer(data=request.data)
@@ -87,6 +85,6 @@ def submit_quote(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def quote_history(request):
-    quotes = QuoteForm.objects.filter(user=request.user).order_by('-delivery_date')  # Assuming you have a 'user' field in your Quote model
+    quotes = QuoteForm.objects.filter(user=request.user).order_by('-delivery_date')
     serializer = QuoteSerializer(quotes, many=True)
     return Response(serializer.data)

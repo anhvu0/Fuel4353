@@ -16,8 +16,8 @@ export default function Navx() {
   let { user, logoutUser } = useContext(AuthContext);
   const [openNavCentred, setOpenNavCentred] = useState(false);
   const handleLogout = (e) => {
-    e.preventDefault(); // Prevent default link behavior
-    logoutUser(); // Call the logout function
+    e.preventDefault(); 
+    logoutUser(); 
   };
 
   return (

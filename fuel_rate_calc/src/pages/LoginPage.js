@@ -32,7 +32,7 @@ const LoginPage = () => {
           </div>
           <button type="submit">Sign In</button>
         </form>
-</div>
+      </div>
       </div>
     </div>
   );
