@@ -6,4 +6,4 @@ class BaseConfig(AppConfig):
     name = 'base'
 
 def ready(self):
-        from .signals import create_profile, save_profile
+        from .signal import create_profile, save_profile
