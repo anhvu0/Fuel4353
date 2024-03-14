@@ -53,12 +53,13 @@ export default function Navx() {
             </MDBNavbarItem>
             <MDBNavbarItem className='align-items-end'>
           {user ? (
-            <MDBBtn type="button" outline color="secondary" className='m-0' href="#" onClick={handleLogout}>Log out</MDBBtn>
+            <MDBBtn type="button" outline color="secondary" className='m-1' href="#" onClick={handleLogout}>Log out</MDBBtn>
             ) : (
             <MDBNavbarLink href="/login">
               Log in
             </MDBNavbarLink>
-              )}</MDBNavbarItem>
+              )}
+            </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>

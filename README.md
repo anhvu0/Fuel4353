@@ -1,6 +1,6 @@
 # Fuel4353
 Tested on Windows and MacOS<br>
-Step 1: Open VSCode, Clone and Fetch this branch (Ryan-django-mdb-ui-react) from Github<br>
+Step 1: Open VSCode, Clone and Fetch this branch (Ryan-django-mdb-react) from Github<br>
 Step 2: ```cd``` into the outer ```backend``` <br>
 Step 3: delete the ```Pipfile``` here<br>
 Step 4: create a virtual environment by typing in ```pipenv shell```<br>
@@ -16,9 +16,8 @@ Step 6: Open ```localhost:3000``` and try the features<br>
     - Profile Update <br>
     - Request a Quote <br>
     - Quote History <br>
-    - Database: PostgreSQL hosted on Render.com,<br> 
-    no need to set up local database<br>
-    - Both Front End + Back End are hosted on Render.com<br><br>
+    - Database: PostgreSQL hosted on Render.com, no need to set up local database<br>
+    - Front End + Back End + DB are hosted on Render.com<br><br>
 
 **To Do list:**<br>
     - Unit Tests<br>

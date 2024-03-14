@@ -33,7 +33,7 @@ const QuoteHistory = () => {
           const data = await response.json();
           setQuotes(data); 
         } else {
-          // Handle errors, e.g., unauthorized access, no quotes found, etc.
+         
           toast.error('Failed to fetch quotes.');
         }
       } catch (error) {

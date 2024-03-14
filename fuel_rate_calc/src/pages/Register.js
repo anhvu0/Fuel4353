@@ -43,7 +43,7 @@ const Register = () => {
 
       if (response.ok) {
         toast.success("Registration successful! Please log in.");
-        setTimeout(() => navigate('/login'), 2000); // Redirect after showing success message
+        setTimeout(() => navigate('/login'), 2000); 
       } else {
         const errorData = await response.json();
         // Handle errors from backend
@@ -53,7 +53,6 @@ const Register = () => {
             toast.error(`${message}`); //`${key}: ${message}`
           });
         } else {
-          // Fallback error message
           toast.error("An error occurred during registration. Please try again.");
         }
       }
@@ -115,7 +114,6 @@ const Register = () => {
           </div>
 
           <button type="submit" className="button-login">Create account</button>
-            
           
         </form>
       </div>

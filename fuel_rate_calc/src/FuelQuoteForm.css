@@ -220,7 +220,10 @@ a {
   color: #20d489; /* Adjust the color as needed */
   text-decoration: none;
 }
-
+Link {
+  color: #20d489; /* Adjust the color as needed */
+  text-decoration: none;
+}
 a:hover {
   text-decoration: underline;
 }

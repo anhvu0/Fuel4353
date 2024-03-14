@@ -105,7 +105,7 @@ function Profile(){
               if (response.ok) {
                 toast.success('Profile updated successfully.');
                 setProfileExists(true); // Ensure future submissions use PATCH
-                setTimeout(() => navigate('/'), 900);
+                setTimeout(() => navigate('/'), 1600);
             } else {
                 throw new Error('Failed to update profile.');
             }
@@ -139,7 +139,9 @@ function Profile(){
             <MDBCardText className='text-start fw-bold'>Full Name</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <input type="text" class="form-control" id="fullName" placeholder="Full Name" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+            <input type="text" class="form-control" 
+            id="fullName" placeholder="Full Name" value={fullName} 
+            onChange={(e) => setFullName(e.target.value)} required />
             </MDBCol>
         </MDBRow>
         <hr />
@@ -148,7 +150,9 @@ function Profile(){
             <MDBCardText className='text-start fw-bold'>Address Line 1</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <input type="text" class="form-control" id="addressOne" placeholder="Address 1" value={addressOne} onChange={(e) => setAddressOne(e.target.value)} required />
+            <input type="text" class="form-control" 
+            id="addressOne" placeholder="Address 1" value={addressOne} 
+            onChange={(e) => setAddressOne(e.target.value)} required />
             </MDBCol>
         </MDBRow>
         <hr />
@@ -157,7 +161,9 @@ function Profile(){
             <MDBCardText className='text-start fw-bold'>Address Line 2</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <input type="text" class="form-control" id="addressTwo" placeholder="Address 2" value={addressTwo} onChange={(e) => setAddressTwo(e.target.value)} />
+            <input type="text" class="form-control" 
+            id="addressTwo" placeholder="Address 2" value={addressTwo} 
+            onChange={(e) => setAddressTwo(e.target.value)} />
             </MDBCol>
         </MDBRow>
         <hr />
@@ -166,7 +172,9 @@ function Profile(){
             <MDBCardText className='text-start fw-bold'>City</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <input type="text" class="form-control" id="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required />
+            <input type="text" class="form-control" 
+            id="city" placeholder="City" value={city} 
+            onChange={(e) => setCity(e.target.value)} required />
             </MDBCol>
         </MDBRow>
         <hr />
@@ -175,8 +183,9 @@ function Profile(){
             <MDBCardText className='text-start fw-bold'>State</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
-            <select class="form-control" id="state" value={state} onChange={(e) => setState(e.target.value)} required>
-                  <option value="" disabled>Select state</option>
+            <select class="form-control" id="state" value={state} 
+            onChange={(e) => setState(e.target.value)} required>
+                  <option value="">Select state</option> {/**disabled */}
                   {states.map((state) => (
                       <option key={state.code} value={state.code}>{state.name}</option>
                   ))}
@@ -201,7 +210,8 @@ function Profile(){
             </MDBCol>
         </MDBRow>
         <hr />
-        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init style={{ backgroundColor: '#20d489' } }>Update</MDBBtn>
+        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init 
+                style={{ backgroundColor: '#20d489' } }>Update</MDBBtn>
         </form>
     </MDBCardBody>
     </MDBCard>

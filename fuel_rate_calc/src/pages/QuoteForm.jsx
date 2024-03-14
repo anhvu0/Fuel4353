@@ -47,7 +47,7 @@ const QuoteForm = () => {
 
     if (!profile) {
       toast.error('You must update your profile to submit a quote.');
-      setTimeout(() => navigate('/profile/'), 900);
+      setTimeout(() => navigate('/profile/'), 1600);
       return;
     }
 
@@ -72,9 +72,9 @@ const QuoteForm = () => {
       if (response.ok) {
         const data = await response.json();
         toast.success('Quote submitted successfully.');
-        setTimeout(() => navigate('/quotehistory'), 600);
+        setTimeout(() => navigate('/quotehistory'), 1600);
       } else {
-        // If the server responded with a client error (e.g., 400) or server error (e.g., 500)
+      
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to submit quote.');
       }
@@ -82,7 +82,7 @@ const QuoteForm = () => {
       toast.error(error.message || 'An error occurred while submitting the quote.');
   }
     // Submit the quoteData to the backend API
-    console.log('Submitting quote:', quoteData);
+    //console.log('Submitting quote:', quoteData);
   };
 
   return (
@@ -175,7 +175,8 @@ const QuoteForm = () => {
             </MDBCol>
         </MDBRow>
         <hr />
-        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init style={{ backgroundColor: '#20d489' }}>Submit Quote</MDBBtn>
+        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init 
+          style={{ backgroundColor: '#20d489' }}>Submit Quote</MDBBtn>
         </form>
         </MDBCardBody>
         </MDBCard>  

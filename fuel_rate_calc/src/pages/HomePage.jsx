@@ -15,12 +15,14 @@ export default function HomePage() {
     const { profile, profileLoaded } = ProfileHook();
   return (
     <section style={{ backgroundColor: '#eee' }}>
-    {profileLoaded ? (
-        profile ? (
       <MDBContainer className="py-5 fluid">
         <MDBRow>     
           <MDBCol lg="3"></MDBCol>
           <MDBCol lg="6">
+          {!profileLoaded ? (
+            <LoadingSpinner /> 
+            ) : (
+              profile ? (
             <MDBCard className="mb-4">
               <MDBCardBody>
               <div className="title">
@@ -82,24 +84,23 @@ export default function HomePage() {
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
+        ) : (
+                <MDBCard>
+              <MDBCardBody>
+                <MDBCardText>
+                Please update your profile information before requesting a quote.
+                </MDBCardText>
+                <MDBBtn href='/profile' type="button" 
+                class="btn btn-success" 
+                data-mdb-ripple-init 
+                style={{ backgroundColor: '#20d489' }}>Edit Profile</MDBBtn>
+              </MDBCardBody>
+              </MDBCard>
+            )
+              )}
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-      ) : (
-        <MDBCard>
-      <MDBCardBody>
-        <MDBCardText>
-        Please update your profile information before requesting a quote.
-        </MDBCardText>
-        <MDBBtn href='/profile' type="button" class="btn btn-success" data-mdb-ripple-init style={{ backgroundColor: '#20d489' }}>Edit Profile</MDBBtn>
-      </MDBCardBody>
-    </MDBCard>
-    )
-) : (
-  <>
-  <LoadingSpinner />
-  </>
-)}
     </section>
   );
 }

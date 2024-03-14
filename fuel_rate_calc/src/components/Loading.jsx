@@ -1,24 +1,25 @@
 import React from 'react';
-import { cardio } from 'ldrs';
+import { trefoil } from 'ldrs'
 import { MDBCard, MDBCardBody, MDBCardText } from 'mdb-react-ui-kit';
 
 const LoadingSpinner = () => {
-  cardio.register();
+  trefoil.register()
   return (
     <MDBCard className="text-center">
       <MDBCardBody>
         <MDBCardText>
-            <l-cardio
-                size="70"
-                stroke="2"
-                speed="1"
-                color="black" 
-          ></l-cardio>
+        <l-trefoil
+          size="60"
+          stroke="2"
+          stroke-length="0.15"
+          bg-opacity="0.1"
+          speed="1.4" 
+          color="black" 
+        ></l-trefoil>
           <p>Loading...</p>
         </MDBCardText>
       </MDBCardBody>
     </MDBCard>
   );
 };
-
 export default LoadingSpinner;
