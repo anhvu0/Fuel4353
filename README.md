@@ -14,8 +14,11 @@ Step 6: Open ```localhost:3000``` and try the features<br>
     - Profile Update <br>
     - Request a Quote <br>
     - Quote History <br>
-    - Database: PostgreSQL hosted on Railway.app,<br> 
-    no need to set up local database<br><br>
+    - Database: PostgreSQL hosted on Render.com,<br> 
+    no need to set up local database<br>
+    - Both Front End + Back End are hosted on Render.com<br><br>
 
 **To Do list:**<br>
     - Unit Tests<br>
+
+**Project URL:** https://fuelquote4353-frontend.onrender.com/
