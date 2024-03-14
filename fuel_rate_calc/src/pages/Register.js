@@ -75,7 +75,7 @@ const Register = () => {
     <div className="login-form-section">
       <div className="login-form-content">
         <h1>Register with Smart+</h1>
-        <p>Already have an account? <Link to="/login" class="text-success">Sign in</Link></p>
+        <p>Already have an account? <Link to="/login" className="text-success">Sign in</Link></p>
 
         <form onSubmit={handleSubmit}>
           <div className="login-form-group">

@@ -19,7 +19,7 @@ const LoginPage = () => {
     <div className="login-form-section">
       <div className="login-form-content">
         <h1>Welcome to Smart+</h1>
-        <p>New Here? <Link to="/register" class="text-success">Create Account</Link></p>
+        <p>New Here? <Link to="/register" className="text-success">Create Account</Link></p>
     
         <form onSubmit={loginUser}>
           <div className="login-form-group">
