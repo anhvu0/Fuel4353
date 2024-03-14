@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+import environ
 import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # os.environ.get('SECRET_KEY')
-#'django-insecure-rhl0ur6pohr@*2phgmo83%6m@cygd$2$8$-xkcr_md&@z@=&@9'
+#
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -32,7 +32,7 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 # os.environ.get('DEBUG', 'False').lower() == 'true'
 # True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ') 
 # os.environ.get('ALLOWED_HOSTS').split(' ') 
 # []
 
@@ -47,7 +47,6 @@ DATABASES = {
 }
 database_url = os.environ.get('DATABASE_URL')   
 DATABASES["default"] = dj_database_url.parse(database_url)
-#postgres://fuelquote4353_user:bGCBS91zTHroCxLikBLSGSZMjIISnXll@dpg-cnp76ied3nmc73e2ug9g-a.oregon-postgres.render.com/fuelquote4353
 #os.environ.get('DATABASE_URL')
 
 # Application definition
@@ -76,6 +75,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -176,6 +176,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# This production code might break development mode, so we check whether we're in DEBUG mode
+if not DEBUG:    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
