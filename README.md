@@ -6,7 +6,7 @@ Step 2: In VSCode terminal, ```cd``` into the outer ```backend``` <br>
 Step 3: Delete the ```Pipfile``` here<br>
 Step 4: Create a virtual environment by typing in ```pipenv shell```<br>
 (Assumming you already installed ```pipenv``` and ```pip```<br>
-Step 5: Install requiremnents by entering: ```pip install -r requirements.txt```
+Step 5: Install requirements by entering: ```pip install -r requirements.txt```<br>
 Step 6: Create a```.env``` file in the root folder, create variables ```SECRET_KEY```, ```ALLOWED HOSTS```, ```DEBUG```, and ```DATABASE_URL```, enter their values, then save.<br>
 Step 7: type ```python manage.py runserver``` to start the backend<br>
 The backend server should start now.<br><br>
