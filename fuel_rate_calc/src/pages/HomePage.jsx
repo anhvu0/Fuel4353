@@ -86,20 +86,14 @@ export default function HomePage() {
         </MDBRow>
       </MDBContainer>
       ) : (
-        <MDBContainer className="py-5 fluid">
-        <MDBRow>     
-          <MDBCol lg="4"></MDBCol>
-          <MDBCol lg="6"></MDBCol>
         <MDBCard>
       <MDBCardBody>
         <MDBCardText>
-        Please update your profile information BEFORE requesting a quote.
+        Please update your profile information.
         </MDBCardText>
         <MDBBtn href='/profile' type="button" class="btn btn-success" data-mdb-ripple-init>Edit Profile</MDBBtn>
       </MDBCardBody>
     </MDBCard>
-    </MDBRow>
-    </MDBContainer>
     )
 ) : (
   <>
