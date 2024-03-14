@@ -14,6 +14,7 @@ import {
 } from 'mdb-react-ui-kit';
 import { toast } from 'react-toastify';
 import LoadingSpinner from "../components/Loading";
+import LoadingButton from "../components/LoadingButton";
 
 const QuoteForm = () => {
   const { profile, profileLoaded } = ProfileHook();
@@ -24,6 +25,7 @@ const QuoteForm = () => {
   const [deliveryDate, setDeliveryDate] = useState('');
   const [pricePerGallon, setPricePerGallon] = useState('2.50'); // Assuming a mock price per gallon
   const [totalAmountDue, setTotalAmountDue] = useState('');
+  let [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // When the profile is loaded, construct the delivery address
@@ -42,9 +44,9 @@ const QuoteForm = () => {
     }
   }, [gallonsRequested, pricePerGallon]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, setLoading) => {
     e.preventDefault();
-
+    setLoading(true);
     if (!profile) {
       alert('You must be logged in to submit a quote.');
       navigate('/login');
@@ -70,7 +72,7 @@ const QuoteForm = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        {/*const data = await response.json();*/}
         toast.success('Quote submitted successfully.');
         setTimeout(() => navigate('/quotehistory'), 600);
       } else {
@@ -98,7 +100,7 @@ const QuoteForm = () => {
             <h3>Request a Fuel Quote</h3>
           </div>
             <hr />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e, setLoading)}>
       <MDBRow>
             <MDBCol sm="3">
             <MDBCardText className='text-start fw-bold'>Delivery Address</MDBCardText>
@@ -172,7 +174,10 @@ const QuoteForm = () => {
             </MDBCol>
         </MDBRow>
         <hr />
-        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init>Submit Quote</MDBBtn>
+        {/*<MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init>Submit Quote</MDBBtn>*/}
+        <LoadingButton type="submit" loading={loading}>
+              Submit
+            </LoadingButton>
         </form>
         </MDBCardBody>
         </MDBCard>  

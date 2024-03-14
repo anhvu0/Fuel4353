@@ -14,8 +14,9 @@ export const AuthProvider = ({children}) => {
 
     const navigate = useNavigate()
 
-    let loginUser = async (e) => {
+    let loginUser = async (e, setLoading) => {
         e.preventDefault()
+        setLoading(true);
         const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/token/`, {
             method: 'POST',
             headers: {
@@ -27,12 +28,14 @@ export const AuthProvider = ({children}) => {
         let data = await response.json();
 
         if(response.ok){
+            //setLoading(false);
             localStorage.setItem('authTokens', JSON.stringify(data));
             setAuthTokens(data);
             setUser(jwtDecode(data.access));
             setTimeout(() => navigate('/'), 900);
             toast.success("Logged in successfully"); // Display success message
         } else {
+            //setLoading(false);
             const errorMessage = data.detail || "Something went wrong while logging in the user!";
             toast.error(errorMessage); // Display error message
         }

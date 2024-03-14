@@ -14,12 +14,13 @@ import {
     MDBBtn
   } from 'mdb-react-ui-kit';
 import LoadingSpinner from "../components/Loading";
-
+import LoadingButton from '../components/LoadingButton';
 function Profile(){
     const { profile, profileLoaded } = ProfileHook();
     const { authTokens } = useContext(AuthContext);
     const navigate = useNavigate();
     const [profileExists, setProfileExists] = useState(false);
+    let [loading, setLoading] = useState(false);
     
     const [fullName, setFullName] = useState('');
     const [addressOne, setAddressOne] = useState('');
@@ -76,9 +77,9 @@ function Profile(){
         }
     }, [profile, profileLoaded]);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, setLoading) => {
       e.preventDefault();
-
+      setLoading(true);
       const method = profileExists ? 'PATCH' : 'POST';
 
       const profileData = {
@@ -103,10 +104,12 @@ function Profile(){
               });
 
               if (response.ok) {
+                //setLoading(false);
                 toast.success('Profile updated successfully.');
                 setProfileExists(true); // Ensure future submissions use PATCH
                 setTimeout(() => navigate('/'), 900);
             } else {
+                //setLoading(false);
                 throw new Error('Failed to update profile.');
             }
         } catch (error) {
@@ -130,7 +133,7 @@ function Profile(){
       <div className="title">
           <h3>Edit Your Profile</h3>
       </div><hr/>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e, setLoading)}>
         <MDBRow>
             <MDBCol sm="3">
             <MDBCardText className='text-start fw-bold'>Full Name</MDBCardText>
@@ -198,7 +201,10 @@ function Profile(){
             </MDBCol>
         </MDBRow>
         <hr />
-        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init>Update</MDBBtn>
+       {/* <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init>Update</MDBBtn>*/}
+        <LoadingButton type="submit" loading={loading}>
+              Update
+            </LoadingButton>
         </form>
     </MDBCardBody>
     </MDBCard>

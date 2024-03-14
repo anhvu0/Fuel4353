@@ -3,15 +3,17 @@ import { useNavigate, Link } from "react-router-dom";
 import "../FuelQuoteForm.css";
 import { toast} from 'react-toastify';
 import winnerImg from '../img/yes.png';
+import LoadingButton from '../components/LoadingButton';
 
 const Register = () => {
+  let [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     password2: '', // Confirm password
   });
   const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
+  const [errors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,8 +23,9 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, setLoading) => {
     e.preventDefault();
+    setLoading(true);
     if (formData.password !== formData.password2) {
       toast.error("Passwords do not match.");
       return;
@@ -77,7 +80,7 @@ const Register = () => {
         <h1>Register with Smart+</h1>
         <p>Already have an account? <Link to="/login" className="text-success">Sign in</Link></p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e, setLoading)}>
           <div className="login-form-group">
             <label htmlFor="username">Username:</label>
             <input type="text" 
@@ -114,8 +117,10 @@ const Register = () => {
             {errors.password2 && <p style={{ color: 'red' }}>{errors.password2}</p>}
           </div>
 
-          <button type="submit" className="button-login">Create account</button>
-            
+         {/* <button type="submit" className="button-login">Create account</button>*/}
+          <LoadingButton type="submit" loading={loading}>
+              Create account
+            </LoadingButton>
           
         </form>
       </div>

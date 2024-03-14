@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <ToastContainer />
+      {/*<ToastContainer />*/}
       <AuthProvider>
         <Routes>
         <Route exact path="/login" element={<LoginPage />} />

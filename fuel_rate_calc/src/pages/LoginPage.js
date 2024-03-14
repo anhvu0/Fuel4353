@@ -1,11 +1,12 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import AuthContext from '../context/AuthContext'
 import { Link } from "react-router-dom";
 import "../FuelQuoteForm.css";
 import mainPageImage from '../img/yes.png';
+import LoadingButton from "../components/LoadingButton";
 
 const LoginPage = () => {
-
+  const [loading, setLoading] = useState(false);
   let {loginUser} = useContext(AuthContext)
   return (
     <div className="login-container">
@@ -21,7 +22,7 @@ const LoginPage = () => {
         <h1>Welcome to Smart+</h1>
         <p>New Here? <Link to="/register" className="text-success">Create Account</Link></p>
     
-        <form onSubmit={loginUser}>
+        <form onSubmit={(e) => loginUser(e, setLoading)}>
           <div className="login-form-group">
           <label htmlFor="username">Username</label>
             <input type="text" name="username" placeholder="Enter username" required />
@@ -30,7 +31,9 @@ const LoginPage = () => {
           <label htmlFor="password">Password</label>
             <input type="password" name="password" placeholder="Enter password" required />
           </div>
-          <button type="submit">Sign In</button>
+          <LoadingButton type="submit" loading={loading}>
+              Sign In
+            </LoadingButton>
         </form>
       </div>
       </div>
