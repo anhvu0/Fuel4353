@@ -1,6 +1,6 @@
 # Fuel4353
-Tested on Windows and MacOS<br>
-**Backend**:
+Tested on Windows and MacOS<br><br>
+**Backend**:<br>
 Step 1: Open VSCode, Clone and Fetch this branch (main) from Github<br>
 Step 2: In VSCode terminal, ```cd``` into the outer ```backend``` <br>
 Step 3: Delete the ```Pipfile``` here<br>
