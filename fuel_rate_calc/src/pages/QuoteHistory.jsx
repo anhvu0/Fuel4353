@@ -21,7 +21,7 @@ const QuoteHistory = () => {
   useEffect(() => {
     const fetchQuotes = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/quote-history/', {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/quote-history/`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${authTokens.access}`,

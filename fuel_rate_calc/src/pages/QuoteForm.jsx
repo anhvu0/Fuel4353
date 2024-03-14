@@ -60,7 +60,7 @@ const QuoteForm = () => {
       total_amount_due: totalAmountDue,
     };
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/quotes/', {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/quotes/`, {
           method: 'POST', 
           headers: {
               'Content-Type': 'application/json',

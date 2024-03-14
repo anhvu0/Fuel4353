@@ -93,7 +93,7 @@ function Profile(){
       // Use the authTokens for the Authorization header
       if (authTokens) {
           try {
-              const response = await fetch('http://127.0.0.1:8000/api/profile/', {
+              const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/profile/`, {
                   method: method,
                   headers: {
                       'Content-Type': 'application/json',

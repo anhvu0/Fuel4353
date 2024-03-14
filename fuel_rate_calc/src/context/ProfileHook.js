@@ -9,7 +9,7 @@ const ProfileHook = () => {
     useEffect(() => {
         const getProfile = async () => {
             try {
-                let response = await fetch('http://127.0.0.1:8000/api/profile', {
+                let response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/profile/`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
