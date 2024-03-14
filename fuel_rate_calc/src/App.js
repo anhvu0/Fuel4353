@@ -23,7 +23,7 @@ function App() {
         <Routes>
         <Route exact path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
-        <Route
+        {/*<Route
           element={
             <>
               <Navx />
@@ -31,12 +31,12 @@ function App() {
               <Footer />
             </>
           }
-        >
+        ></Route>*/}
           <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />        
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/quoteform" element={<PrivateRoute><QuoteForm /></PrivateRoute>} />
           <Route path="/quotehistory" element={<PrivateRoute><QuoteHistory /></PrivateRoute>} />
-          </Route>
+          
         </Routes>
       </AuthProvider>
       </Router>
