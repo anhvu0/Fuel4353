@@ -57,8 +57,7 @@ const QuoteHistory = () => {
       
       <MDBCol lg="10" >
       {isLoading ? (
-            // Replace <LoadingSpinner /> with your actual spinner component
-            <LoadingSpinner /> // This assumes you have a LoadingSpinner component
+            <LoadingSpinner /> 
           ) : (
       <MDBCard>
       <MDBCardBody>

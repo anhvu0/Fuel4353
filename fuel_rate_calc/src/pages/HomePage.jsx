@@ -91,7 +91,7 @@ export default function HomePage() {
         <MDBCardText>
         Please update your profile information before requesting a quote.
         </MDBCardText>
-        <MDBBtn href='/profile' type="button" class="btn btn-success" data-mdb-ripple-init>Edit Profile</MDBBtn>
+        <MDBBtn href='/profile' type="button" class="btn btn-success" data-mdb-ripple-init style={{ backgroundColor: '#20d489' }}>Edit Profile</MDBBtn>
       </MDBCardBody>
     </MDBCard>
     )

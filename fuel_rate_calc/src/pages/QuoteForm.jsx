@@ -46,8 +46,8 @@ const QuoteForm = () => {
     e.preventDefault();
 
     if (!profile) {
-      alert('You must be logged in to submit a quote.');
-      navigate('/login');
+      toast.error('You must update your profile to submit a quote.');
+      setTimeout(() => navigate('/profile/'), 900);
       return;
     }
 
@@ -87,11 +87,14 @@ const QuoteForm = () => {
 
   return (
     <section style={{ backgroundColor: '#eee' }}>
-    {profileLoaded ? (
+    
     <MDBContainer className="py-5 fluid">
     <MDBRow>     
       <MDBCol lg="2"></MDBCol>
       <MDBCol lg="8">
+      {!profileLoaded ? (
+        <LoadingSpinner /> 
+        ) : (
       <MDBCard>
       <MDBCardBody>
           <div className="title">
@@ -172,18 +175,14 @@ const QuoteForm = () => {
             </MDBCol>
         </MDBRow>
         <hr />
-        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init>Submit Quote</MDBBtn>
+        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init style={{ backgroundColor: '#20d489' }}>Submit Quote</MDBBtn>
         </form>
         </MDBCardBody>
         </MDBCard>  
+      )}
         </MDBCol>  
         </MDBRow>
         </MDBContainer>
-        ) : (
-          <>
-          <LoadingSpinner />
-          </>
-      )}
         </section>
   );
 };

@@ -120,11 +120,14 @@ function Profile(){
 
     return (
     <section style={{ backgroundColor: '#eee' }}>
-    {profileLoaded ? (
+    
     <MDBContainer className="py-5 fluid">
     <MDBRow>    
     <MDBCol lg="2"></MDBCol>
     <MDBCol lg="8">
+    {!profileLoaded ? (
+        <LoadingSpinner /> 
+        ) : (
     <MDBCard >
     <MDBCardBody>
       <div className="title">
@@ -198,18 +201,14 @@ function Profile(){
             </MDBCol>
         </MDBRow>
         <hr />
-        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init>Update</MDBBtn>
+        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init style={{ backgroundColor: '#20d489' } }>Update</MDBBtn>
         </form>
     </MDBCardBody>
     </MDBCard>
+    )}
     </MDBCol>
     </MDBRow>
     </MDBContainer>
-    ) : (
-        <>
-        <LoadingSpinner />
-        </>
-    )}
     </section>
     )
 }

@@ -9,7 +9,8 @@ import {
   MDBNavbarItem,
   MDBNavbarLink,
   MDBCollapse,
-  MDBIcon
+  MDBIcon,
+  MDBBtn
 } from 'mdb-react-ui-kit';
 
 export default function Navx() {
@@ -22,7 +23,7 @@ export default function Navx() {
 
   return (
     <MDBNavbar expand='lg' className='shadow-3 text-dark'>
-      <MDBContainer fluid >
+      <MDBContainer fluid className='justify-content-start'>
        <MDBNavbarBrand href='/'>SMART+</MDBNavbarBrand>
         <MDBNavbarToggler
           type='button'
@@ -35,7 +36,7 @@ export default function Navx() {
           <MDBIcon icon='bars' fas />
         </MDBNavbarToggler>
         <MDBCollapse navbar open={openNavCentred} center id='navbarCenteredExample'>
-          <MDBNavbarNav fullWidth={false} className='mb-2 mb-lg-0'>
+          <MDBNavbarNav fullWidth={false} className='mb-2 mb-lg-0 bg-gradient' >
             <MDBNavbarItem >
               <MDBNavbarLink aria-current='page' href='/'>
                 Home
@@ -50,15 +51,14 @@ export default function Navx() {
             <MDBNavbarItem>
               <MDBNavbarLink href='/quotehistory'>Quote History</MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
-            {user ? (
-            <MDBNavbarLink href="/login" onClick={handleLogout}>Log out</MDBNavbarLink>
+            <MDBNavbarItem className='align-items-end'>
+          {user ? (
+            <MDBBtn type="button" outline color="secondary" className='m-0' href="#" onClick={handleLogout}>Log out</MDBBtn>
             ) : (
             <MDBNavbarLink href="/login">
               Log in
             </MDBNavbarLink>
-              )}
-            </MDBNavbarItem>
+              )}</MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>
