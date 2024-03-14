@@ -33,9 +33,9 @@ function App() {
           }
         >
           <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>} />        
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/quoteform" element={<QuoteForm />} />
-          <Route path="/quotehistory" element={<QuoteHistory />} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/quoteform" element={<PrivateRoute><QuoteForm /></PrivateRoute>} />
+          <Route path="/quotehistory" element={<PrivateRoute><QuoteHistory /></PrivateRoute>} />
           </Route>
         </Routes>
       </AuthProvider>
