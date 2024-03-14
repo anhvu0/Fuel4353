@@ -39,3 +39,8 @@ class QuoteSerializer(serializers.ModelSerializer):
         model = QuoteForm
         fields = '__all__'
         read_only_fields = ('user',)  
+        
+    def validate_delivery_address(self, value):
+        if not value.strip():  # Checks if the string is empty after stripping whitespace
+            raise serializers.ValidationError("Delivery address cannot be blank.")
+        return value
