@@ -142,7 +142,7 @@ function Profile(){
         <hr />
         <MDBRow>
             <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>Address 1</MDBCardText>
+            <MDBCardText className='text-start fw-bold'>Address Line 1</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
             <input type="text" class="form-control" id="addressOne" placeholder="Address 1" value={addressOne} onChange={(e) => setAddressOne(e.target.value)} required />
@@ -151,7 +151,7 @@ function Profile(){
         <hr />
         <MDBRow>
             <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>Address 2</MDBCardText>
+            <MDBCardText className='text-start fw-bold'>Address Line 2</MDBCardText>
             </MDBCol>
             <MDBCol sm="6">
             <input type="text" class="form-control" id="addressTwo" placeholder="Address 2" value={addressTwo} onChange={(e) => setAddressTwo(e.target.value)} />

@@ -38,7 +38,7 @@ export default function HomePage() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="4">
-                    <MDBCardText className='text-start fw-bold'>Address 1</MDBCardText>
+                    <MDBCardText className='text-start fw-bold'>Address Line 1</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
                     <MDBCardText className='text-start'>{profile.addressOne}</MDBCardText>
@@ -47,7 +47,7 @@ export default function HomePage() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="4">
-                    <MDBCardText className='text-start fw-bold'>Address 2</MDBCardText>
+                    <MDBCardText className='text-start fw-bold'>Address Line 2</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
                     <MDBCardText className='text-start'>{profile.addressTwo}</MDBCardText>
@@ -89,7 +89,7 @@ export default function HomePage() {
         <MDBCard>
       <MDBCardBody>
         <MDBCardText>
-        Please update your profile information.
+        Please update your profile information before requesting a quote.
         </MDBCardText>
         <MDBBtn href='/profile' type="button" class="btn btn-success" data-mdb-ripple-init>Edit Profile</MDBBtn>
       </MDBCardBody>
