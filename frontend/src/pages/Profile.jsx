@@ -12,15 +12,15 @@ import {
     MDBCardText,
     MDBCardBody,
     MDBBtn
-  } from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
 import LoadingSpinner from "../components/Loading";
 
-function Profile(){
+function Profile() {
     const { profile, profileLoaded } = ProfileHook();
     const { authTokens } = useContext(AuthContext);
     const navigate = useNavigate();
     const [profileExists, setProfileExists] = useState(false);
-    
+
     const [fullName, setFullName] = useState('');
     const [addressOne, setAddressOne] = useState('');
     const [addressTwo, setAddressTwo] = useState('');
@@ -31,8 +31,8 @@ function Profile(){
     const handleChange = (e) => {
         const value = e.target.value.replace(/\D/g, "").slice(0, 9);
         setZipCode(value);
-      };
-      
+    };
+
 
     const states = [
         { code: "AL", name: "Alabama" }, { code: "AK", name: "Alaska" },
@@ -77,149 +77,149 @@ function Profile(){
     }, [profile, profileLoaded]);
 
     const handleSubmit = async (e) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      const method = profileExists ? 'PATCH' : 'POST';
+        const method = profileExists ? 'PATCH' : 'POST';
 
-      const profileData = {
-          full_name: fullName,
-          addressOne: addressOne,
-          addressTwo: addressTwo,
-          city: city,
-          state: state,
-          zip_code: zipCode,
-      };
+        const profileData = {
+            full_name: fullName,
+            addressOne: addressOne,
+            addressTwo: addressTwo,
+            city: city,
+            state: state,
+            zip_code: zipCode,
+        };
 
-      // Use the authTokens for the Authorization header
-      if (authTokens) {
-          try {
-              const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/profile/`, {
-                  method: method,
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${authTokens.access}`, 
-                  },
-                  body: JSON.stringify(profileData),
-              });
+        // Use the authTokens for the Authorization header
+        if (authTokens) {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/profile/`, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authTokens.access}`,
+                    },
+                    body: JSON.stringify(profileData),
+                });
 
-              if (response.ok) {
-                toast.success('Profile updated successfully.');
-                setProfileExists(true); // Ensure future submissions use PATCH
-                setTimeout(() => navigate('/'), 1600);
-            } else {
-                throw new Error('Failed to update profile.');
+                if (response.ok) {
+                    toast.success('Profile updated successfully.');
+                    setProfileExists(true); // Ensure future submissions use PATCH
+                    setTimeout(() => navigate('/'), 1600);
+                } else {
+                    throw new Error('Failed to update profile.');
+                }
+            } catch (error) {
+                toast.error(error.message || 'An error occurred.');
             }
-        } catch (error) {
-            toast.error(error.message || 'An error occurred.');
+        } else {
+            toast.error("You're not logged in.");
         }
-    } else {
-        toast.error("You're not logged in.");
-    }
-};
+    };
 
 
     return (
-    <section style={{ backgroundColor: '#eee' }}>
-    
-    <MDBContainer className="py-5 fluid">
-    <MDBRow>    
-    <MDBCol lg="2"></MDBCol>
-    <MDBCol lg="8">
-    {!profileLoaded ? (
-        <LoadingSpinner /> 
-        ) : (
-    <MDBCard >
-    <MDBCardBody>
-      <div className="title">
-          <h3>Edit Your Profile</h3>
-      </div><hr/>
-        <form onSubmit={handleSubmit}>
-        <MDBRow>
-            <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>Full Name</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="6">
-            <input type="text" class="form-control" 
-            id="fullName" placeholder="Full Name" value={fullName} 
-            onChange={(e) => setFullName(e.target.value)} required />
-            </MDBCol>
-        </MDBRow>
-        <hr />
-        <MDBRow>
-            <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>Address Line 1</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="6">
-            <input type="text" class="form-control" 
-            id="addressOne" placeholder="Address 1" value={addressOne} 
-            onChange={(e) => setAddressOne(e.target.value)} required />
-            </MDBCol>
-        </MDBRow>
-        <hr />
-        <MDBRow>
-            <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>Address Line 2</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="6">
-            <input type="text" class="form-control" 
-            id="addressTwo" placeholder="Address 2" value={addressTwo} 
-            onChange={(e) => setAddressTwo(e.target.value)} />
-            </MDBCol>
-        </MDBRow>
-        <hr />
-        <MDBRow>
-            <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>City</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="6">
-            <input type="text" class="form-control" 
-            id="city" placeholder="City" value={city} 
-            onChange={(e) => setCity(e.target.value)} required />
-            </MDBCol>
-        </MDBRow>
-        <hr />
-        <MDBRow>
-            <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>State</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="6">
-            <select class="form-control" id="state" value={state} 
-            onChange={(e) => setState(e.target.value)} required>
-                  <option value="">Select state</option> {/**disabled */}
-                  {states.map((state) => (
-                      <option key={state.code} value={state.code}>{state.name}</option>
-                  ))}
-              </select>
-            </MDBCol>
-        </MDBRow>
-        <hr />
-        <MDBRow>
-            <MDBCol sm="3">
-            <MDBCardText className='text-start fw-bold'>Zip Code</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="6">
-            <input type="text" class="form-control" id="zipCode"
-                  placeholder="Zip code"
-                  value={zipCode}
-                  onChange={handleChange}
-                  pattern="\d{5}(\d{4})?"
-                  title="Zip code must be either 5 or 9 digits."
-                  maxLength="9"
-                  minLength="5"
-                required />
-            </MDBCol>
-        </MDBRow>
-        <hr />
-        <MDBBtn type="submit" class="btn btn-success" data-mdb-ripple-init 
-                style={{ backgroundColor: '#20d489' } }>Update</MDBBtn>
-        </form>
-    </MDBCardBody>
-    </MDBCard>
-    )}
-    </MDBCol>
-    </MDBRow>
-    </MDBContainer>
-    </section>
+        <section style={{ backgroundColor: '#eee' }}>
+
+            <MDBContainer className="py-5 fluid">
+                <MDBRow>
+                    <MDBCol lg="2"></MDBCol>
+                    <MDBCol lg="8">
+                        {!profileLoaded ? (
+                            <LoadingSpinner />
+                        ) : (
+                            <MDBCard >
+                                <MDBCardBody>
+                                    <div className="title">
+                                        <h3>Edit Your Profile</h3>
+                                    </div><hr />
+                                    <form onSubmit={handleSubmit}>
+                                        <MDBRow>
+                                            <MDBCol sm="3">
+                                                <MDBCardText className='text-start fw-bold'>Full Name</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="6">
+                                                <input type="text" className="form-control"
+                                                    id="fullName" placeholder="Full Name" value={fullName}
+                                                    onChange={(e) => setFullName(e.target.value)} required />
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="3">
+                                                <MDBCardText className='text-start fw-bold'>Address Line 1</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="6">
+                                                <input type="text" className="form-control"
+                                                    id="addressOne" placeholder="Address 1" value={addressOne}
+                                                    onChange={(e) => setAddressOne(e.target.value)} required />
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="3">
+                                                <MDBCardText className='text-start fw-bold'>Address Line 2</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="6">
+                                                <input type="text" className="form-control"
+                                                    id="addressTwo" placeholder="Address 2" value={addressTwo}
+                                                    onChange={(e) => setAddressTwo(e.target.value)} />
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="3">
+                                                <MDBCardText className='text-start fw-bold'>City</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="6">
+                                                <input type="text" className="form-control"
+                                                    id="city" placeholder="City" value={city}
+                                                    onChange={(e) => setCity(e.target.value)} required />
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="3">
+                                                <MDBCardText className='text-start fw-bold'>State</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="6">
+                                                <select className="form-control" id="state" value={state}
+                                                    onChange={(e) => setState(e.target.value)} required>
+                                                    <option value="">Select state</option> {/**disabled */}
+                                                    {states.map((state) => (
+                                                        <option key={state.code} value={state.code}>{state.name}</option>
+                                                    ))}
+                                                </select>
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                            <MDBCol sm="3">
+                                                <MDBCardText className='text-start fw-bold'>Zip Code</MDBCardText>
+                                            </MDBCol>
+                                            <MDBCol sm="6">
+                                                <input type="text" className="form-control" id="zipCode"
+                                                    placeholder="Zip code"
+                                                    value={zipCode}
+                                                    onChange={handleChange}
+                                                    pattern="\d{5}(\d{4})?"
+                                                    title="Zip code must be either 5 or 9 digits."
+                                                    maxLength="9"
+                                                    minLength="5"
+                                                    required />
+                                            </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBBtn type="submit" class="btn btn-success"
+                                            style={{ backgroundColor: '#20d489' }}>Update</MDBBtn>
+                                    </form>
+                                </MDBCardBody>
+                            </MDBCard>
+                        )}
+                    </MDBCol>
+                </MDBRow>
+            </MDBContainer>
+        </section>
     )
 }
 

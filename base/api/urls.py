@@ -12,4 +12,5 @@ urlpatterns = [
     path('register/', user_registration, name='register'),
     path('quotes/', submit_quote, name='submit_quote'),
     path('quote-history/', quote_history, name='quote_history'),
+    path('getquote/', get_quote_price, name='get_quote_price'),
 ]

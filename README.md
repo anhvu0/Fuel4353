@@ -7,7 +7,7 @@ Step 3: Delete the ```Pipfile``` here.<br>
 Step 4: Create a virtual environment by typing in the terminal: ```pipenv shell```.<br>
 Assumming you already installed ```pipenv``` and ```pip```.<br>
 Step 5: Install requirements by entering: ```pip install -r requirements.txt```<br>
-Step 6: Create a```.env``` file in the root folder, <br>create variables ```SECRET_KEY```, ```ALLOWED HOSTS```, ```DEBUG```, and ```DATABASE_URL```, enter their values, then save.<br>
+Step 6: Create a```.env``` file in the root folder, <br>create variables ```SECRET_KEY```, ```ALLOWED_HOSTS```, ```DEBUG```, and ```DATABASE_URL```, enter their values, then save.<br>
 Step 7: Type ```python manage.py runserver``` to start the backend<br><br>
 
 **FrontEnd**:<br>
@@ -23,6 +23,7 @@ Step 4: Open ```localhost:3000``` and try out the features<br>
     - Profile Update <br>
     - Request a Quote <br>
     - Quote History <br>
+    - Pricing Module<br>
     - Front End is hosted on Render.com<br>
     - Back End + PostgreSQL DB are hosted on Azure Web Service<br><br>
 

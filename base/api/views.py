@@ -9,6 +9,8 @@ from base.serializer import ProfileSerializer
 from base.serializer import QuoteSerializer
 from base.models import Profile
 from base.models import QuoteForm
+from django.http import JsonResponse
+from .getquote import calculate_suggested_price
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -72,6 +74,7 @@ def user_registration(request):
             return Response(error_messages, status=status.HTTP_400_BAD_REQUEST)
         
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def submit_quote(request):
     if request.method == 'POST':
         serializer = QuoteSerializer(data=request.data)
@@ -88,3 +91,18 @@ def quote_history(request):
     quotes = QuoteForm.objects.filter(user=request.user).order_by('-delivery_date')
     serializer = QuoteSerializer(quotes, many=True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def get_quote_price(request):
+    location = request.data.get('location')
+    gallons_requested = request.data.get('gallons_requested')
+    user = request.user
+
+    # Determine if the user has a rate history
+    has_history = QuoteForm.objects.filter(user=user).exists()
+    
+    suggested_price = calculate_suggested_price(location, gallons_requested, has_history)
+    total_amount_due = suggested_price * gallons_requested
+    
+    return JsonResponse({'suggested_price': suggested_price, 'total_amount_due': total_amount_due})
