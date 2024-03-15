@@ -30,5 +30,5 @@ Step 4: Open ```localhost:3000``` and try the features<br><br>
 **To Do list:**<br>
     - Unit Tests<br>
 
-**Project Deployment URL:** https://cs4353.lemonadess.com/
+**Project Deployment URL:** https://cs4353.lemonadess.com/<br>
 Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Spinning up a service takes a few seconds up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running. For example, a browser page load will hang momentarily.
