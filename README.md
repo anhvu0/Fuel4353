@@ -1,13 +1,20 @@
 # Fuel4353
-Tested on Windows and MacOS<br>
-Step 1: Open VSCode, Clone and Fetch this branch (Ryan-django-mdb-react) from Github<br>
-Step 2: ```cd``` into the outer ```backend``` <br>
-Step 3: delete the ```Pipfile``` here<br>
-Step 4: create a virtual environment by typing in ```pipenv shell```<br>
-Step 4: type ```python manage.py runserver``` to start the backend<br>
-Step 5: open another Terminal, ```cd``` into the ```fuel_rate_calc``` folder, then type ```npm start```, the front end server should start.<br>
-If errors occur, delete the ```package-lock.json``` file, then enter ```npm install```, then ```npm start```<br>
-Step 6: Open ```localhost:3000``` and try the features<br>
+Tested on Windows and MacOS<br><br>
+**Backend**:<br>
+Step 1: Open VSCode, Clone and Fetch this branch from Github.<br>
+Step 2: In VSCode terminal, ```cd``` into root folder <br>where you can see ```Pipfile``` and ```requirements.txt```. <br>
+Step 3: Delete the ```Pipfile``` here.<br>
+Step 4: Create a virtual environment by typing in the terminal: ```pipenv shell```.<br>
+Assumming you already installed ```pipenv``` and ```pip```.<br>
+Step 5: Install requirements by entering: ```pip install -r requirements.txt```<br>
+Step 6: Create a```.env``` file in the root folder, <br>create variables ```SECRET_KEY```, ```ALLOWED HOSTS```, ```DEBUG```, and ```DATABASE_URL```, enter their values, then save.<br>
+Step 7: Type ```python manage.py runserver``` to start the backend<br><br>
+
+**FrontEnd**:<br>
+Step 1: Open another Terminal, ```cd``` into the ```frontend``` folder,<br> 
+Step 2: Create a```.env``` file, <br>create variables ```REACT_APP_API_BASE_URL```, enter the URL then save.<br>
+Step 3: Delete the ```package-lock.json``` file, then enter ```npm install```, then ```npm start```<br>
+Step 4: Open ```localhost:3000``` and try out the features<br><br>
 **Note:** May have to install missing packages and modules: try to Google the errors and solutions/commands to install packages are usually on Stackoverflow.
 <br><br>
 
@@ -16,11 +23,11 @@ Step 6: Open ```localhost:3000``` and try the features<br>
     - Profile Update <br>
     - Request a Quote <br>
     - Quote History <br>
-    - Front End hosted on Render.com<br>
-    - Back End + PostgreSQL DB hosted on Azure Web Services<br><br>
+    - Front End is hosted on Render.com<br>
+    - Back End + PostgreSQL DB are hosted on Azure Web Service<br><br>
 
 **To Do list:**<br>
     - Unit Tests<br>
-    - Pricing Modul<br>
+    - Pricing Module<br>
 
-**Project Deployment URL:** https://cs4353.lemonadess.com/
+**Project Deployment URL:** https://cs4353.lemonadess.com/<br>
