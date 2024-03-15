@@ -29,6 +29,6 @@ Step 4: Open ```localhost:3000``` and try out the features<br>
 
 **To Do list:**<br>
     - Unit Tests<br>
-    - Pricing Module<br>
+    - Implement best practices<br>
 
 **Project Deployment URL:** https://cs4353.lemonadess.com/<br>
