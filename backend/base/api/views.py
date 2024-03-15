@@ -22,16 +22,17 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
+
 @api_view(['GET', 'POST', 'PATCH'])
 @permission_classes([IsAuthenticated])
-def profile_view(request):
+def profile_view(request): #This gets the request from the front end.
     user = request.user
 
-    if request.method == 'GET':
+    if request.method == 'GET': #If the request is GET
         try:
-            profile = Profile.objects.get(user=user)
-            serializer = ProfileSerializer(profile)
-            return Response(serializer.data)
+            profile = Profile.objects.get(user=user) #It will get the profile of the user from the database. In this case, it is SQLite
+            serializer = ProfileSerializer(profile) #It will serialize the data -> convert it to json format
+            return Response(serializer.data) #Return the response
         except Profile.DoesNotExist:
             return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -70,6 +71,7 @@ def user_registration(request):
             print(errors)
             error_messages = {'errors': errors}
             return Response(error_messages, status=status.HTTP_400_BAD_REQUEST)
+        
         
 @api_view(['POST'])
 def submit_quote(request):

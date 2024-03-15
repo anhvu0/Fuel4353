@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.3",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "firebase": "^10.8.0",
     "jwt-decode": "^4.0.0",
@@ -23,9 +24,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-django": "cd ../backend && python3 manage.py runserver",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"npm start\" \"npm run start-django\""
   },
   "eslintConfig": {
     "extends": [

@@ -63,6 +63,7 @@ const Register = () => {
   };
 
   return (
+    <>
     <div className="login-container">
     <div className="login-image-section">
       <div className="image-text-content">
@@ -119,6 +120,7 @@ const Register = () => {
       </div>
       </div>
     </div>
+    </>
   );
 };
 

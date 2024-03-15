@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useCallback } from 'react'
 import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
@@ -13,6 +13,7 @@ export const AuthProvider = ({children}) => {
     let [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
+    
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -47,7 +48,7 @@ export const AuthProvider = ({children}) => {
         toast.dismiss();
     }
 
-    const updateToken = async () => {
+    const updateToken = useCallback(async () => {
         const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/token/refresh/`, {
             method: 'POST',
             headers: {
@@ -68,7 +69,7 @@ export const AuthProvider = ({children}) => {
         if(loading){
             setLoading(false)
         }
-    }
+    }, [authTokens, setAuthTokens, setUser, logoutUser])
 
     let contextData = {
         user:user,
