@@ -8,8 +8,8 @@ export default AuthContext;
 
 export const AuthProvider = ({children}) => {
 
-    let [user, setUser] = useState(() => (localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null))
-    let [authTokens, setAuthTokens] = useState(() => (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null))
+    let [user, setUser] = useState(() => (sessionStorage.getItem('authTokens') ? jwtDecode(sessionStorage.getItem('authTokens')) : null))
+    let [authTokens, setAuthTokens] = useState(() => (sessionStorage.getItem('authTokens') ? JSON.parse(sessionStorage.getItem('authTokens')) : null))
     let [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
@@ -28,7 +28,7 @@ export const AuthProvider = ({children}) => {
         let data = await response.json();
 
         if(response.ok){
-            localStorage.setItem('authTokens', JSON.stringify(data));
+            sessionStorage.setItem('authTokens', JSON.stringify(data));
             setAuthTokens(data);
             setUser(jwtDecode(data.access));
             setTimeout(() => navigate('/'), 900);
@@ -41,7 +41,7 @@ export const AuthProvider = ({children}) => {
 
     let logoutUser = (e) => {
         //e.preventDefault()
-        localStorage.removeItem('authTokens')
+        sessionStorage.removeItem('authTokens')
         setAuthTokens(null)
         setUser(null)
         setTimeout(() => navigate('/login'), 450);
@@ -61,7 +61,7 @@ export const AuthProvider = ({children}) => {
         if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwtDecode(data.access))
-            localStorage.setItem('authTokens',JSON.stringify(data))
+            sessionStorage.setItem('authTokens',JSON.stringify(data))
         } else {
             logoutUser()
         }

@@ -10,6 +10,8 @@ from base.serializer import QuoteSerializer
 from base.models import Profile
 from base.models import QuoteForm
 
+#This is where everything happens. Views works like a server. It handle request and response.
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
