@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.core.validators import MinValueValidator
 
-class Profile(models.Model):
+class Profile(models.Model): #models.py file define the database schema. Each class is a table in the database.
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     full_name = models.CharField(max_length=50, blank=True)
     addressOne = models.CharField(max_length=50, blank=True)

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useCallback } from 'react'
 import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
@@ -8,11 +8,12 @@ export default AuthContext;
 
 export const AuthProvider = ({children}) => {
 
-    let [user, setUser] = useState(() => (localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null))
-    let [authTokens, setAuthTokens] = useState(() => (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null))
+    let [user, setUser] = useState(() => (sessionStorage.getItem('authTokens') ? jwtDecode(sessionStorage.getItem('authTokens')) : null))
+    let [authTokens, setAuthTokens] = useState(() => (sessionStorage.getItem('authTokens') ? JSON.parse(sessionStorage.getItem('authTokens')) : null))
     let [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
+    
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -27,7 +28,7 @@ export const AuthProvider = ({children}) => {
         let data = await response.json();
 
         if(response.ok){
-            localStorage.setItem('authTokens', JSON.stringify(data));
+            sessionStorage.setItem('authTokens', JSON.stringify(data));
             setAuthTokens(data);
             setUser(jwtDecode(data.access));
             setTimeout(() => navigate('/'), 900);
@@ -40,14 +41,14 @@ export const AuthProvider = ({children}) => {
 
     let logoutUser = (e) => {
         //e.preventDefault()
-        localStorage.removeItem('authTokens')
+        sessionStorage.removeItem('authTokens')
         setAuthTokens(null)
         setUser(null)
         setTimeout(() => navigate('/login'), 450);
         toast.dismiss();
     }
 
-    const updateToken = async () => {
+    const updateToken = useCallback(async () => {
         const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/token/refresh/`, {
             method: 'POST',
             headers: {
@@ -60,7 +61,7 @@ export const AuthProvider = ({children}) => {
         if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwtDecode(data.access))
-            localStorage.setItem('authTokens',JSON.stringify(data))
+            sessionStorage.setItem('authTokens',JSON.stringify(data))
         } else {
             logoutUser()
         }
@@ -68,7 +69,7 @@ export const AuthProvider = ({children}) => {
         if(loading){
             setLoading(false)
         }
-    }
+    }, [authTokens, setAuthTokens, setUser, logoutUser])
 
     let contextData = {
         user:user,
