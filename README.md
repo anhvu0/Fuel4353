@@ -16,10 +16,11 @@ Step 6: Open ```localhost:3000``` and try the features<br>
     - Profile Update <br>
     - Request a Quote <br>
     - Quote History <br>
-    - Database: PostgreSQL hosted on Render.com, no need to set up local database<br>
-    - Front End + Back End + DB are hosted on Render.com<br><br>
+    - Front End hosted on Render.com<br>
+    - Back End + PostgreSQL DB hosted on Azure Web Services<br><br>
 
 **To Do list:**<br>
     - Unit Tests<br>
+    - Pricing Modul<br>
 
 **Project Deployment URL:** https://cs4353.lemonadess.com/
