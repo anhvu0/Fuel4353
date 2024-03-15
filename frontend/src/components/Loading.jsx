@@ -11,7 +11,7 @@ const LoadingSpinner = () => {
         <l-cardio
           size="70"
           stroke="3"
-          speed="0.5" 
+          speed="0.2" 
           color="black" 
         ></l-cardio>
           <p>Loading...</p>
