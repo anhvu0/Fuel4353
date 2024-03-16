@@ -23,26 +23,25 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
-# os.environ.get('SECRET_KEY')
-#
+SECRET_KEY = 'django-insecure-rhl0ur6pohr@*2phgmo83%6m@cygd$2$8$-xkcr_md&@z@=&@9'
+# os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
-# os.environ.get('DEBUG', 'False').lower() == 'true'
+DEBUG = True
+# os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 # True
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ') 
-# os.environ.get('ALLOWED_HOSTS').split(' ') 
-# []
+ALLOWED_HOSTS = []
+# os.getenv('ALLOWED_HOSTS').split(' ') 
 
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
+# These are for Azure deployment.
+#CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
 
-SECURE_SSL_REDIRECT = \
-    os.getenv('SECURE_SSL_REDIRECT', '0').lower() in ['true', 't', '1']
-if SECURE_SSL_REDIRECT:
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_SSL_REDIRECT = \ 
+    #os.getenv('SECURE_SSL_REDIRECT', '0').lower() in ['true', 't', '1']
+#if SECURE_SSL_REDIRECT:
+    #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -58,8 +57,8 @@ DATABASES = {
         'OPTIONS': {'sslmode': 'require'},
     }
 }
-#database_url = os.environ.get('DATABASE_URL')   
-#DATABASES["default"] = dj_database_url.parse(database_url)
+database_url = os.environ.get('DATABASE_URL')   
+DATABASES["default"] = dj_database_url.parse(database_url)
 #os.environ.get('DATABASE_URL')
 
 # Application definition

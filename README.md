@@ -5,16 +5,18 @@ Step 1: Open VSCode, Clone and Fetch this branch from Github.<br>
 Step 2: In VSCode terminal, ```cd``` into root folder <br>where you can see ```Pipfile``` and ```requirements.txt```. <br>
 Step 3: Delete the ```Pipfile``` here.<br>
 Step 4: Create a virtual environment by typing in the terminal: ```pipenv shell```.<br>
-Assumming you already installed ```pipenv``` and ```pip```.<br>
-Step 5: Install requirements by entering: ```pip install -r requirements.txt```<br>
-Step 6: Create a```.env``` file in the root folder, <br>create variables ```SECRET_KEY```, ```ALLOWED_HOSTS```, ```DEBUG```, and ```DATABASE_URL```, enter their values, then save.<br>
-Step 7: Type ```python manage.py runserver``` to start the backend<br><br>
+(Assumming you already installed ```pipenv``` and ```pip```.)<br>
+Step 5: Install requirements by entering: ```pip install -r requirements.txt```.<br>
+Step 6: Create a ```.env``` file in the root folder.<br>
+Step 7: Get the db url from ```lemonadess```, <br>
+Then type in ```DATABASE_URL=url here``` into the ```.env``` file, save it.<br>
+Step 8: Type ```python manage.py runserver``` to start the backend server.<br><br>
 
 **FrontEnd**:<br>
-Step 1: Open another Terminal, ```cd``` into the ```frontend``` folder,<br> 
-Step 2: Create a```.env``` file, <br>create a variable ```REACT_APP_API_BASE_URL```, enter the URL then save.<br>
-Step 3: Delete the ```package-lock.json``` file, then enter ```npm install```, then ```npm start```<br>
-Step 4: Open ```localhost:3000``` and try out the features<br>
+Step 1: Open another VSCode Terminal, ```cd``` into the ```frontend``` folder.<br> 
+Step 2: Create a```.env``` file, <br>type in ```REACT_APP_API_BASE_URL=http://localhost:8000/api```, then save.<br>
+Step 3: Delete the ```package-lock.json``` file, then enter ```npm install```, then ```npm start```.<br>
+Step 4: Open ```localhost:3000``` and try out the features<br><br>
 **Note:** May have to install missing packages and modules: try to Google the errors and solutions/commands to install packages are usually on Stackoverflow.
 <br><br>
 
@@ -24,8 +26,7 @@ Step 4: Open ```localhost:3000``` and try out the features<br>
     - Request a Quote <br>
     - Quote History <br>
     - Pricing Module<br>
-    - Front End is hosted on Render.com<br>
-    - Back End + PostgreSQL DB are hosted on Azure Web Service<br><br>
+    - PostgreSQL DB hosted on Render.com<br><br>
 
 **To Do list:**<br>
     - Unit Tests<br>
