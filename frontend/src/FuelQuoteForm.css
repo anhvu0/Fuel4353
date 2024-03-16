@@ -1,0 +1,303 @@
+.title {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #000000;
+  margin: 10px;
+}
+
+.fuel-quote-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+  /* adjust as needed for spacing */
+}
+
+.form-group label {
+  width: 180px;
+  /* adjust as needed */
+  margin-right: 10px;
+  /* adjust as needed for spacing */
+  text-align: left;
+}
+
+.form-group input {
+  flex: 1;
+  /* ensures input fields take up the remaining space */
+  width: 250px;
+  margin-right: 10px;
+  /* Space after the input, adjust as needed */
+  padding: 10px;
+  /* Adds some space inside the input box */
+  border-radius: 5px;
+  /* Rounds the corners of the input box */
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.retrieve-address {
+  width: 100%;
+  min-width: 250px;
+}
+
+ap {
+  color: blue;
+  font-family: Arial;
+}
+
+.responsive-image {
+  width: 65%;
+  /* Make the image take up the full container width */
+  height: auto;
+  /* Maintain the aspect ratio of the image */
+  margin: 0 auto;
+  display: block;
+  /* Remove any extra space below the image */
+}
+
+/* limit the size of the image */
+@media (min-width: 768px) {
+  .responsive-image {
+    max-height: 700px;
+    /* Adjust as necessary */
+  }
+}
+
+/* Footer.css */
+.footer {
+  background-color: #141239;
+  color: #cfcfcf;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  /* Stick to bottom */
+  margin-top: auto;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Header.css */
+header {
+  background-color: #e4f2fe;
+}
+
+.profile-table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.two-column-layout {
+  display: flex;
+}
+
+.image-column {
+  flex: 2;
+  padding: 20px;
+
+}
+
+.form-column {
+  flex: 1;
+  padding: 20px;
+}
+
+
+img {
+  width: 100%;
+  /* Make the image occupy the full container width */
+  height: 100%;
+  /* Make the image occupy the full container height */
+  object-fit: fill;
+  /* Stretch the image to fill the container */
+}
+
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  align-items: stretch;
+  /* Ensure the children fill the height */
+}
+
+.login-image-section {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center children horizontally */
+  justify-content: center;
+  /* Center children vertically */
+  background-color: #20d489;
+  color: white;
+}
+
+.image-text-content h2 {
+  font-size: 3rem;
+  /* Large text for the title */
+  margin-top: 15px;
+  color: #181c32;
+  font-family: "Lexend", sans-serif;
+  font-weight: bold;
+}
+
+.image-text-content p {
+  font-size: 1.4rem;
+  /* Smaller text for the subtitle */
+  color: white;
+  font-weight: bold;
+  font-family: "Lexend", sans-serif;
+}
+
+.login-image {
+  max-width: 85%;
+  /* Adjust the image size */
+  height: auto;
+  /* Adjust height automatically */
+  margin-top: 0.5rem;
+  /* Space between the text and the image */
+}
+
+.login-form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: white;
+  align-items: center;
+}
+
+.login-form-content {
+  max-width: 400px;
+  /* Maximum width of the form */
+  width: 100%;
+  /* Make the form full width within its container */
+  text-align: left;
+  font-family: "Lexend", sans-serif;
+}
+
+.login-form-content h1 {
+  margin-bottom: 1em;
+  color: #181c32;
+}
+
+.login-form-content p {
+  margin-bottom: 3em;
+  color: #ababab;
+  font-family: "Lexend", sans-serif;
+  font-weight: bold;
+}
+
+.login-form-group {
+  margin-bottom: 1em;
+}
+
+.login-form-group input {
+  border: 0px solid #ccc;
+  border-radius: 10px;
+  /* Rounded corners */
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  /* Space between each input field */
+  width: 100%;
+  /* Full width */
+  box-sizing: border-box;
+  /* Include padding and border in the element's width */
+  font-size: 14px;
+  background-color: #eef3f7;
+  font-family: "Lexend", sans-serif;
+}
+
+.login-form-group input::placeholder {
+  color: #aaa;
+}
+
+.login-form-group input:focus {
+  border-color: #9fa7a8;
+  outline: none;
+  /* Remove default focus outline */
+  box-shadow: none;
+}
+
+.login-form-group a {
+  display: block;
+  /* Or inline-block based on design */
+}
+
+.login-form-group label {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+a {
+  color: #20d489;
+  /* Adjust the color as needed */
+  text-decoration: none;
+}
+
+Link {
+  color: #20d489;
+  /* Adjust the color as needed */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.login-form-content button {
+  width: 100%;
+  font-family: "Lexend", sans-serif;
+  font-size: 14px;
+}
+
+button {
+  /*width: 100%;*/
+  padding: 10px;
+  margin-bottom: 1em;
+  /* Space between buttons */
+  background-color: #20d489;
+  /* Adjust background color as needed */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #b4b4b4;
+  /* Adjust hover color as needed */
+}
+
+
+.button-container {
+  display: flex;
+  /* Display buttons in a row */
+  justify-content: space-between;
+  /* Add space between buttons */
+  margin-top: 15px;
+  text-align: center;
+  width: 100%;
+  /* Ensure it takes full width to work with justify-content */
+  gap: 10px;
+
+}

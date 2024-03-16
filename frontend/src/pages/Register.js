@@ -11,7 +11,7 @@ const Register = () => {
     password2: '', // Confirm password
   });
   const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
+  const [errors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +42,7 @@ const Register = () => {
       });
 
       if (response.ok) {
-        toast.success("Registration successful! Please log in.");
+        toast.success("Registration is successful! \n Please log in.");
         setTimeout(() => navigate('/login'), 2000); 
       } else {
         const errorData = await response.json();

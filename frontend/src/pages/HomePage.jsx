@@ -10,6 +10,7 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit';
 import LoadingSpinner from "../components/Loading";
+import ProfileUpdateCard from '../components/ProfileUpdateCard';
 
 export default function HomePage() {
     const { profile, profileLoaded } = ProfileHook();
@@ -85,19 +86,9 @@ export default function HomePage() {
               </MDBCardBody>
             </MDBCard>
         ) : (
-                <MDBCard>
-              <MDBCardBody>
-                <MDBCardText>
-                Please update your profile information before requesting a quote.
-                </MDBCardText>
-                <MDBBtn href='/profile' type="button" 
-                class="btn btn-success" 
-                data-mdb-ripple-init 
-                style={{ backgroundColor: '#20d489' }}>Edit Profile</MDBBtn>
-              </MDBCardBody>
-              </MDBCard>
+          <ProfileUpdateCard />
             )
-              )}
+        )}
           </MDBCol>
         </MDBRow>
       </MDBContainer>

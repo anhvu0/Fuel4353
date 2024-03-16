@@ -15,39 +15,51 @@ from datetime import timedelta
 import os
 import dj_database_url
 from dotenv import load_dotenv
-load_dotenv()  # loads the configs from .env
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
+SECRET_KEY = os.getenv('SECRET_KEY')
 # os.environ.get('SECRET_KEY')
 #
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.getenv('DEBUG', 'False').lower() == 'true')
+DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 # os.environ.get('DEBUG', 'False').lower() == 'true'
 # True
 
-ALLOWED_HOSTS = list(os.getenv('ALLOWED_HOSTS').split(' '))
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ') 
 # os.environ.get('ALLOWED_HOSTS').split(' ') 
+# []
+
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
+
+SECURE_SSL_REDIRECT = \
+    os.getenv('SECURE_SSL_REDIRECT', '0').lower() in ['true', 't', '1']
+if SECURE_SSL_REDIRECT:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DBNAME'),
+        'HOST': os.environ.get('DBHOST'),
+        'USER': os.environ.get('DBUSER'),
+        'PASSWORD': os.environ.get('DBPASS'),
+        'PORT': os.environ.get('DBPORT'),
+        'OPTIONS': {'sslmode': 'require'},
     }
 }
-database_url = str(os.getenv('DATABASE_URL'))
-DATABASES["default"] = dj_database_url.parse(database_url)
+#database_url = os.environ.get('DATABASE_URL')   
+#DATABASES["default"] = dj_database_url.parse(database_url)
 #os.environ.get('DATABASE_URL')
 
 # Application definition
