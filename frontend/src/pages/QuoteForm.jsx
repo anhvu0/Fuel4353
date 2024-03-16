@@ -149,7 +149,7 @@ const QuoteForm = () => {
                         <MDBCol sm="3">
                           <MDBCardText className='text-start fw-bold'>Delivery Date</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="4">
+                        <MDBCol sm="5">
                           <input
                             type="date"
                             id="deliveryDate"
@@ -165,7 +165,7 @@ const QuoteForm = () => {
                         <MDBCol sm="3">
                           <MDBCardText className='text-start fw-bold'>Gallons Requested</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="4">
+                        <MDBCol sm="5">
                           <input
                             type="number"
                             min="0"
@@ -183,14 +183,17 @@ const QuoteForm = () => {
                         <MDBCol sm="3">
                           <MDBCardText className='text-start fw-bold'>Price/Gallon</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="4">
-                          <input
-                            type="text"
-                            id="pricePerGallon"
-                            className="form-control"
-                            value={pricePerGallon}
-                            disabled={true} // This field is not editable
-                          />
+                        <MDBCol sm="5">
+                          <div className="input-group">
+                            <span className="input-group-text">$</span>
+                            <input
+                              type="text"
+                              id="pricePerGallon"
+                              className="form-control"
+                              value={pricePerGallon}
+                              disabled={true} // This field is not editable
+                            />
+                          </div>
                         </MDBCol>
                       </MDBRow>
                       <hr />
@@ -199,15 +202,18 @@ const QuoteForm = () => {
                         <MDBCol sm="3">
                           <MDBCardText className='text-start fw-bold'>Suggested Price</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="4">
-                          <input
-                            type="text"
-                            id="suggestedPrice"
-                            className="form-control"
-                            value={suggestedPrice}
-                            disabled={true} // This field is not editable
-                            readOnly
-                          />
+                        <MDBCol sm="5">
+                          <div className="input-group">
+                            <span className="input-group-text">$</span>
+                            <input
+                              type="text"
+                              id="suggestedPrice"
+                              className="form-control"
+                              value={suggestedPrice}
+                              disabled={true} // This field is not editable
+                              readOnly
+                            />
+                          </div>
                         </MDBCol>
                       </MDBRow>
                       <hr />
@@ -215,15 +221,18 @@ const QuoteForm = () => {
                         <MDBCol sm="3">
                           <MDBCardText className='text-start fw-bold'>Total Amount Due</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="4">
-                          <input
-                            type="text"
-                            id="totalAmountDue"
-                            className="form-control"
-                            value={totalAmountDue}
-                            disabled={true} // This field is not editable
-                            readOnly
-                          />
+                        <MDBCol sm="5">
+                          <div className="input-group">
+                            <span className="input-group-text">$</span>
+                            <input
+                              type="text"
+                              id="totalAmountDue"
+                              className="form-control"
+                              value={totalAmountDue}
+                              disabled={true} // This field is not editable
+                              readOnly
+                            />
+                          </div>
                         </MDBCol>
                       </MDBRow>
                       <hr />

@@ -107,6 +107,6 @@ def get_quote_price(request):
     has_history = QuoteForm.objects.filter(user=user).exists()
     
     suggested_price = calculate_suggested_price(location, gallons_requested, has_history)
-    total_amount_due = suggested_price * gallons_requested
+    total_amount_due = round(suggested_price * gallons_requested,2)
     
     return JsonResponse({'suggested_price': suggested_price, 'total_amount_due': total_amount_due})
