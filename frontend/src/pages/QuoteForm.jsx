@@ -1,7 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProfileHook from '../context/ProfileHook';
-import { useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
 import "../FuelQuoteForm.css";
 import {
   MDBCol,
@@ -12,22 +10,21 @@ import {
   MDBCardBody,
   MDBBtn
 } from 'mdb-react-ui-kit';
-import { toast } from 'react-toastify';
+
 import LoadingSpinner from "../components/Loading";
 import ProfileUpdateCard from '../components/ProfileUpdateCard';
-
+import QuoteFormHook from '../context/QuoteFormHook';
 
 const QuoteForm = () => {
   const { profile, profileLoaded } = ProfileHook();
-  const { authTokens } = useContext(AuthContext);
-  const navigate = useNavigate();
+  //const { authTokens } = useContext(AuthContext);
+  //const navigate = useNavigate();
   const [gallonsRequested, setGallonsRequested] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
   const [pricePerGallon] = useState('1.50'); // Assuming a mock price per gallon
-  const [totalAmountDue, setTotalAmountDue] = useState('');
-  const [suggestedPrice, setSuggestedPrice] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const { handleGetQuote, handleSubmitQuote, isLoading, suggestedPrice, totalAmountDue } = QuoteFormHook(profile);
+  const [LockedInput, setLockedInput] = useState(false);
 
   useEffect(() => {
     // When the profile is loaded, construct the delivery address
@@ -37,85 +34,85 @@ const QuoteForm = () => {
     }
   }, [profile, profileLoaded]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!profile) {
-      toast.error('You must update your profile to submit a quote.');
-      setTimeout(() => navigate('/profile/'), 1600);
-      return;
-    }
-
-    const quoteData = {
-      user: profile.user,
-      gallons_requested: gallonsRequested,
-      delivery_address: deliveryAddress,
-      delivery_date: deliveryDate,
-      price_per_gallon: pricePerGallon,
-      total_amount_due: totalAmountDue,
-    };
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/quotes/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authTokens.access}`,
-        },
-        body: JSON.stringify(quoteData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        toast.success(data.message || 'Quote submitted successfully.');
-        setTimeout(() => navigate('/quotehistory'), 1600);
-      } else {
-
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to submit quote.');
-      }
-    } catch (error) {
-      toast.error(error.message || 'An error occurred while submitting the quote.');
-    }
-    // Submit the quoteData to the backend API
-    //console.log('Submitting quote:', quoteData);
-  };
-
-  const handleGetQuote = async () => {
-    setIsLoading(true);
-    if (!profile) {
-      toast.error('You must update your profile to submit a quote.');
-      setTimeout(() => navigate('/profile/'), 1600);
-      return;
-    }
-    const quoteData = {
-      location: profile.state,
-      gallons_requested: gallonsRequested,
-    };
-
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/getquote/`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${authTokens.access}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(quoteData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      setSuggestedPrice(data.suggested_price);
-      setTotalAmountDue(data.total_amount_due);
-    } catch (error) {
-      console.error("Fetch error:", error);
-      toast.error("An error occurred while fetching the quote.");
-    }
-
-    setIsLoading(false); // Stop loading indicator
-  };
+  /* const handleSubmit = async (e) => {
+     e.preventDefault();
+ 
+     if (!profile) {
+       toast.error('You must update your profile to submit a quote.');
+       setTimeout(() => navigate('/profile/'), 1600);
+       return;
+     }
+ 
+     const quoteData = {
+       user: profile.user,
+       gallons_requested: gallonsRequested,
+       delivery_address: deliveryAddress,
+       delivery_date: deliveryDate,
+       price_per_gallon: pricePerGallon,
+       total_amount_due: totalAmountDue,
+     };
+     try {
+       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/quotes/`, {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+           'Authorization': `Bearer ${authTokens.access}`,
+         },
+         body: JSON.stringify(quoteData),
+       });
+ 
+       if (response.ok) {
+         const data = await response.json();
+         toast.success(data.message || 'Quote submitted successfully.');
+         setTimeout(() => navigate('/quotehistory'), 1600);
+       } else {
+ 
+         const errorData = await response.json();
+         throw new Error(errorData.error || 'Failed to submit quote.');
+       }
+     } catch (error) {
+       toast.error(error.message || 'An error occurred while submitting the quote.');
+     }
+     // Submit the quoteData to the backend API
+     //console.log('Submitting quote:', quoteData);
+   };
+ 
+   const handleGetQuote = async () => {
+     setIsLoading(true);
+     if (!profile) {
+       toast.error('You must update your profile to submit a quote.');
+       setTimeout(() => navigate('/profile/'), 1600);
+       return;
+     }
+     const quoteData = {
+       location: profile.state,
+       gallons_requested: gallonsRequested,
+     };
+ 
+     try {
+       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/getquote/`, {
+         method: 'POST',
+         headers: {
+           'Authorization': `Bearer ${authTokens.access}`,
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(quoteData),
+       });
+ 
+       if (!response.ok) {
+         throw new Error('Network response was not ok');
+       }
+ 
+       const data = await response.json();
+       setSuggestedPrice(data.suggested_price);
+       setTotalAmountDue(data.total_amount_due);
+     } catch (error) {
+       console.error("Fetch error:", error);
+       toast.error("An error occurred while fetching the quote.");
+     }
+ 
+     setIsLoading(false); // Stop loading indicator
+   };*/
 
 
   return (
@@ -135,7 +132,18 @@ const QuoteForm = () => {
                       <h3>Request a Fuel Quote</h3>
                     </div>
                     <hr />
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={(e) => {
+                      e.preventDefault();
+                      const quoteData = {
+                        user: profile.user,
+                        gallons_requested: gallonsRequested,
+                        delivery_address: deliveryAddress,
+                        delivery_date: deliveryDate,
+                        price_per_gallon: pricePerGallon,
+                        total_amount_due: totalAmountDue,
+                      };
+                      handleSubmitQuote(quoteData);
+                    }}>
                       <MDBRow>
                         <MDBCol sm="3">
                           <MDBCardText className='text-start fw-bold'>Delivery Address</MDBCardText>
@@ -156,6 +164,7 @@ const QuoteForm = () => {
                             className="form-control"
                             value={deliveryDate}
                             onChange={(e) => setDeliveryDate(e.target.value)}
+                            disabled={LockedInput} // Disable if gallons requested is not
                             required
                           />
                         </MDBCol>
@@ -174,6 +183,7 @@ const QuoteForm = () => {
                             value={gallonsRequested}
                             onChange={(e) => setGallonsRequested(Number(e.target.value))}
                             required
+                            disabled={LockedInput}
                           />
                         </MDBCol>
                       </MDBRow>
@@ -243,8 +253,13 @@ const QuoteForm = () => {
 
                         <MDBCol md="4">
                           <p>Step 1</p>
-                          <MDBBtn onClick={handleGetQuote} class="btn btn-success"
-                            disabled={!gallonsRequested || isLoading}
+                          <MDBBtn onClick={() => {
+                            handleGetQuote(gallonsRequested);
+                            setLockedInput(true); // Lock the field after fetching the quote
+                          }}
+                            class="btn btn-success"
+                            disabled={!gallonsRequested || isLoading || LockedInput
+                            }
                             style={{ backgroundColor: '#20d489' }}>Get Quote</MDBBtn>
                         </MDBCol>
 

@@ -7,13 +7,11 @@ Step 3: Delete the ```Pipfile``` here.<br>
 Step 4: Create a virtual environment by typing in the terminal: ```pipenv shell```.<br>
 (Assumming you already installed ```pipenv``` and ```pip```.)<br>
 Step 5: Install requirements by entering: ```pip install -r requirements.txt```.<br>
-Step 6: Create a ```.env``` file in the root folder.<br>
-Step 7: Get the db url from ```lemonadess```, then type in ```DATABASE_URL= url here``` into the ```.env``` file, save it.<br>
-Step 8: Type ```python manage.py runserver``` to start the backend server.<br><br>
+Step 6: Type ```python manage.py runserver``` to start the backend server.<br><br>
 
 **FrontEnd**:<br>
 Step 1: Open another VSCode Terminal, ```cd``` into the ```frontend``` folder.<br> 
-Step 2: Create a```.env``` file, <br>type in ```REACT_APP_API_BASE_URL=http://localhost:8000/api```, then save.<br>
+Step 2: Create a ```.env``` file, <br>type in ```REACT_APP_API_BASE_URL=http://localhost:8000/api```, then save.<br>
 Step 3: Delete the ```package-lock.json``` file, then enter ```npm install```, then ```npm start```.<br>
 Step 4: Open ```localhost:3000``` and try out the features.<br><br>
 
@@ -31,5 +29,3 @@ Step 4: Open ```localhost:3000``` and try out the features.<br><br>
 **To Do list:**<br>
     - Unit Tests<br>
     - Implement best practices<br>
-
-**Project Deployment URL:** https://cs4353.lemonadess.com/<br>
