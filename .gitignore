@@ -5,3 +5,6 @@ fuel_rate_calc/firebase.json
 fuel_rate_calc/.firebase/hosting.YnVpbGQ.cache
 .venv/
 .env
+venv/
+**/__pycache__/
+db.sqlite3
