@@ -20,6 +20,7 @@ const QuoteForm = () => {
   //const { authTokens } = useContext(AuthContext);
   //const navigate = useNavigate();
   const [gallonsRequested, setGallonsRequested] = useState('');
+  const [gallonsError, setGallonsError] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
   const [pricePerGallon] = useState('1.50'); // Assuming a mock price per gallon
@@ -113,7 +114,20 @@ const QuoteForm = () => {
  
      setIsLoading(false); // Stop loading indicator
    };*/
+  const handleGallonsChange = (e) => {
+    const value = e.target.value;
+    const intValue = parseInt(value, 10);
 
+    if (value === '' || (!isNaN(intValue) && intValue.toString() === value)) {
+      setGallonsRequested(intValue);
+      setGallonsError(''); // Clear error if input is valid
+    } else {
+      // Set error message if the input is not an integer
+      setGallonsError('Gallons requested must be an integer');
+    }
+  };
+  // Calculate today's date in YYYY-MM-DD format
+  const today = new Date().toISOString().split('T')[0];
 
   return (
     <section style={{ backgroundColor: '#eee' }}>
@@ -162,6 +176,7 @@ const QuoteForm = () => {
                             type="date"
                             id="deliveryDate"
                             className="form-control"
+                            min={today}
                             value={deliveryDate}
                             onChange={(e) => setDeliveryDate(e.target.value)}
                             disabled={LockedInput} // Disable if gallons requested is not
@@ -175,7 +190,7 @@ const QuoteForm = () => {
                           <MDBCardText className='text-start fw-bold'>Gallons Requested</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="5">
-                          <input
+                          {/*<input
                             type="number"
                             min="0"
                             id="gallonsRequested"
@@ -184,7 +199,18 @@ const QuoteForm = () => {
                             onChange={(e) => setGallonsRequested(Number(e.target.value))}
                             required
                             disabled={LockedInput}
+                          />*/}
+                          <input
+                            type="number"
+                            min="0"
+                            id="gallonsRequested"
+                            className={`form-control ${gallonsError ? 'is-invalid' : ''}`}
+                            value={gallonsRequested}
+                            onChange={handleGallonsChange}
+                            required
+                            disabled={LockedInput}
                           />
+                          {gallonsError && <div className="error-msg">{gallonsError}</div>}
                         </MDBCol>
                       </MDBRow>
                       <hr />

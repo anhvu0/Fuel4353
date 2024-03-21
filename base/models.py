@@ -6,8 +6,8 @@ from django.core.validators import MinValueValidator
 class Profile(models.Model): #models.py file define the database schema. Each class is a table in the database.
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     full_name = models.CharField(max_length=50, blank=True)
-    addressOne = models.CharField(max_length=50, blank=True)
-    addressTwo = models.CharField(max_length=50, blank=True)
+    addressOne = models.CharField(max_length=100, blank=True)
+    addressTwo = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
     state = models.CharField(max_length=50, blank=True)
     zip_code = models.CharField(max_length=9, blank=True,
@@ -25,7 +25,7 @@ class Profile(models.Model): #models.py file define the database schema. Each cl
 class QuoteForm(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quotes')
     gallons_requested = models.PositiveIntegerField(validators=[MinValueValidator(0)])
-    delivery_address = models.CharField(max_length=255)  # Combined address at the time of the quote
+    delivery_address = models.CharField(max_length=410)  # Combined address at the time of the quote
     delivery_date = models.DateField()
     price_per_gallon = models.DecimalField(max_digits=5, decimal_places=2)
     total_amount_due = models.DecimalField(max_digits=8, decimal_places=2)

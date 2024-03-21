@@ -27,59 +27,68 @@ function Profile() {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
-    
+
     //Input validation for handling errors
     const [fullNameError, setFullNameError] = useState('');
     const [addressOneError, setAddressOneError] = useState('');
+    const [addressTwoError, setAddressTwoError] = useState('');
     const [cityError, setCityError] = useState('');
-    const [zipCodeError, setZipCodeError] = useState('');
 
-    const validate_input = () =>{
-        let is_valid = true;
+    const handleFullNameChange = (e) => {
+        const value = e.target.value;
+        setFullName(value); // Update state
 
-        //All type of errors
-        if (!fullName.trim()){
-            setFullNameError('Missing Fullname');
-            is_valid= false
-        }
-        else if (fullName.length <5 || fullName.length > 60){
-            setFullNameError('Invalid length, please enter again');
-            is_valid= false
-        }
-        else{
-            setFullNameError('')
-        }
-
-        if (!addressOne.trim()){
-            setAddressOneError('Missing Address 1')
-            is_valid= false
-        }
-
-        else{
-            setAddressOneError('')
-        }
-        
-        if (!city.trim()){
-            setCityError('Missing City')
-            is_valid= false
-        }
-        else if (city.length <5 || city.length > 60){
-            setCityError('Invalid length, please enter again');
-            is_valid= false
-        }
-        else{
-            setCityError('')
-        }
-
-        if (!zipCode.trim() || !/^\d{5}(-\d{4})?$/.test(zipCode)) {
-            setZipCodeError('Invalid or missing Zipcode. Must be in the format XXXXX or XXXXX-XXXX')
-            is_valid = false
+        // Validate Full Name
+        if (!value.trim()) {
+            setFullNameError('Full Name is required');
+        } else if (value.length > 50) {
+            setFullNameError('Full Name must be less than 50 characters');
         } else {
-            setZipCodeError('')
+            setFullNameError(''); // Clear error
         }
-        return is_valid
-    }
-    const handleChange = (e) => {
+    };
+
+    const handleAddressOneChange = (e) => {
+        const value = e.target.value;
+        setAddressOne(value); // Update state
+
+        // Validate Address 1
+        if (!value.trim()) {
+            setAddressOneError('Address Line 1 is required');
+        } else if (value.length > 100) {
+            setAddressOneError('Address Line 1 must be less than 100 characters');
+        } else {
+            setAddressOneError(''); // Clear error
+        }
+    };
+
+    const handleAddressTwoChange = (e) => {
+        const value = e.target.value;
+        setAddressTwo(value); // Update state
+
+        // Validate Address 2 (optional)
+        if (value.length > 100) {
+            setAddressTwoError('Address Line 2 must be less than 100 characters');
+        } else {
+            setAddressTwoError(''); // Clear error
+        }
+    };
+
+    const handleCityChange = (e) => {
+        const value = e.target.value;
+        setCity(value); // Update state
+
+        // Validate City
+        if (!value.trim()) {
+            setCityError('City is required');
+        } else if (value.length > 100) {
+            setCityError('City must be less than 100 characters');
+        } else {
+            setCityError(''); // Clear error
+        }
+    };
+
+    const handleZipChange = (e) => {
         const value = e.target.value.replace(/\D/g, "").slice(0, 9);
         setZipCode(value);
     };
@@ -129,11 +138,7 @@ function Profile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        //Validate the input before submit data
-        if (!validate_input()){
-            return;
-        }
+
         const method = profileExists ? 'PATCH' : 'POST';
 
         const profileData = {
@@ -196,8 +201,8 @@ function Profile() {
                                             <MDBCol sm="6">
                                                 <input type="text" className="form-control"
                                                     id="fullName" placeholder="Full Name" value={fullName}
-                                                    onChange={(e) => setFullName(e.target.value)} required />
-                                                    {fullNameError && <div className="error-msg">{fullNameError}</div>}
+                                                    onChange={handleFullNameChange} required />
+                                                {fullNameError && <div className="error-msg">{fullNameError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
@@ -208,8 +213,8 @@ function Profile() {
                                             <MDBCol sm="6">
                                                 <input type="text" className="form-control"
                                                     id="addressOne" placeholder="Address 1" value={addressOne}
-                                                    onChange={(e) => setAddressOne(e.target.value)} required />
-                                                    {addressOneError && <div className="error-msg">{addressOneError}</div>}
+                                                    onChange={handleAddressOneChange} required />
+                                                {addressOneError && <div className="error-msg">{addressOneError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
@@ -220,7 +225,8 @@ function Profile() {
                                             <MDBCol sm="6">
                                                 <input type="text" className="form-control"
                                                     id="addressTwo" placeholder="Address 2" value={addressTwo}
-                                                    onChange={(e) => setAddressTwo(e.target.value)} />
+                                                    onChange={handleAddressTwoChange} />
+                                                {addressTwoError && <div className="error-msg">{addressTwoError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
@@ -231,8 +237,8 @@ function Profile() {
                                             <MDBCol sm="6">
                                                 <input type="text" className="form-control"
                                                     id="city" placeholder="City" value={city}
-                                                    onChange={(e) => setCity(e.target.value)} required />
-                                                    {cityError && <div className="error-msg">{cityError}</div>}
+                                                    onChange={handleCityChange} required />
+                                                {cityError && <div className="error-msg">{cityError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
@@ -259,13 +265,12 @@ function Profile() {
                                                 <input type="text" className="form-control" id="zipCode"
                                                     placeholder="Zip code"
                                                     value={zipCode}
-                                                    onChange={handleChange}
+                                                    onChange={handleZipChange}
                                                     pattern="\d{5}(\d{4})?"
                                                     title="Zip code must be either 5 or 9 digits."
                                                     maxLength="9"
                                                     minLength="5"
                                                     required />
-                                                    {zipCodeError && <div className="error-msg">{zipCodeError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
