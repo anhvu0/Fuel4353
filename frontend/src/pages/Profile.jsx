@@ -27,7 +27,58 @@ function Profile() {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
+    
+    //Input validation for handling errors
+    const [fullNameError, setFullNameError] = useState('');
+    const [addressOneError, setAddressOneError] = useState('');
+    const [cityError, setCityError] = useState('');
+    const [zipCodeError, setZipCodeError] = useState('');
 
+    const validate_input = () =>{
+        let is_valid = true;
+
+        //All type of errors
+        if (!fullName.trim()){
+            setFullNameError('Missing Fullname');
+            is_valid= false
+        }
+        else if (fullName.length <5 || fullName.length > 60){
+            setFullNameError('Invalid length, please enter again');
+            is_valid= false
+        }
+        else{
+            setFullNameError('')
+        }
+
+        if (!addressOne.trim()){
+            setAddressOneError('Missing Address 1')
+            is_valid= false
+        }
+
+        else{
+            setAddressOneError('')
+        }
+        
+        if (!city.trim()){
+            setCityError('Missing City')
+            is_valid= false
+        }
+        else if (city.length <5 || city.length > 60){
+            setCityError('Invalid length, please enter again');
+            is_valid= false
+        }
+        else{
+            setCityError('')
+        }
+
+        if (!zipCode.trim() || !/^\d{5}(-\d{4})?$/.test(zipCode)) {
+            setZipCodeError('Invalid or missing Zipcode. Must be in the format XXXXX or XXXXX-XXXX')
+            is_valid = false
+        } else {
+            setZipCodeError('')
+        }
+        return is_valid
+    }
     const handleChange = (e) => {
         const value = e.target.value.replace(/\D/g, "").slice(0, 9);
         setZipCode(value);
@@ -78,7 +129,11 @@ function Profile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
+        //Validate the input before submit data
+        if (!validate_input()){
+            return;
+        }
         const method = profileExists ? 'PATCH' : 'POST';
 
         const profileData = {
@@ -142,6 +197,7 @@ function Profile() {
                                                 <input type="text" className="form-control"
                                                     id="fullName" placeholder="Full Name" value={fullName}
                                                     onChange={(e) => setFullName(e.target.value)} required />
+                                                    {fullNameError && <div className="error-msg">{fullNameError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
@@ -153,6 +209,7 @@ function Profile() {
                                                 <input type="text" className="form-control"
                                                     id="addressOne" placeholder="Address 1" value={addressOne}
                                                     onChange={(e) => setAddressOne(e.target.value)} required />
+                                                    {addressOneError && <div className="error-msg">{addressOneError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
@@ -175,6 +232,7 @@ function Profile() {
                                                 <input type="text" className="form-control"
                                                     id="city" placeholder="City" value={city}
                                                     onChange={(e) => setCity(e.target.value)} required />
+                                                    {cityError && <div className="error-msg">{cityError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
@@ -207,6 +265,7 @@ function Profile() {
                                                     maxLength="9"
                                                     minLength="5"
                                                     required />
+                                                    {zipCodeError && <div className="error-msg">{zipCodeError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
