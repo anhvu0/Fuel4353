@@ -81,7 +81,7 @@ const QuoteHistory = () => {
                         <tr key={quote.id}>
                           <th scope="row">{index + 1}</th>
                           <td>{quote.delivery_date}</td>
-                          <td className="text-start">{quote.delivery_address}</td>
+                          <td className={`text-start table-responsive-cell`}>{quote.delivery_address}</td>
                           <td>{quote.gallons_requested}</td>
                           <td>${quote.price_per_gallon}</td>
                           <td>${quote.total_amount_due}</td>

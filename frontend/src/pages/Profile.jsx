@@ -139,6 +139,12 @@ function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Check for validation errors before proceeding
+        if (fullNameError || addressOneError || addressTwoError || cityError) {
+            toast.error('Please correct the errors before submitting.');
+            return; // Stop the form submission
+        }
+
         const method = profileExists ? 'PATCH' : 'POST';
 
         const profileData = {
