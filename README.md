@@ -24,8 +24,10 @@ Step 4: Open ```localhost:3000``` and try out the features.<br><br>
     - Request a Quote <br>
     - Quote History <br>
     - Pricing Module<br>
-    - PostgreSQL DB hosted on Render.com<br><br>
+    - PostgreSQL DB will be hosted on Render.com<br><br>
 
 **To Do list:**<br>
-    - Unit Tests<br>
-    - Implement best practices<br>
+    - Implement best practices<br><br>
+
+**Project Deployment URL:** https://cs4353.lemonadess.com/ <br>
+

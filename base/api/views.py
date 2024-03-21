@@ -72,7 +72,7 @@ def user_registration(request):
             return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
         else:
             errors = serializer.errors
-            print(errors)
+            #print(errors)
             error_messages = {'errors': errors}
             return Response(error_messages, status=status.HTTP_400_BAD_REQUEST)
         
@@ -86,7 +86,7 @@ def submit_quote(request):
             serializer.save(user=request.user)  # Automatically associate the quote with the logged-in user
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            print(serializer.errors)
+            #print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 @api_view(['GET'])
