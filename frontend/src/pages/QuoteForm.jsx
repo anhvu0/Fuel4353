@@ -211,7 +211,7 @@ const QuoteForm = () => {
                             setLockedInput(true); // Lock the field after fetching the quote
                           }}
                             class="btn btn-success"
-                            disabled={!gallonsRequested || isLoading || LockedInput
+                            disabled={!gallonsRequested || !deliveryDate || isLoading || LockedInput
                             }
                             style={{ backgroundColor: '#20d489' }}>Get Quote</MDBBtn>
                         </MDBCol>
