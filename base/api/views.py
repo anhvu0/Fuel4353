@@ -100,13 +100,14 @@ def quote_history(request):
 @permission_classes([IsAuthenticated])
 def get_quote_price(request):
     location = request.data.get('location')
-    gallons_requested = request.data.get('gallons_requested')
+    gallons_requested = float(request.data.get('gallons_requested'))
     user = request.user
 
     # Determine if the user has a rate history
     has_history = QuoteForm.objects.filter(user=user).exists()
     
     suggested_price = calculate_suggested_price(location, gallons_requested, has_history)
+    #print(type(suggested_price), type(gallons_requested))
     total_amount_due = round(suggested_price * gallons_requested,2)
     
     return JsonResponse({'suggested_price': suggested_price, 'total_amount_due': total_amount_due})
