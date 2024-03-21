@@ -13,4 +13,5 @@ urlpatterns = [
     path('submit-quote/', submit_quote, name='submit_quote'),
     path('quote-history/', quote_history, name='quote_history'),
     path('get-quote/', get_quote_price, name='get_quote_price'),
+    path('ppg/', current_price_per_gallon, name='current_price_per_gallon'),
 ]

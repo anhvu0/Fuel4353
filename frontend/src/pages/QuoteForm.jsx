@@ -17,15 +17,13 @@ import QuoteFormHook from '../context/QuoteFormHook';
 
 const QuoteForm = () => {
   const { profile, profileLoaded } = ProfileHook();
-  //const { authTokens } = useContext(AuthContext);
-  //const navigate = useNavigate();
   const [gallonsRequested, setGallonsRequested] = useState('');
   const [gallonsError, setGallonsError] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
-  const [pricePerGallon] = useState('1.50'); // Assuming a mock price per gallon
   const { handleGetQuote, handleSubmitQuote, isLoading, suggestedPrice, totalAmountDue } = QuoteFormHook(profile);
   const [LockedInput, setLockedInput] = useState(false);
+  const [pricePerGallon, setPricePerGallon] = useState('');;
 
   useEffect(() => {
     // When the profile is loaded, construct the delivery address
@@ -35,85 +33,24 @@ const QuoteForm = () => {
     }
   }, [profile, profileLoaded]);
 
-  /* const handleSubmit = async (e) => {
-     e.preventDefault();
- 
-     if (!profile) {
-       toast.error('You must update your profile to submit a quote.');
-       setTimeout(() => navigate('/profile/'), 1600);
-       return;
-     }
- 
-     const quoteData = {
-       user: profile.user,
-       gallons_requested: gallonsRequested,
-       delivery_address: deliveryAddress,
-       delivery_date: deliveryDate,
-       price_per_gallon: pricePerGallon,
-       total_amount_due: totalAmountDue,
-     };
-     try {
-       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/quotes/`, {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-           'Authorization': `Bearer ${authTokens.access}`,
-         },
-         body: JSON.stringify(quoteData),
-       });
- 
-       if (response.ok) {
-         const data = await response.json();
-         toast.success(data.message || 'Quote submitted successfully.');
-         setTimeout(() => navigate('/quotehistory'), 1600);
-       } else {
- 
-         const errorData = await response.json();
-         throw new Error(errorData.error || 'Failed to submit quote.');
-       }
-     } catch (error) {
-       toast.error(error.message || 'An error occurred while submitting the quote.');
-     }
-     // Submit the quoteData to the backend API
-     //console.log('Submitting quote:', quoteData);
-   };
- 
-   const handleGetQuote = async () => {
-     setIsLoading(true);
-     if (!profile) {
-       toast.error('You must update your profile to submit a quote.');
-       setTimeout(() => navigate('/profile/'), 1600);
-       return;
-     }
-     const quoteData = {
-       location: profile.state,
-       gallons_requested: gallonsRequested,
-     };
- 
-     try {
-       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/getquote/`, {
-         method: 'POST',
-         headers: {
-           'Authorization': `Bearer ${authTokens.access}`,
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify(quoteData),
-       });
- 
-       if (!response.ok) {
-         throw new Error('Network response was not ok');
-       }
- 
-       const data = await response.json();
-       setSuggestedPrice(data.suggested_price);
-       setTotalAmountDue(data.total_amount_due);
-     } catch (error) {
-       console.error("Fetch error:", error);
-       toast.error("An error occurred while fetching the quote.");
-     }
- 
-     setIsLoading(false); // Stop loading indicator
-   };*/
+  useEffect(() => {//Get the current price per gallon from back end
+    const fetchPricePerGallon = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/ppg/`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch the current price per gallon.');
+        }
+        const data = await response.json();
+        setPricePerGallon(data.current_price_per_gallon); //
+        //console.log('Price per gallon:', data.current_price_per_gallon);
+      } catch (error) {
+        console.error('Error fetching price per gallon:', error);
+      }
+    };
+
+    fetchPricePerGallon();
+  }, []);
+
   const handleGallonsChange = (e) => {
     const value = e.target.value;
     const intValue = parseInt(value, 10);
@@ -190,16 +127,6 @@ const QuoteForm = () => {
                           <MDBCardText className='text-start fw-bold'>Gallons Requested</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="5">
-                          {/*<input
-                            type="number"
-                            min="0"
-                            id="gallonsRequested"
-                            className="form-control"
-                            value={gallonsRequested}
-                            onChange={(e) => setGallonsRequested(Number(e.target.value))}
-                            required
-                            disabled={LockedInput}
-                          />*/}
                           <input
                             type="number"
                             min="0"
@@ -226,7 +153,7 @@ const QuoteForm = () => {
                               type="text"
                               id="pricePerGallon"
                               className="form-control"
-                              value={pricePerGallon}
+                              value={pricePerGallon || 'N/A'}
                               disabled={true} // This field is not editable
                             />
                           </div>

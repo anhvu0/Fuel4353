@@ -10,7 +10,7 @@ from base.serializer import QuoteSerializer
 from base.models import Profile
 from base.models import QuoteForm
 from django.http import JsonResponse
-from .getquote import calculate_suggested_price
+from .pricing import calculate_suggested_price, get_price_per_gallon
 
 #This is where everything happens. Views works like a server. It handle request and response.
 
@@ -111,3 +111,9 @@ def get_quote_price(request):
     total_amount_due = round(suggested_price * gallons_requested,2)
     
     return JsonResponse({'suggested_price': suggested_price, 'total_amount_due': total_amount_due})
+
+
+@api_view(['GET'])
+def current_price_per_gallon(request):
+    current_price_per_gallon = get_price_per_gallon()
+    return Response({"current_price_per_gallon": current_price_per_gallon})

@@ -2,15 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import {
-    MDBTable,
-    MDBTableHead,
-    MDBTableBody,
-    MDBCol,
-    MDBContainer,
-    MDBRow,
-    MDBCard,
-    MDBCardBody,
-  } from 'mdb-react-ui-kit';
+  MDBTable,
+  MDBTableHead,
+  MDBTableBody,
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardBody,
+} from 'mdb-react-ui-kit';
 import LoadingSpinner from '../components/Loading';
 
 const QuoteHistory = () => {
@@ -31,9 +31,9 @@ const QuoteHistory = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setQuotes(data); 
+          setQuotes(data);
         } else {
-         
+
           toast.error('Failed to fetch quotes.');
         }
       } catch (error) {
@@ -51,51 +51,51 @@ const QuoteHistory = () => {
 
   return (
     <section style={{ backgroundColor: '#eee' }}>
-    <MDBContainer className="py-5 fluid">
-    <MDBRow>     
-      <MDBCol lg="1"></MDBCol>
-      
-      <MDBCol lg="10" >
-      {isLoading ? (
-            <LoadingSpinner /> 
-          ) : (
-      <MDBCard>
-      <MDBCardBody>
-      <div className="title">
-            <h3>Your Quote History</h3>
-          </div>
-            <hr />
-      <MDBTable class="table table-striped table-hover">
-            <MDBTableHead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Delivery Date</th>
-                <th scope="col">Delivery Address</th>
-                <th scope="col">Gallons Requested</th>
-                <th scope="col">Price/Gallon</th>
-                <th scope="col">Total Amount Due</th>
-                </tr>
-            </MDBTableHead>
-            <MDBTableBody>
-                {quotes.map((quote, index) => (
-                <tr key={quote.id}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{quote.delivery_date}</td>
-                    <td class="text-start">{quote.delivery_address}</td>
-                    <td>{quote.gallons_requested}</td>
-                    <td>${quote.price_per_gallon}</td>
-                    <td>${quote.total_amount_due}</td>
-                </tr>
-                ))}
-            </MDBTableBody>
-       </MDBTable>
-        </MDBCardBody>
-        </MDBCard>  
-        )}
-        </MDBCol>        
+      <MDBContainer className="py-5 fluid">
+        <MDBRow>
+          <MDBCol lg="1"></MDBCol>
+
+          <MDBCol lg="10" >
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <MDBCard>
+                <MDBCardBody>
+                  <div className="title">
+                    <h3>Your Quote History</h3>
+                  </div>
+                  <hr />
+                  <MDBTable className="table table-striped table-hover">
+                    <MDBTableHead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Delivery Date</th>
+                        <th scope="col">Delivery Address</th>
+                        <th scope="col">Gallons Requested</th>
+                        <th scope="col">Price/Gallon</th>
+                        <th scope="col">Total Amount Due</th>
+                      </tr>
+                    </MDBTableHead>
+                    <MDBTableBody>
+                      {quotes.map((quote, index) => (
+                        <tr key={quote.id}>
+                          <th scope="row">{index + 1}</th>
+                          <td>{quote.delivery_date}</td>
+                          <td className="text-start">{quote.delivery_address}</td>
+                          <td>{quote.gallons_requested}</td>
+                          <td>${quote.price_per_gallon}</td>
+                          <td>${quote.total_amount_due}</td>
+                        </tr>
+                      ))}
+                    </MDBTableBody>
+                  </MDBTable>
+                </MDBCardBody>
+              </MDBCard>
+            )}
+          </MDBCol>
         </MDBRow>
-        </MDBContainer>
-        </section>
+      </MDBContainer>
+    </section>
   );
 };
 
