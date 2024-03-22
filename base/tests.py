@@ -1,18 +1,18 @@
-from django.test import RequestFactory, TestCase
+from django.test import TestCase
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
-from base.models import Profile, QuoteForm
-from base.api.views import profile_view, user_registration, submit_quote, quote_history, get_quote_price
+from base.models import Profile
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework_simplejwt.tokens import RefreshToken
+from unittest.mock import patch
 
 class MyTokenObtainPairViewTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.user = User.objects.create_user(username='testuser', password='password')
-        self.url = reverse('token_obtain_pair')  # Replace 'token_obtain_pair' with your actual URL name
+        self.url = reverse('token_obtain_pair')
 
     def test_token_obtain_success(self):
         response = self.client.post(self.url, {'username': 'testuser', 'password': 'password'})
@@ -31,7 +31,7 @@ class ProfileViewTests(TestCase):
         self.user = User.objects.create_user(username='testuser', password='password')
         self.profile = Profile.objects.create(user=self.user)
         self.client.force_authenticate(user=self.user)
-        self.url = reverse('profile_view')  # Replace 'profile_view' with your actual URL name
+        self.url = reverse('profile_view')
 
     def test_get_profile_success(self):
         response = self.client.get(self.url)
@@ -49,7 +49,7 @@ class ProfileViewTests(TestCase):
 class UserRegistrationTests(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.url = reverse('register')  # Make sure 'register' matches the name in your URLconf.
+        self.url = reverse('register')
 
     def test_user_registration_success(self):
         data = {
@@ -100,9 +100,8 @@ class UserRegistrationTests(TestCase):
         response = self.client.post(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         # Adjust the assertion to match the nested structure under 'errors' key
-        self.assertIn('password', response.data['errors'])  # Now correctly accessing the nested 'errors' key
+        self.assertIn('password', response.data['errors'])
 
-        # If you want to check for a specific error message related to password strength, adjust accordingly
         password_errors = response.data['errors']['password']
         self.assertTrue(any("This password is entirely numeric." in error for error in password_errors))
         
@@ -118,7 +117,6 @@ class UserRegistrationTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('password', response.data['errors'])
 
-        # If you want to check for a specific error message related to password strength, adjust accordingly
         password_errors = response.data['errors']['password']
         self.assertTrue(any("This password is too short." in error for error in password_errors))
 
@@ -150,18 +148,81 @@ class TestViews(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, [])  # Assuming no quotes exist yet
 
-#This test below is not working yet.
-    """def test_get_quote_price(self):
+    def test_get_quote_price(self):
         self.authenticate()
         url = reverse('get_quote_price')
         data = {
-            'location': 'Texas',
+            'location': 'TX',
             'gallons_requested': 500
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        # Check for keys in response. Add more detailed assertions based on your business logic.
         self.assertIn('suggested_price', response.json())
-        self.assertIn('total_amount_due', response.json())"""
+        self.assertIn('total_amount_due', response.json())
+        
+class SubmitQuoteTests(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.profile = Profile.objects.create(user=self.user, 
+                                              full_name='Test User',
+                                              addressOne='123 Main St',
+                                              addressTwo='Apt 1',
+                                              city='Anytown',
+                                              state='TX',
+                                              zip_code='12345')
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+        self.quote_url = reverse('submit_quote')
+        delivery_address = f"{self.profile.addressOne} {self.profile.addressTwo}, {self.profile.city}, {self.profile.state}, {self.profile.zip_code}"
+        self.valid_quote_data = {
+            'delivery_address': delivery_address,
+            'gallons_requested': 1000,
+            'delivery_date': '2021-12-31',
+            'price_per_gallon': 2.00,
+            'total_amount_due': 2000.0
+        }
+        self.invalid_quote_data = {
+            'delivery_address': '   ',  # Invalid because delivery address is empty
+            'gallons_requested': 1000,
+            'delivery_date': '2021-12-31',
+            'price_per_gallon': 2.00,
+            'total_amount_due': 2000.0
+        }
 
-    # Add more tests for different scenarios and error cases
+    
+    def test_submit_quote_with_valid_data(self):
+        response = self.client.post(self.quote_url, self.valid_quote_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED, msg=response.data)
+
+        # Iterate over each key-value pair in the valid quote data
+        for key, value in self.valid_quote_data.items():
+            if key in response.data:
+                # If the value is numeric, convert both the expected and actual values to floats for comparison
+                if isinstance(value, (int, float)):
+                    self.assertEqual(float(response.data[key]), float(value))
+                else:
+                    self.assertEqual(response.data[key], value)
+
+    def test_submit_quote_with_invalid_data(self):
+        response = self.client.post(self.quote_url, self.invalid_quote_data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('delivery_address', response.data)
+        self.assertIn('This field may not be blank.', response.data['delivery_address'])
+
+
+class CurrentPricePerGallonTest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+    @patch('base.api.pricing.get_price_per_gallon') 
+    def test_current_price_per_gallon(self, mock_get_price_per_gallon):
+
+        # Use reverse to get the URL for the view
+        url = reverse('current_price_per_gallon') 
+
+        # Make a GET request to the view
+        response = self.client.get(url)
+
+        # Assert the response status code and content
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"current_price_per_gallon": 1.5})
