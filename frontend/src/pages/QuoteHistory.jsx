@@ -73,7 +73,7 @@ const QuoteHistory = () => {
                         <th scope="col">Delivery Address</th>
                         <th scope="col">Gallons Requested</th>
                         <th scope="col">Price/Gallon</th>
-                        <th scope="col">Total Amount Due</th>
+                        <th className='text-end' scope="col">Total Amount Due</th>
                       </tr>
                     </MDBTableHead>
                     <MDBTableBody>
@@ -82,9 +82,9 @@ const QuoteHistory = () => {
                           <th scope="row">{index + 1}</th>
                           <td>{quote.delivery_date}</td>
                           <td className={`text-start table-responsive-cell`}>{quote.delivery_address}</td>
-                          <td>{new Intl.NumberFormat('en-US').format(quote.gallons_requested)}</td>
+                          <td >{new Intl.NumberFormat('en-US').format(quote.gallons_requested)}</td>
                           <td>${quote.price_per_gallon}</td>
-                          <td>${new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(quote.total_amount_due)}</td>
+                          <td className='text-end'>${new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(quote.total_amount_due)}</td>
                         </tr>
                       ))}
                     </MDBTableBody>

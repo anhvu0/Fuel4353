@@ -13,9 +13,8 @@ const ProfileUpdateCard = () => {
         <MDBCardText>
           Please update your profile information before requesting a quote.
         </MDBCardText>
-        <MDBBtn href='/profile' type="button" 
-        className="btn btn-success" 
-        style={{ backgroundColor: '#20d489' }}>Edit Profile</MDBBtn>
+        <MDBBtn href='/profile' type="button" outline rounded color="secondary"
+        >Edit Profile</MDBBtn>
       </MDBCardBody>
     </MDBCard>
   );

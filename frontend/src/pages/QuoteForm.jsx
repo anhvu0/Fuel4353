@@ -55,13 +55,16 @@ const QuoteForm = () => {
     const value = e.target.value;
     const intValue = parseInt(value, 10);
 
-    // Check if the value is an integer and within the acceptable range
-    if (value === '' || (!isNaN(intValue) && intValue.toString() === value && intValue <= 10000000)) {
+    // Check if the value is an integer, greater than 0, and within the acceptable range
+    if (value === '' || (!isNaN(intValue) && intValue.toString() === value && intValue > 0 && intValue <= 10000000)) {
       setGallonsRequested(intValue);
       setGallonsError(''); // Clear error if input is valid
     } else if (intValue > 10000000) {
-      // Set error message if the input is larger than 1000000
-      setGallonsError('Gallons requested must not be larger than 10,000,000');
+      // Set error message if the input is larger than 10,000,000
+      setGallonsError('Gallons requested must be less than 10,000,000');
+    } else if (intValue <= 0) {
+      // Set error message if the input is 0 or negative
+      setGallonsError('Gallons requested must be greater than 0');
     } else {
       // Set error message if the input is not an integer
       setGallonsError('Gallons requested must be an integer');
@@ -75,8 +78,8 @@ const QuoteForm = () => {
 
       <MDBContainer className="py-5 fluid">
         <MDBRow>
-          <MDBCol lg="2"></MDBCol>
-          <MDBCol lg="8">
+          <MDBCol lg="3"></MDBCol>
+          <MDBCol lg="6">
             {!profileLoaded ? (
               <LoadingSpinner />
             ) : (
@@ -100,19 +103,19 @@ const QuoteForm = () => {
                       handleSubmitQuote(quoteData);
                     }}>
                       <MDBRow>
-                        <MDBCol sm="3">
+                        <MDBCol sm="4">
                           <MDBCardText className='text-start fw-bold'>Delivery Address</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="6">
+                        <MDBCol sm="8">
                           <MDBCardText className='text-start'>{deliveryAddress}</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                       <hr />
                       <MDBRow>
-                        <MDBCol sm="3">
+                        <MDBCol sm="4">
                           <MDBCardText className='text-start fw-bold'>Delivery Date</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="5">
+                        <MDBCol sm="6">
                           <input
                             type="date"
                             id="deliveryDate"
@@ -120,17 +123,17 @@ const QuoteForm = () => {
                             min={today}
                             value={deliveryDate}
                             onChange={(e) => setDeliveryDate(e.target.value)}
-                            disabled={LockedInput} // Disable if gallons requested is not
+                            disabled={LockedInput}
                             required
                           />
                         </MDBCol>
                       </MDBRow>
                       <hr />
                       <MDBRow>
-                        <MDBCol sm="3">
+                        <MDBCol sm="4">
                           <MDBCardText className='text-start fw-bold'>Gallons Requested</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="5">
+                        <MDBCol sm="6">
                           <input
                             type="number"
                             min="0"
@@ -148,17 +151,18 @@ const QuoteForm = () => {
                       <hr />
 
                       <MDBRow>
-                        <MDBCol sm="3">
-                          <MDBCardText className='text-start fw-bold'>Price/Gallon</MDBCardText>
+                        <MDBCol sm="4">
+                          <MDBCardText className='text-start fw-bold'>Price per Gallon</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="5">
+                        <MDBCol sm="6">
                           <div className="input-group">
                             <span className="input-group-text">$</span>
                             <input
                               type="text"
                               id="pricePerGallon"
                               className="form-control"
-                              value={pricePerGallon || 'N/A'}
+                              //value={pricePerGallon || 'N/A'}
+                              value={new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(pricePerGallon) || 'N/A'}
                               disabled={true} // This field is not editable
                             />
                           </div>
@@ -167,10 +171,10 @@ const QuoteForm = () => {
                       <hr />
 
                       <MDBRow>
-                        <MDBCol sm="3">
+                        <MDBCol sm="4">
                           <MDBCardText className='text-start fw-bold'>Suggested Price</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="5">
+                        <MDBCol sm="6">
                           <div className="input-group">
                             <span className="input-group-text">$</span>
                             <input
@@ -186,10 +190,10 @@ const QuoteForm = () => {
                       </MDBRow>
                       <hr />
                       <MDBRow>
-                        <MDBCol sm="3">
+                        <MDBCol sm="4">
                           <MDBCardText className='text-start fw-bold'>Total Amount Due</MDBCardText>
                         </MDBCol>
-                        <MDBCol sm="5">
+                        <MDBCol sm="6">
                           <div className="input-group">
                             <span className="input-group-text">$</span>
                             <input
@@ -207,7 +211,7 @@ const QuoteForm = () => {
                       <hr />
 
                       <MDBRow>
-                        <MDBCol md="3">
+                        <MDBCol md="2">
                         </MDBCol>
 
                         <MDBCol md="4">
@@ -216,16 +220,15 @@ const QuoteForm = () => {
                             handleGetQuote(gallonsRequested);
                             setLockedInput(true); // Lock the field after fetching the quote
                           }}
-                            class="btn btn-success"
+                            outline rounded color="secondary"
                             disabled={!gallonsRequested || !deliveryDate || isLoading || LockedInput
                             }
-                            style={{ backgroundColor: '#20d489' }}>Get Quote</MDBBtn>
+                          >Get Quote</MDBBtn>
                         </MDBCol>
 
                         <MDBCol md="4">
                           <p>Step 2</p>
-                          <MDBBtn type='submit' class="btn btn-success"
-                            style={{ backgroundColor: '#20d489' }}
+                          <MDBBtn type='submit' outline rounded color="secondary"
                             disabled={
                               !gallonsRequested ||
                               !deliveryDate ||

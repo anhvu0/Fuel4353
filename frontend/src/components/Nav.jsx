@@ -17,14 +17,14 @@ export default function Navx() {
   let { user, logoutUser } = useContext(AuthContext);
   const [openNavCentred, setOpenNavCentred] = useState(false);
   const handleLogout = (e) => {
-    e.preventDefault(); 
-    logoutUser(); 
+    e.preventDefault();
+    logoutUser();
   };
 
   return (
     <MDBNavbar expand='lg' className='shadow-3 text-dark'>
       <MDBContainer fluid className='justify-content-start'>
-       <MDBNavbarBrand href='/'>SMART+</MDBNavbarBrand>
+        <MDBNavbarBrand href='/'>SMART+</MDBNavbarBrand>
         <MDBNavbarToggler
           type='button'
           data-target='#navbarCenteredExample'
@@ -52,12 +52,12 @@ export default function Navx() {
               <MDBNavbarLink href='/quotehistory'>Quote History</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem className='align-items-end'>
-          {user ? (
-            <MDBBtn type="button" outline color="secondary" className='m-1' href="#" onClick={handleLogout}>Log out</MDBBtn>
-            ) : (
-            <MDBNavbarLink href="/login">
-              Log in
-            </MDBNavbarLink>
+              {user ? (
+                <MDBBtn type="button" outline rounded color="secondary" className='m-1' href="#" onClick={handleLogout}>Log out</MDBBtn>
+              ) : (
+                <MDBNavbarLink href="/login">
+                  Log in
+                </MDBNavbarLink>
               )}
             </MDBNavbarItem>
           </MDBNavbarNav>

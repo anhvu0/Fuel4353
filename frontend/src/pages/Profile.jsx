@@ -189,8 +189,8 @@ function Profile() {
 
             <MDBContainer className="py-5 fluid">
                 <MDBRow>
-                    <MDBCol lg="2"></MDBCol>
-                    <MDBCol lg="8">
+                    <MDBCol lg="3"></MDBCol>
+                    <MDBCol lg="6">
                         {!profileLoaded ? (
                             <LoadingSpinner />
                         ) : (
@@ -201,10 +201,10 @@ function Profile() {
                                     </div><hr />
                                     <form onSubmit={handleSubmit}>
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>Full Name</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control"
                                                     id="fullName" placeholder="Full Name" value={fullName}
                                                     onChange={handleFullNameChange} required />
@@ -213,10 +213,10 @@ function Profile() {
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>Address Line 1</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control"
                                                     id="addressOne" placeholder="Address 1" value={addressOne}
                                                     onChange={handleAddressOneChange} required />
@@ -225,10 +225,10 @@ function Profile() {
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>Address Line 2</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control"
                                                     id="addressTwo" placeholder="Address 2" value={addressTwo}
                                                     onChange={handleAddressTwoChange} />
@@ -237,10 +237,10 @@ function Profile() {
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>City</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control"
                                                     id="city" placeholder="City" value={city}
                                                     onChange={handleCityChange} required />
@@ -249,10 +249,10 @@ function Profile() {
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>State</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <select className="form-control" id="state" value={state}
                                                     onChange={(e) => setState(e.target.value)} required>
                                                     <option value="">Select state</option> {/**disabled */}
@@ -264,10 +264,10 @@ function Profile() {
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>Zip Code</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control" id="zipCode"
                                                     placeholder="Zip code"
                                                     value={zipCode}
@@ -280,8 +280,8 @@ function Profile() {
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
-                                        <MDBBtn type="submit" class="btn btn-success"
-                                            style={{ backgroundColor: '#20d489' }}>Update</MDBBtn>
+                                        <MDBBtn type="submit" outline rounded color="secondary"
+                                        >Update Profile</MDBBtn>
                                     </form>
                                 </MDBCardBody>
                             </MDBCard>

@@ -284,7 +284,7 @@ button {
 }
 
 button:hover {
-  background-color: #00a561;
+  background-color: #19c17b;
   /* Adjust hover color as needed */
 }
 
@@ -314,7 +314,7 @@ button:hover {
 .table-responsive-cell {
   word-wrap: break-word;
   /* Allows the words to break and wrap to the next line */
-  max-width: 200px;
+  max-width: 300px;
   /* Adjust this value based on your layout's needs */
   overflow-wrap: break-word;
   /* Ensures that long words will wrap and not overflow */

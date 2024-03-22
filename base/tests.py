@@ -39,7 +39,7 @@ class ProfileViewTests(TestCase):
 
     def test_post_profile_creation(self):
         response = self.client.post(self.url, {})
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)  # Assuming profile already exists
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST) 
 
     def test_patch_profile_update(self):
         response = self.client.patch(self.url, {'field_to_update': 'new_value'})
@@ -77,7 +77,6 @@ class UserRegistrationTests(TestCase):
 
 
     def test_missing_required_fields(self):
-    # Example for missing username, similar approach can be applied for missing passwords
         data = {
             'password': 'test123@@',
             'password2': 'test123@@'  # Missing username
@@ -91,7 +90,6 @@ class UserRegistrationTests(TestCase):
 
 
     def test_invalid_password1(self):
-    # This test assumes 'validate_password' enforces certain strength requirements.
         data = {
             'username': 'userweakpw',
             'password': '123456789',  # Password is entirely numeric
@@ -217,12 +215,9 @@ class CurrentPricePerGallonTest(TestCase):
     @patch('base.api.pricing.get_price_per_gallon') 
     def test_current_price_per_gallon(self, mock_get_price_per_gallon):
 
-        # Use reverse to get the URL for the view
         url = reverse('current_price_per_gallon') 
 
-        # Make a GET request to the view
         response = self.client.get(url)
 
-        # Assert the response status code and content
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"current_price_per_gallon": 1.5})

@@ -7,7 +7,7 @@ export default function Footer() {
       <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
         &copy; {new Date().getFullYear()} Copyright:{' '}
         <a className='text-dark'>
-          CS4353 Group xx
+          CS4353 Group 52
         </a>
       </div>
     </MDBFooter>

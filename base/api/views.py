@@ -34,7 +34,7 @@ def profile_view(request): #This gets the request from the front end.
 
     if request.method == 'GET': #If the request is GET
         try:
-            profile = Profile.objects.get(user=user) #It will get the profile of the user from the database. In this case, it is SQLite
+            profile = Profile.objects.get(user=user) #It will get the profile of the user from the database.
             serializer = ProfileSerializer(profile) #It will serialize the data -> convert it to json format
             return Response(serializer.data) #Return the response
         except Profile.DoesNotExist:
