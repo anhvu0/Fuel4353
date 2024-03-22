@@ -55,9 +55,13 @@ const QuoteForm = () => {
     const value = e.target.value;
     const intValue = parseInt(value, 10);
 
-    if (value === '' || (!isNaN(intValue) && intValue.toString() === value)) {
+    // Check if the value is an integer and within the acceptable range
+    if (value === '' || (!isNaN(intValue) && intValue.toString() === value && intValue <= 10000000)) {
       setGallonsRequested(intValue);
       setGallonsError(''); // Clear error if input is valid
+    } else if (intValue > 10000000) {
+      // Set error message if the input is larger than 1000000
+      setGallonsError('Gallons requested must not be larger than 10,000,000');
     } else {
       // Set error message if the input is not an integer
       setGallonsError('Gallons requested must be an integer');
@@ -130,6 +134,7 @@ const QuoteForm = () => {
                           <input
                             type="number"
                             min="0"
+                            max="10000000" // Set the maximum value for the input
                             id="gallonsRequested"
                             className={`form-control ${gallonsError ? 'is-invalid' : ''}`}
                             value={gallonsRequested}
@@ -191,7 +196,8 @@ const QuoteForm = () => {
                               type="text"
                               id="totalAmountDue"
                               className="form-control"
-                              value={totalAmountDue}
+                              // Use Intl.NumberFormat to format the totalAmountDue value with commas
+                              value={new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(totalAmountDue)}
                               disabled={true} // This field is not editable
                               readOnly
                             />

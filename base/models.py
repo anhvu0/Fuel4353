@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Profile(models.Model): #models.py file define the database schema. Each class is a table in the database.
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -24,11 +24,15 @@ class Profile(models.Model): #models.py file define the database schema. Each cl
     
 class QuoteForm(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quotes')
-    gallons_requested = models.PositiveIntegerField(validators=[MinValueValidator(0)])
+    gallons_requested = models.PositiveIntegerField(validators=[
+            MinValueValidator(0),
+            MaxValueValidator(10000000)  # Ensure gallons_requested does not exceed 10,000,000
+            ]
+    )
     delivery_address = models.CharField(max_length=410)  # Combined address at the time of the quote
     delivery_date = models.DateField()
     price_per_gallon = models.DecimalField(max_digits=5, decimal_places=2)
-    total_amount_due = models.DecimalField(max_digits=8, decimal_places=2)
+    total_amount_due = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f"{self.user.username} - {self.delivery_date}"

@@ -26,7 +26,7 @@ Step 4: Open ```localhost:3000``` and try out the features.<br><br>
     - Request a Quote <br>
     - Quote History <br>
     - Pricing Module<br>
-    - Unit Tests with Code Coverage over 80%<br>
+    - Unit Tests with Code Coverage over 90%<br>
     - PostgreSQL DB will be hosted on Render.com<br>
 
 **Project Deployment URL:** https://cs4353.lemonadess.com/ <br>
