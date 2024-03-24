@@ -3,10 +3,10 @@ import { MDBFooter } from 'mdb-react-ui-kit';
 
 export default function Footer() {
   return (
-    <MDBFooter bgColor='light' className='text-center text-lg-left fixed-bottom'>
-      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
+    <MDBFooter className='text-center text-lg-left '>
+      <div className='text-center p-3 text-secondary' style={{ backgroundColor: 'white' }}>
         &copy; {new Date().getFullYear()} Copyright:{' '}
-        <a className='text-dark'>
+        <a>
           CS4353 Group 52
         </a>
       </div>

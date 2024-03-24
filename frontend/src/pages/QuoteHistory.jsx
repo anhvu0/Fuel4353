@@ -65,30 +65,32 @@ const QuoteHistory = () => {
                     <h3>Your Quote History</h3>
                   </div>
                   <hr />
-                  <MDBTable className="table table-striped table-hover">
-                    <MDBTableHead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Delivery Date</th>
-                        <th scope="col">Delivery Address</th>
-                        <th scope="col">Gallons Requested</th>
-                        <th scope="col">Price/Gallon</th>
-                        <th className='text-end' scope="col">Total Amount Due</th>
-                      </tr>
-                    </MDBTableHead>
-                    <MDBTableBody>
-                      {quotes.map((quote, index) => (
-                        <tr key={quote.id}>
-                          <th scope="row">{index + 1}</th>
-                          <td>{quote.delivery_date}</td>
-                          <td className={`text-start table-responsive-cell`}>{quote.delivery_address}</td>
-                          <td >{new Intl.NumberFormat('en-US').format(quote.gallons_requested)}</td>
-                          <td>${quote.price_per_gallon}</td>
-                          <td className='text-end'>${new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(quote.total_amount_due)}</td>
+                  <div className="table-responsive">
+                    <MDBTable className="table table-striped table-hover">
+                      <MDBTableHead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Delivery Date</th>
+                          <th scope="col">Delivery Address</th>
+                          <th scope="col">Gallons Requested</th>
+                          <th scope="col">Price/Gallon</th>
+                          <th className='text-end' scope="col">Total Amount Due</th>
                         </tr>
-                      ))}
-                    </MDBTableBody>
-                  </MDBTable>
+                      </MDBTableHead>
+                      <MDBTableBody>
+                        {quotes.map((quote, index) => (
+                          <tr key={quote.id}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{quote.delivery_date}</td>
+                            <td className={`text-start table-responsive-cell`}>{quote.delivery_address}</td>
+                            <td >{new Intl.NumberFormat('en-US').format(quote.gallons_requested)}</td>
+                            <td>${quote.price_per_gallon}</td>
+                            <td className='text-end'>${new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(quote.total_amount_due)}</td>
+                          </tr>
+                        ))}
+                      </MDBTableBody>
+                    </MDBTable>
+                  </div>
                 </MDBCardBody>
               </MDBCard>
             )}
