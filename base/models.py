@@ -37,9 +37,9 @@ class QuoteForm(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.delivery_date}"
 
-    def save(self, *args, **kwargs):
+    """def save(self, *args, **kwargs):
         if not self.pk:  # Check if the quote is being created for the first time
             profile = self.user.profile
             # Combine address fields from the user's profile for this quote
             self.delivery_address = f"{profile.addressOne} {profile.addressTwo}, {profile.city}, {profile.state}, {profile.zip_code}"
-        super().save(*args, **kwargs)
+        super().save(*args, **kwargs)"""

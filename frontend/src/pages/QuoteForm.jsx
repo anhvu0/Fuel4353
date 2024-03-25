@@ -16,24 +16,30 @@ import ProfileUpdateCard from '../components/ProfileUpdateCard';
 import QuoteFormHook from '../context/QuoteFormHook';
 
 const QuoteForm = () => {
-  const { profile, profileLoaded } = ProfileHook();
+
+  const [LockedInput, setLockedInput] = useState(false);
   const [gallonsRequested, setGallonsRequested] = useState('');
   const [gallonsError, setGallonsError] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
+  const { profile, profileLoaded } = ProfileHook();
   const { handleGetQuote, handleSubmitQuote, isLoading, suggestedPrice, totalAmountDue } = QuoteFormHook(profile);
-  const [LockedInput, setLockedInput] = useState(false);
-  const [pricePerGallon, setPricePerGallon] = useState('');;
+
+  //const [pricePerGallon, setPricePerGallon] = useState('');;
 
   useEffect(() => {
     // When the profile is loaded, construct the delivery address
     if (profileLoaded && profile) {
-      const fullAddress = `${profile.addressOne} ${profile.addressTwo}, ${profile.city}, ${profile.state} ${profile.zip_code}`;
+      let fullAddress = `${profile.addressOne}`;
+      if (profile.addressTwo) {
+        fullAddress += `, ${profile.addressTwo}`;
+      }
+      fullAddress += `, ${profile.city}, ${profile.state} ${profile.zip_code}`;
       setDeliveryAddress(fullAddress.trim()); // Trim in case some fields are empty
     }
   }, [profile, profileLoaded]);
 
-  useEffect(() => {//Get the current price per gallon from back end
+  /*useEffect(() => {//Get the current price per gallon from back end
     const fetchPricePerGallon = async () => {
       try {
         const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/ppg/`);
@@ -49,7 +55,7 @@ const QuoteForm = () => {
     };
 
     fetchPricePerGallon();
-  }, []);
+  }, []);*/
 
   const handleGallonsChange = (e) => {
     const value = e.target.value;
@@ -97,7 +103,7 @@ const QuoteForm = () => {
                         gallons_requested: gallonsRequested,
                         delivery_address: deliveryAddress,
                         delivery_date: deliveryDate,
-                        price_per_gallon: pricePerGallon,
+                        price_per_gallon: suggestedPrice,
                         total_amount_due: totalAmountDue,
                       };
                       handleSubmitQuote(quoteData);
@@ -150,7 +156,7 @@ const QuoteForm = () => {
                       </MDBRow>
                       <hr />
 
-                      <MDBRow>
+                      {/* <MDBRow>
                         <MDBCol sm="4">
                           <MDBCardText className='text-start fw-bold'>Price per Gallon</MDBCardText>
                         </MDBCol>
@@ -168,11 +174,11 @@ const QuoteForm = () => {
                           </div>
                         </MDBCol>
                       </MDBRow>
-                      <hr />
+                  <hr />*/}
 
                       <MDBRow>
                         <MDBCol sm="4">
-                          <MDBCardText className='text-start fw-bold'>Suggested Price</MDBCardText>
+                          <MDBCardText className='text-start fw-bold'>Suggested Price/Gallon</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="6">
                           <div className="input-group">
@@ -181,7 +187,7 @@ const QuoteForm = () => {
                               type="text"
                               id="suggestedPrice"
                               className="form-control"
-                              value={suggestedPrice}
+                              value={new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(suggestedPrice)}
                               disabled={true} // This field is not editable
                               readOnly
                             />

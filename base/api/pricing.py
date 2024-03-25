@@ -13,5 +13,5 @@ def calculate_suggested_price(location, gallons_requested, has_history):
     margin = current_price_per_gallon * (location_factor - rate_history_factor + gallons_requested_factor + company_profit_factor)
     suggested_price = current_price_per_gallon + margin
     
-    return round(suggested_price,3)
+    return round(suggested_price,2)
 
