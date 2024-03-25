@@ -9,7 +9,7 @@ class Profile(models.Model): #models.py file define the database schema. Each cl
     addressOne = models.CharField(max_length=100, blank=True)
     addressTwo = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
-    state = models.CharField(max_length=50, blank=True)
+    state = models.CharField(max_length=2, blank=True)
     zip_code = models.CharField(max_length=9, blank=True,
         validators=[
             RegexValidator(
@@ -29,7 +29,7 @@ class QuoteForm(models.Model):
             MaxValueValidator(10000000)  # Ensure gallons_requested does not exceed 10,000,000
             ]
     )
-    delivery_address = models.CharField(max_length=410)  # Combined address at the time of the quote
+    delivery_address = models.CharField(max_length=320)  # Combined address at the time of the quote
     delivery_date = models.DateField()
     price_per_gallon = models.DecimalField(max_digits=5, decimal_places=2)
     total_amount_due = models.DecimalField(max_digits=10, decimal_places=2)
