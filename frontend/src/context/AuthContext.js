@@ -49,27 +49,42 @@ export const AuthProvider = ({ children }) => {
     }, [navigate]);
 
     const updateToken = useCallback(async () => {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/token/refresh/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ refresh: authTokens?.refresh })
-        })
+        const MAX_RETRIES = 5;
+        let attempt = 0; // Current attempt
+        let success = false; // Flag to indicate if token refresh was successful
 
-        const data = await response.json()
-        if (response.status === 200) {
-            setAuthTokens(data)
-            setUser(jwtDecode(data.access))
-            sessionStorage.setItem('authTokens', JSON.stringify(data))
-        } else {
-            logoutUser()
+        while (attempt < MAX_RETRIES && !success) {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/token/refresh/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ refresh: authTokens?.refresh })
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                setAuthTokens(data);
+                setUser(jwtDecode(data.access));
+                sessionStorage.setItem('authTokens', JSON.stringify(data));
+                success = true; // Update success flag
+            } else {
+                attempt += 1; // Increment attempt counter
+                await new Promise(resolve => setTimeout(resolve, 500)); // Wait 0.5 second before retrying
+            }
+        }
+
+        if (!success) {
+            // Handle the case where the token couldn't be refreshed after retries
+            console.log("Unable to refresh token after multiple attempts.");
+            logoutUser();
         }
 
         if (loading) {
-            setLoading(false)
+            setLoading(false);
         }
-    }, [authTokens, setAuthTokens, setUser, logoutUser, loading])
+    }, [authTokens, setAuthTokens, setUser, logoutUser, loading]);
+
 
     let contextData = {
         user: user,
@@ -98,5 +113,4 @@ export const AuthProvider = ({ children }) => {
             {children}
         </AuthContext.Provider>
     )
-}//Latest commit fixed eslint warning by adding the dependencies. 
-//Could cause potential bug. Revert this file if needed.
+}
