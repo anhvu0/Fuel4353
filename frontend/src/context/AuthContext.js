@@ -49,7 +49,11 @@ export const AuthProvider = ({ children }) => {
     }, [navigate]);
 
     const updateToken = useCallback(async () => {
-        const MAX_RETRIES = 5;
+        if (window.location.pathname === '/register' || window.location.pathname === '/login') {
+            console.log('No token refresh needed on this page');
+            return;
+        }
+        const MAX_RETRIES = 10;
         let attempt = 0; // Current attempt
         let success = false; // Flag to indicate if token refresh was successful
 
@@ -70,12 +74,12 @@ export const AuthProvider = ({ children }) => {
                 success = true; // Update success flag
             } else {
                 attempt += 1; // Increment attempt counter
-                await new Promise(resolve => setTimeout(resolve, 500)); // Wait 0.5 second before retrying
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
             }
         }
 
         if (!success) {
-            // Handle the case where the token couldn't be refreshed after retries
+            // Handle the case where the token couldn't be refreshed logoutUser() after retries 
             console.log("Unable to refresh token after multiple attempts.");
             logoutUser();
         }
@@ -94,10 +98,9 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        if (loading) {
+        /*if (loading) {
             updateToken()
-        }
-
+        }*/
         const REFRESH_INTERVAL = 1000 * 60 * 4 // 4 minutes
         let interval = setInterval(() => {
             if (authTokens) {
