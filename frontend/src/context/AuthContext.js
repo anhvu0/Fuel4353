@@ -73,13 +73,13 @@ export const AuthProvider = ({ children }) => {
                 sessionStorage.setItem('authTokens', JSON.stringify(data));
                 success = true; // Update success flag
             } else {
-                attempt += 1; // Increment attempt counter
+                attempt += 1;
                 await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
             }
         }
 
         if (!success) {
-            // Handle the case where the token couldn't be refreshed logoutUser() after retries 
+            // Handle the case where the token couldn't be refreshed
             console.log("Unable to refresh token after multiple attempts.");
             logoutUser();
         }
@@ -98,18 +98,21 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        /*if (loading) {
-            updateToken()
-        }*/
-        const REFRESH_INTERVAL = 1000 * 60 * 4 // 4 minutes
-        let interval = setInterval(() => {
-            if (authTokens) {
-                updateToken()
+        let refreshTimeout;
+        if (authTokens?.access) {
+            const decoded = jwtDecode(authTokens.access);
+            const now = Date.now().valueOf() / 1000; // Current time in seconds since epoch
+            const timeUntilExpiry = (decoded.exp - now) - 30; // Refresh 30 seconds before expiry
+            if (timeUntilExpiry > 0) {
+                refreshTimeout = setTimeout(updateToken, timeUntilExpiry * 1000);
+            } else {
+                // If the token is already expired, refresh immediately
+                updateToken();
             }
-        }, REFRESH_INTERVAL)
-        return () => clearInterval(interval)
+        }
 
-    }, [authTokens, loading, updateToken])
+        return () => clearTimeout(refreshTimeout);
+    }, [authTokens, updateToken]);
 
     return (
         <AuthContext.Provider value={contextData}>
