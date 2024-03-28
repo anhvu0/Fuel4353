@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import AuthContext from '../context/AuthContext'
+import { useLocation } from 'react-router-dom';
 import {
   MDBContainer,
   MDBNavbar,
@@ -19,6 +20,10 @@ export default function Navx() {
   const handleLogout = (e) => {
     e.preventDefault();
     logoutUser();
+  };
+  const location = useLocation();
+  const isActive = (path) => {
+    return location.pathname === path;
   };
 
   return (
@@ -40,18 +45,18 @@ export default function Navx() {
           <div className="navbar-flex-container"> {/* Flex container for navbar content */}
             <MDBNavbarNav fullWidth={false} className='mr-auto mb-2 mb-lg-0 bg-gradient' >
               <MDBNavbarItem >
-                <MDBNavbarLink aria-current='page' href='/'>
+                <MDBNavbarLink href='/' className={isActive('/') ? 'fw-bold' : ''}>
                   Home
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href='/profile'>Profile</MDBNavbarLink>
+                <MDBNavbarLink href='/profile' className={isActive('/profile') ? 'fw-bold' : ''}>Profile</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href='/quoteform'>Get a Quote</MDBNavbarLink>
+                <MDBNavbarLink href='/quoteform' className={isActive('/quoteform') ? 'fw-bold' : ''}>Get a Quote</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href='/quotehistory'>Quote History</MDBNavbarLink>
+                <MDBNavbarLink href='/quotehistory' className={isActive('/quotehistory') ? 'fw-bold' : ''}>Quote History</MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>
             {user && (

@@ -3,15 +3,17 @@ import { useNavigate, Link } from "react-router-dom";
 import "../FuelQuoteForm.css";
 import { toast } from 'react-toastify';
 import winnerImg from '../img/yes.png';
-
+import { cardio } from 'ldrs'
 const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     password2: '', // Confirm password
   });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [errors] = useState({});
+  cardio.register()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +29,7 @@ const Register = () => {
       toast.error("Passwords do not match.");
       return;
     }
-
+    setLoading(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/register/`, {
         method: 'POST',
@@ -59,6 +61,8 @@ const Register = () => {
     } catch (error) {
       console.error('Error during registration:', error);
       toast.error("An error occurred during registration. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -114,7 +118,14 @@ const Register = () => {
                 {errors.password2 && <p style={{ color: 'red' }}>{errors.password2}</p>}
               </div>
 
-              <button type="submit" className="button-login">Create account</button>
+              <button type="submit" className="button-login" disabled={loading}>
+                {loading ? <l-cardio
+                  size="20"
+                  stroke="2"
+                  speed="0.9"
+                  color="white"
+                ></l-cardio> : 'Create Account'}
+              </button>
 
             </form>
           </div>
