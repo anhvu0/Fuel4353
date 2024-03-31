@@ -28,7 +28,67 @@ function Profile() {
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
 
-    const handleChange = (e) => {
+    //Input validation for handling errors
+    const [fullNameError, setFullNameError] = useState('');
+    const [addressOneError, setAddressOneError] = useState('');
+    const [addressTwoError, setAddressTwoError] = useState('');
+    const [cityError, setCityError] = useState('');
+
+    const handleFullNameChange = (e) => {
+        const value = e.target.value;
+        setFullName(value); // Update state
+
+        // Validate Full Name
+        if (!value.trim()) {
+            setFullNameError('Full Name is required');
+        } else if (value.length > 50) {
+            setFullNameError('Full Name must be less than 50 characters');
+        } else {
+            setFullNameError(''); // Clear error
+        }
+    };
+
+    const handleAddressOneChange = (e) => {
+        const value = e.target.value;
+        setAddressOne(value); // Update state
+
+        // Validate Address 1
+        if (!value.trim()) {
+            setAddressOneError('Address Line 1 is required');
+        } else if (value.length > 100) {
+            setAddressOneError('Address Line 1 must be less than 100 characters');
+        } else {
+            setAddressOneError(''); // Clear error
+        }
+    };
+
+    const handleAddressTwoChange = (e) => {
+        const value = e.target.value;
+        setAddressTwo(value); // Update state
+
+        // Validate Address 2 (optional)
+        if (value.length > 100) {
+            setAddressTwoError('Address Line 2 must be less than 100 characters');
+        } else {
+            setAddressTwoError(''); // Clear error
+        }
+    };
+
+    const handleCityChange = (e) => {
+        const value = e.target.value;
+        setCity(value); // Update state
+
+        // Validate City
+        if (!value.trim()) {
+            setCityError('City is required');
+        } else if (value.length > 100) {
+            setCityError('City must be less than 100 characters');
+        } else {
+            setCityError(''); // Clear error
+        }
+    };
+
+    const handleZipChange = (e) => {
         const value = e.target.value.replace(/\D/g, "").slice(0, 9);
         setZipCode(value);
     };
@@ -79,6 +139,12 @@ function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Check for validation errors before proceeding
+        if (fullNameError || addressOneError || addressTwoError || cityError) {
+            toast.error('Please correct the errors before submitting.');
+            return; // Stop the form submission
+        }
+
         const method = profileExists ? 'PATCH' : 'POST';
 
         const profileData = {
@@ -123,8 +189,8 @@ function Profile() {
 
             <MDBContainer className="py-5 fluid">
                 <MDBRow>
-                    <MDBCol lg="2"></MDBCol>
-                    <MDBCol lg="8">
+                    <MDBCol lg="3"></MDBCol>
+                    <MDBCol lg="6">
                         {!profileLoaded ? (
                             <LoadingSpinner />
                         ) : (
@@ -135,54 +201,58 @@ function Profile() {
                                     </div><hr />
                                     <form onSubmit={handleSubmit}>
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>Full Name</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control"
                                                     id="fullName" placeholder="Full Name" value={fullName}
-                                                    onChange={(e) => setFullName(e.target.value)} required />
+                                                    onChange={handleFullNameChange} required />
+                                                {fullNameError && <div className="error-msg">{fullNameError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>Address Line 1</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control"
                                                     id="addressOne" placeholder="Address 1" value={addressOne}
-                                                    onChange={(e) => setAddressOne(e.target.value)} required />
+                                                    onChange={handleAddressOneChange} required />
+                                                {addressOneError && <div className="error-msg">{addressOneError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>Address Line 2</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control"
                                                     id="addressTwo" placeholder="Address 2" value={addressTwo}
-                                                    onChange={(e) => setAddressTwo(e.target.value)} />
+                                                    onChange={handleAddressTwoChange} />
+                                                {addressTwoError && <div className="error-msg">{addressTwoError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>City</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control"
                                                     id="city" placeholder="City" value={city}
-                                                    onChange={(e) => setCity(e.target.value)} required />
+                                                    onChange={handleCityChange} required />
+                                                {cityError && <div className="error-msg">{cityError}</div>}
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>State</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <select className="form-control" id="state" value={state}
                                                     onChange={(e) => setState(e.target.value)} required>
                                                     <option value="">Select state</option> {/**disabled */}
@@ -194,14 +264,14 @@ function Profile() {
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
-                                            <MDBCol sm="3">
+                                            <MDBCol sm="4">
                                                 <MDBCardText className='text-start fw-bold'>Zip Code</MDBCardText>
                                             </MDBCol>
-                                            <MDBCol sm="6">
+                                            <MDBCol sm="7">
                                                 <input type="text" className="form-control" id="zipCode"
                                                     placeholder="Zip code"
                                                     value={zipCode}
-                                                    onChange={handleChange}
+                                                    onChange={handleZipChange}
                                                     pattern="\d{5}(\d{4})?"
                                                     title="Zip code must be either 5 or 9 digits."
                                                     maxLength="9"
@@ -210,8 +280,8 @@ function Profile() {
                                             </MDBCol>
                                         </MDBRow>
                                         <hr />
-                                        <MDBBtn type="submit" class="btn btn-success"
-                                            style={{ backgroundColor: '#20d489' }}>Update</MDBBtn>
+                                        <MDBBtn type="submit" outline rounded color="secondary"
+                                        >Update Profile</MDBBtn>
                                     </form>
                                 </MDBCardBody>
                             </MDBCard>

@@ -10,7 +10,7 @@ from base.serializer import QuoteSerializer
 from base.models import Profile
 from base.models import QuoteForm
 from django.http import JsonResponse
-from .getquote import calculate_suggested_price
+from .pricing import calculate_suggested_price, get_price_per_gallon
 
 #This is where everything happens. Views works like a server. It handle request and response.
 
@@ -34,7 +34,7 @@ def profile_view(request): #This gets the request from the front end.
 
     if request.method == 'GET': #If the request is GET
         try:
-            profile = Profile.objects.get(user=user) #It will get the profile of the user from the database. In this case, it is SQLite
+            profile = Profile.objects.get(user=user) #It will get the profile of the user from the database.
             serializer = ProfileSerializer(profile) #It will serialize the data -> convert it to json format
             return Response(serializer.data) #Return the response
         except Profile.DoesNotExist:
@@ -72,7 +72,7 @@ def user_registration(request):
             return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
         else:
             errors = serializer.errors
-            print(errors)
+            #print(errors)
             error_messages = {'errors': errors}
             return Response(error_messages, status=status.HTTP_400_BAD_REQUEST)
         
@@ -86,7 +86,7 @@ def submit_quote(request):
             serializer.save(user=request.user)  # Automatically associate the quote with the logged-in user
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            print(serializer.errors)
+            #print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 @api_view(['GET'])
@@ -100,13 +100,20 @@ def quote_history(request):
 @permission_classes([IsAuthenticated])
 def get_quote_price(request):
     location = request.data.get('location')
-    gallons_requested = request.data.get('gallons_requested')
+    gallons_requested = float(request.data.get('gallons_requested'))
     user = request.user
 
     # Determine if the user has a rate history
     has_history = QuoteForm.objects.filter(user=user).exists()
     
     suggested_price = calculate_suggested_price(location, gallons_requested, has_history)
+    #print(type(suggested_price), type(gallons_requested))
     total_amount_due = round(suggested_price * gallons_requested,2)
     
     return JsonResponse({'suggested_price': suggested_price, 'total_amount_due': total_amount_due})
+
+
+@api_view(['GET'])
+def current_price_per_gallon(request):
+    current_price_per_gallon = get_price_per_gallon()
+    return Response({"current_price_per_gallon": current_price_per_gallon})

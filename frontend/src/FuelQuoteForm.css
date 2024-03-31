@@ -25,27 +25,20 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 10px;
-  /* adjust as needed for spacing */
 }
 
 .form-group label {
   width: 180px;
-  /* adjust as needed */
   margin-right: 10px;
-  /* adjust as needed for spacing */
   text-align: left;
 }
 
 .form-group input {
   flex: 1;
-  /* ensures input fields take up the remaining space */
   width: 250px;
   margin-right: 10px;
-  /* Space after the input, adjust as needed */
   padding: 10px;
-  /* Adds some space inside the input box */
   border-radius: 5px;
-  /* Rounds the corners of the input box */
   border: 1px solid #ccc;
   background-color: white;
 }
@@ -55,26 +48,17 @@
   min-width: 250px;
 }
 
-ap {
-  color: blue;
-  font-family: Arial;
-}
-
 .responsive-image {
   width: 65%;
-  /* Make the image take up the full container width */
   height: auto;
-  /* Maintain the aspect ratio of the image */
   margin: 0 auto;
   display: block;
-  /* Remove any extra space below the image */
 }
 
 /* limit the size of the image */
 @media (min-width: 768px) {
   .responsive-image {
     max-height: 700px;
-    /* Adjust as necessary */
   }
 }
 
@@ -85,7 +69,6 @@ ap {
   text-align: center;
   padding: 10px 0;
   width: 100%;
-  /* Stick to bottom */
   margin-top: auto;
 }
 
@@ -124,17 +107,15 @@ header {
 
 img {
   width: 100%;
-  /* Make the image occupy the full container width */
   height: 100%;
-  /* Make the image occupy the full container height */
   object-fit: fill;
-  /* Stretch the image to fill the container */
 }
 
 .login-container {
   display: flex;
   min-height: 100vh;
   align-items: stretch;
+  flex-direction: row;
   /* Ensure the children fill the height */
 }
 
@@ -152,7 +133,6 @@ img {
 
 .image-text-content h2 {
   font-size: 3rem;
-  /* Large text for the title */
   margin-top: 15px;
   color: #181c32;
   font-family: "Lexend", sans-serif;
@@ -161,19 +141,15 @@ img {
 
 .image-text-content p {
   font-size: 1.4rem;
-  /* Smaller text for the subtitle */
   color: white;
   font-weight: bold;
   font-family: "Lexend", sans-serif;
 }
 
 .login-image {
-  max-width: 85%;
-  /* Adjust the image size */
+  max-width: 80%;
   height: auto;
-  /* Adjust height automatically */
   margin-top: 0.5rem;
-  /* Space between the text and the image */
 }
 
 .login-form-section {
@@ -186,9 +162,9 @@ img {
 }
 
 .login-form-content {
-  max-width: 400px;
+  max-width: 450px;
   /* Maximum width of the form */
-  width: 100%;
+  width: 90%;
   /* Make the form full width within its container */
   text-align: left;
   font-family: "Lexend", sans-serif;
@@ -213,12 +189,10 @@ img {
 .login-form-group input {
   border: 0px solid #ccc;
   border-radius: 10px;
-  /* Rounded corners */
   padding: 10px 15px;
   margin-bottom: 20px;
   /* Space between each input field */
   width: 100%;
-  /* Full width */
   box-sizing: border-box;
   /* Include padding and border in the element's width */
   font-size: 14px;
@@ -239,7 +213,6 @@ img {
 
 .login-form-group a {
   display: block;
-  /* Or inline-block based on design */
 }
 
 .login-form-group label {
@@ -247,15 +220,37 @@ img {
   font-size: 15px;
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    /* Stack image and form vertically on smaller screens */
+  }
+
+  .login-image-section,
+  .login-form-section {
+    flex: none;
+    /* Remove the flex grow/shrink ratios */
+    width: 100%;
+  }
+
+  .login-image {
+    max-width: 70%;
+  }
+
+  .login-form-content {
+    padding: 1rem;
+    /* Add more padding around the form for smaller screens */
+  }
+}
+
 a {
   color: #20d489;
-  /* Adjust the color as needed */
   text-decoration: none;
 }
 
 Link {
   color: #20d489;
-  /* Adjust the color as needed */
   text-decoration: none;
 }
 
@@ -270,12 +265,9 @@ a:hover {
 }
 
 button {
-  /*width: 100%;*/
   padding: 10px;
   margin-bottom: 1em;
-  /* Space between buttons */
   background-color: #20d489;
-  /* Adjust background color as needed */
   color: white;
   border: none;
   cursor: pointer;
@@ -284,20 +276,51 @@ button {
 }
 
 button:hover {
-  background-color: #b4b4b4;
-  /* Adjust hover color as needed */
+  background-color: #19c17b;
 }
 
 
 .button-container {
   display: flex;
-  /* Display buttons in a row */
   justify-content: space-between;
-  /* Add space between buttons */
   margin-top: 15px;
   text-align: center;
   width: 100%;
-  /* Ensure it takes full width to work with justify-content */
   gap: 10px;
 
+}
+
+.error-msg {
+  display: flex;
+  color: rgb(254, 62, 62);
+  font-size: 12px;
+  justify-content: flex-start;
+  padding-left: 5px;
+  margin-top: 2px;
+}
+
+.table-responsive-cell {
+  word-wrap: break-word;
+  /* Allows the words to break and wrap to the next line */
+  max-width: 300px;
+  /* Adjust this value based on your layout's needs */
+  overflow-wrap: break-word;
+  /* Ensures that long words will wrap and not overflow */
+}
+
+.navbar-toggler:hover {
+  background-color: rgb(215, 215, 215);
+}
+
+.navbar-flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .navbar-flex-container {
+    flex-direction: column;
+  }
 }

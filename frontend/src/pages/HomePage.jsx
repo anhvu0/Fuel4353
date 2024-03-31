@@ -7,6 +7,7 @@ import {
   MDBCard,
   MDBCardText,
   MDBCardBody,
+  MDBBtn
 } from 'mdb-react-ui-kit';
 import LoadingSpinner from "../components/Loading";
 import ProfileUpdateCard from '../components/ProfileUpdateCard';
@@ -82,6 +83,9 @@ export default function HomePage() {
                         <MDBCardText className='text-start'>{profile.zip_code}</MDBCardText>
                       </MDBCol>
                     </MDBRow>
+                    <hr />
+                    <MDBBtn href='/profile' type="button"
+                      outline rounded color="secondary">Edit Profile</MDBBtn>
                   </MDBCardBody>
                 </MDBCard>
               ) : (

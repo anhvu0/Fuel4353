@@ -8,12 +8,12 @@ const LoadingSpinner = () => {
     <MDBCard className="text-center">
       <MDBCardBody>
         <MDBCardText>
-        <l-cardio
-          size="60"
-          stroke="2"
-          speed="0.5" 
-          color="black" 
-        ></l-cardio>
+          <l-cardio
+            size="60"
+            stroke="2"
+            speed="0.7"
+            color="black"
+          ></l-cardio>
           <p>Loading...</p>
         </MDBCardText>
       </MDBCardBody>

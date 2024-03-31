@@ -7,3 +7,4 @@ class BaseConfig(AppConfig):
 
 def ready(self):
         from .signal import create_profile, save_profile
+#if stuff breaks, uncomment this
