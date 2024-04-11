@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User #Right here, Django will automatically create a User table with fields like id, username, password, ... provided in the doc.
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Profile(models.Model): #models.py file define the database schema. Each class is a table in the database.
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') #The user here points to the ID in the User table automatically created by Django.
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     full_name = models.CharField(max_length=50)
     addressOne = models.CharField(max_length=100)
     addressTwo = models.CharField(max_length=100, blank=True)
